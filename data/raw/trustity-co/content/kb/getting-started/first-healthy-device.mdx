@@ -1,0 +1,147 @@
+# Verify your first healthy device
+
+A software installer reporting success is only the first checkpoint. A healthy Trustity endpoint must also be enrolled in the intended organization, running locally, communicating with the Cloud Portal, receiving policy, and meeting its module prerequisites.
+
+## Scope
+
+Use this acceptance runbook for the first Windows or Linux TAO endpoint and for at least one endpoint in each materially different deployment ring. It validates health without requiring destructive or high-impact security tests.
+
+## Prerequisites
+
+- TAO installed using the current package from **Cloud Portal → Deployment**
+- Enrollment performed with the correct organization license key
+- Access to **Managed devices** and the relevant module pages
+- Local administrative access to the pilot endpoint
+- Approved low-risk test cases for entitled modules
+- A recorded pilot hostname, OS, expected version, and deployment time
+
+## Step 1: verify local installation
+
+### Windows
+
+Run from an elevated Command Prompt:
+
+```text
+sc query TrustityAgent
+```
+
+Confirm the service is `RUNNING`. In an interactive user session, open the Trustity Agent UI and confirm it shows the intended organization and does not request enrollment.
+
+### Linux
+
+Run:
+
+```bash
+sudo tao-agent status
+sudo tao-agent --version
+sudo systemctl status trustity-tao
+```
+
+Confirm the service is active and the status reports enrollment. Linux enrollment must be performed with `sudo` so state is available in `/var/lib/trustity/tao`.
+
+## Step 2: verify portal identity and heartbeat
+
+1. Open **Managed devices**.
+2. Locate the expected hostname.
+3. Confirm the operating system and agent version match the pilot record.
+4. Confirm the device has a recent online state.
+5. Check for duplicate or unexpected records for the same pilot.
+
+If the device is missing, stop here and use the [offline-agent troubleshooting runbook](/kb/getting-started/troubleshooting-agent-offline). Do not repeatedly reinstall or re-enroll without understanding the failure.
+
+## Step 3: verify policy delivery
+
+1. Open **Security policies** and select an entitled module.
+2. Record the approved pilot setting.
+3. Allow the endpoint's normal policy refresh.
+4. Confirm the endpoint UI, local behavior, or module status reflects the intended configuration.
+5. If the policy remains stale, verify heartbeat and entitlement before editing the policy again.
+
+Policy delivery is asynchronous. A current online state plus the expected behavior is stronger evidence than the time an administrator clicked Save.
+
+## Step 4: verify inventory
+
+In Managed devices, confirm that available OS and installed-software details are populated.
+
+On Linux, you can also run:
+
+```bash
+sudo tao-agent inventory
+```
+
+If Linux inventory is empty, confirm `dpkg-query` or `rpm` is available. Inventory content can vary by operating system and installed package manager.
+
+## Step 5: run controlled module checks
+
+Perform only checks for entitled modules.
+
+### VisionX
+
+1. Sign in to an active local or RDP Windows session.
+2. Confirm VisionX reports healthy rather than waiting for a session.
+3. Use an approved, non-sensitive test scenario.
+4. Confirm expected local behavior and the corresponding VisionX event when event reporting is enabled.
+
+Do not use real confidential data in evidence tests.
+
+### GenGuard
+
+1. Confirm the extension is installed and cannot be removed by a standard user when force-install is intended.
+2. Confirm it is configured for the correct organization.
+3. Perform an approved test against a non-sensitive test destination or rule.
+4. Confirm the expected allow, alert, or block behavior and corresponding GenGuard event.
+
+### Vault/PAM
+
+1. Confirm the workflow is limited to a designated local pilot account.
+2. Verify an independent recovery path before rotation.
+3. Perform an authorized test rotation.
+4. Confirm the portal records a successful result and authorized operators can complete the expected Vault workflow.
+
+Do not test first against the only accessible administrator account.
+
+### HostGuard IPS
+
+1. Confirm the pilot policy and endpoint firewall compatibility.
+2. Use an approved simulation that cannot affect production administration.
+3. Confirm the expected local block behavior and HostGuard event.
+4. Remove or allow the test source according to the approved cleanup process.
+
+## Step 6: review operational records
+
+- Review the relevant module event page for the controlled test.
+- Review Audit Logs for supported administrative changes.
+- Record test time, timezone, device, expected result, actual result, and approver.
+- Store screenshots only if they contain no license keys, credentials, sensitive evidence, or unnecessary user data.
+
+## Healthy-device acceptance criteria
+
+The device passes when all applicable checks are true:
+
+- Current package installed from Deployment
+- Correct organization displayed
+- Service remains running
+- Recent online state in Managed devices
+- Expected hostname, OS, and version
+- Inventory present
+- Expected entitled modules and policy
+- Controlled module test passes locally
+- Expected module event is visible
+- No unexplained endpoint-security, proxy, or firewall blocks
+- Recovery and support steps are documented
+
+## Troubleshooting and security
+
+- **Service healthy but device absent:** check network and enrollment, not policy.
+- **Device online but module missing:** check entitlement, platform support, and module prerequisites.
+- **VisionX unhealthy:** ensure an interactive Windows session exists.
+- **Linux online but Windows-only test fails:** use the Linux capability scope; features are not identical across platforms.
+- **Unexpected duplicate:** preserve both records and deployment timestamps before contacting support.
+- Never expose the real license key or collect endpoint state files as routine evidence.
+
+## Related links
+
+- [Install TAO on Windows](/kb/getting-started/install-tao-windows)
+- [Install TAO on Linux](/kb/getting-started/install-tao-linux)
+- [Entitlements and module matrix](/kb/getting-started/entitlements-module-matrix)
+- [Pilot-to-production rollout](/kb/getting-started/pilot-to-production-rollout)

@@ -1,0 +1,124 @@
+# Install the TAO agent on Windows
+
+TAO is Trustity's unified Windows endpoint agent for entitled capabilities such as VisionX, Vault/PAM, HostGuard IPS, asset inventory, endpoint hardening, and browser-host controls.
+
+## Scope
+
+This runbook covers a first interactive installation and an enterprise silent deployment. It does not replace your organization's application packaging, change-control, code-signing validation, or endpoint rollback standards.
+
+## Prerequisites
+
+- A supported Windows pilot endpoint with administrator elevation
+- An entitled Trustity organization
+- Access to **Cloud Portal → Deployment**
+- Current `Trustity-Agent-Setup.exe` downloaded from Deployment
+- The published SHA-256 recorded and compared when the portal provides one
+- Outbound HTTPS access that meets the [network requirements](/kb/getting-started/network-requirements)
+- An organization license key handled through an approved secure workflow
+
+Use `<TRUSTITY_LICENSE_KEY>` as the placeholder in internal examples. Never publish or commit the actual key.
+
+## Interactive installation
+
+1. Sign in to the Cloud Portal and open **Deployment**.
+2. Download the current Windows Setup package. Do not use a third-party mirror or an installer retained from an unrelated organization.
+3. If a SHA-256 value is shown, validate the file before deployment:
+
+   ```powershell
+   Get-FileHash .\Trustity-Agent-Setup.exe -Algorithm SHA256
+   ```
+
+4. Run `Trustity-Agent-Setup.exe` as an administrator and approve the Windows elevation prompt.
+5. Enter the organization license key when requested and complete the installer.
+6. Sign in to an interactive Windows session so the tray application and any session-dependent module can initialize.
+
+The default application path is `C:\Program Files\Trustity\TAO`. Enrollment and policy state are kept under `%ProgramData%\Trustity\TAO` so an in-place update can retain configuration.
+
+### After reboot
+
+A successful enrollment persists across reboot:
+
+1. The **TrustityAgent** service starts automatically.
+2. Tray/GUI should show the organization name and **Protected** (or managed) status - **not** a fresh Activate prompt.
+3. The hostname should remain Online in **Managed devices** after the first post-boot heartbeat.
+
+If the UI asks for a license again while the service is running and the portal already shows the device Online, do **not** re-enroll with a different key. Confirm you are on a current Setup build from **Deployment**, then collect time/hostname for Support. Re-entering the same organization key is usually harmless but unnecessary; using another tenant’s key can move the device’s enrollment.
+
+## Silent installation and enrollment
+
+For Intune, SCCM, or another software-distribution platform, pass the license during the silent install:
+
+```text
+Trustity-Agent-Setup.exe /quiet /license=<TRUSTITY_LICENSE_KEY>
+```
+
+`/quiet` by itself installs the application but does **not** supply the organization credential. A production silent deployment should include `/license=<TRUSTITY_LICENSE_KEY>` so installation and enrollment occur in one managed action.
+
+Protect the command and package assignment as sensitive deployment configuration. Limit who can read or edit it, and do not include the real command in screenshots, public logs, or knowledge articles. Follow the MDM vendor's secure-value guidance where available.
+
+For a pilot package:
+
+1. Upload the current Setup executable to the endpoint-management system.
+2. Configure installation in the system context with administrative rights.
+3. Use the silent install-and-enroll command above.
+4. Assign only to the pilot device group.
+5. Define detection using the installed application or `TrustityAgent` service, then validate portal health separately.
+6. Treat a package-manager success result as installation evidence, not as proof of cloud enrollment.
+
+## Components and expected behavior
+
+| Component | Expected role |
+|---|---|
+| **TrustityAgent service** | Maintains enrollment, heartbeat, policy refresh, inventory, and entitled privileged enforcement |
+| **Tray/GUI process** | Displays organization, connectivity, and module status to the interactive user |
+| **Session helper** | Supports VisionX in an active local or RDP user session |
+
+VisionX requires an interactive user session. A running service on the sign-in screen does not by itself prove VisionX session health.
+
+## Verification
+
+Run from an elevated Command Prompt:
+
+```text
+sc query TrustityAgent
+```
+
+Then confirm:
+
+1. The service state is `RUNNING`.
+2. The tray/GUI identifies the expected organization and does not request enrollment.
+3. The hostname appears in **Cloud Portal → Managed devices**.
+4. The device shows a recent online state, the expected agent version, and OS information.
+5. Expected entitled modules are present after policy refresh.
+6. A controlled module test produces the expected local behavior and portal event.
+
+## Update and removal
+
+Use a newly downloaded Setup package for an approved in-place update. Verify health again after the update.
+
+Standard removal can be initiated from Windows installed applications or with:
+
+```text
+Trustity-Agent-Setup.exe /uninstall
+```
+
+An organization can enable endpoint hardening that requires authorized removal. Ensure the helpdesk has the approved removal process before broad rollout; do not attempt to bypass it.
+
+## Troubleshooting and security
+
+- **Installed but not enrolled:** confirm the silent command included `/license=<TRUSTITY_LICENSE_KEY>` or complete an authorized enrollment through the agent UI.
+- **License rejected:** recopy the organization license key from Deployment; do not use the organization ID.
+- **Service not running:** review Windows service state and `%ProgramData%\Trustity\TAO` logs, then check endpoint security software for blocked execution.
+- **Device absent from the portal:** verify DNS, system time, proxy behavior, and outbound TLS before reinstalling.
+- **Activate prompt after reboot:** verify `sc query TrustityAgent` is `RUNNING` and the portal still lists the host. Prefer upgrading the agent before wiping `%ProgramData%\Trustity\TAO`.
+- **Inventory report failed / empty inventory:** see [Managed devices and software inventory](/kb/portal/managed-devices-and-inventory).
+- **VisionX waiting for a session:** sign in locally or through an active RDP session and recheck module status.
+- **Policy not applied:** confirm entitlement, recent heartbeat, and a saved policy; allow the normal refresh before repeated changes.
+- Do not delete the data directory as a routine repair step. It contains enrollment state and removal can change device identity behavior.
+
+## Related links
+
+- [Verify your first healthy device](/kb/getting-started/first-healthy-device)
+- [Network requirements](/kb/getting-started/network-requirements)
+- [Troubleshoot an offline or stale agent](/kb/getting-started/troubleshooting-agent-offline)
+- [Pilot-to-production rollout](/kb/getting-started/pilot-to-production-rollout)

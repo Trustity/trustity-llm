@@ -1,0 +1,42 @@
+# TAO agent integration model
+
+This page describes the **integration model** between TAO and the Cloud Portal at a level suitable for engineers evaluating or supporting deployments. It is not a full OpenAPI dump.
+
+## Lifecycle
+
+1. **Install** the agent from the Cloud Portal Deployment page (Windows EXE or Linux package). Trustity does not remotely install onto machines that are not already in the customer’s distribution channel.
+2. **Enroll** the device using the organization license key from Deployment.
+3. On success, the portal issues an **agent identity** the device stores locally for subsequent calls (`agent_id` + secret under the platform data directory).
+4. The agent **heartbeats**, pulls **policy**, and reports module results according to entitlements.
+
+## Authentication phases (summary)
+
+| Phase | What identifies the caller |
+|-------|----------------------------|
+| Enrollment | Organization license key (treat as a secret) |
+| Runtime | Per-device agent credentials issued at enrollment |
+
+Re-enrollment on the same machine may rotate the agent credential. Operators should treat device state directories as sensitive.
+
+On Windows, enrollment persists under `%ProgramData%\Trustity\TAO`. The service (SYSTEM) owns privileged secrets; the interactive GUI should trust enrollment without demanding Activate after every reboot. Unelevated UIs that cannot read the agent secret must not clear enrollment state.
+
+## Policy
+
+Policy is authored in the Cloud Portal. Agents refresh on a heartbeat cycle; forcing a restart can speed verification during rollouts.
+
+## Notable runtime reports
+
+| Report | Purpose |
+|--------|---------|
+| Heartbeat | Liveness, version, modules, optional ring/target version fields |
+| Inventory | Full software snapshot replace for the device (`endpoint_software`) |
+| VisionX event | Detection evidence and/or Strict **`no_camera`** lock incidents |
+| PAM rotation result | Local-account rotation outcome for vaulting |
+
+Inventory inserts should tolerate Windows `YYYYMMDD` install dates and large item lists. Integrators debugging empty inventory should distinguish **agent collection**, **auth**, and **portal insert** failures using the agent’s portal error text.
+
+Module-specific behavior (VisionX activation, IPS thresholds, PAM targets, inventory) is configured in portal policy UIs — not hardcoded into installers.
+
+## Operator docs vs developer docs
+
+Day-to-day install steps for IT admins live on the marketing Knowledge Base (`trustity.co/kb`). Enterprise identity/RBAC/assurance overview: [Enterprise controls](/docs/platform/enterprise-controls). Use this hub for architecture and integration context.

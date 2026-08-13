@@ -1,0 +1,65 @@
+# HostGuard IPS overview
+
+HostGuard IPS observes repeated failed-logon activity on managed endpoints. According to policy, it can report qualifying activity or add a temporary endpoint firewall block and report the event to the Cloud Portal.
+
+HostGuard is threshold-based. It does not provide a configurable source allowlist or process allowlist. Plan safe rollout with **Report only**, representative testing, and appropriate attempt, window, and ban thresholds.
+
+## Prerequisites
+
+- HostGuard entitlement and a current TAO agent
+- Endpoint communication with current policy
+- Owners for Windows firewall, endpoint management, helpdesk, and security events
+- An inventory of normal remote administration, automation, vulnerability scanning, and support activity
+- A recovery path that does not depend on the network path being tested
+
+## Policy behavior
+
+- **Enabled** controls whether HostGuard evaluates failed-logon activity.
+- **Maximum login attempts** sets the qualifying count.
+- **Detection window** sets the period in which attempts are counted.
+- **Ban duration** sets how long an enforcement-mode firewall block remains.
+- **Report only** generates observable activity without adding firewall blocks.
+
+Thresholds work together. A low attempt count inside a long window is more sensitive than the same count inside a short window. Ban duration affects recovery and user impact after enforcement.
+
+## Recommended rollout
+
+1. Enable HostGuard for a small, representative pilot.
+2. Turn on **Report only** so detections do not add firewall blocks.
+3. Retain initial thresholds long enough to observe normal administration cycles.
+4. Review events for legitimate remote support, stale credentials, automation, scanners, and suspicious sources.
+5. Adjust thresholds to reduce known operational noise while preserving the security objective.
+6. Test blocking on lab or recovery-ready endpoints.
+7. Disable Report only for a limited enforcement ring.
+8. Monitor blocks, helpdesk cases, and endpoint reachability before wider rollout.
+
+## What operators see
+
+The HostGuard event view can show source, endpoint, detection time, attempt information, and whether activity was reported or blocked, depending on tenant and agent version. In enforcement mode, endpoint-local firewall rules may also be present.
+
+Treat a HostGuard event as a lead for investigation. Failed logons can result from attack activity, stale saved passwords, misconfigured services, scanners, or legitimate users.
+
+## Response workflow
+
+1. Confirm the affected endpoint, source, time, and HostGuard action.
+2. Determine whether the source belongs to approved administration or automation.
+3. Correlate with identity, endpoint, firewall, and remote-access logs available to your organization.
+4. If blocked activity appears malicious, follow incident-response procedures and preserve relevant records.
+5. If activity is legitimate, correct the credential or workflow and tune thresholds if justified.
+6. Record policy changes and retest through the pilot.
+
+Do not weaken thresholds globally to resolve one unexplained event. Identify the cause first.
+
+## Operational boundaries
+
+- Blocks are local to the managed endpoint; HostGuard does not configure upstream network firewalls.
+- Report only observes and reports but does not create the HostGuard firewall block.
+- There is no HostGuard source allowlist documented in the current policy. Use staged rollout and thresholds to manage legitimate activity.
+- Disabling HostGuard removes protection rather than solving the underlying failed-logon source.
+
+## Related
+
+- [HostGuard: thresholds and allowlists](/kb/hostguard/thresholds-and-allowlists)
+- [Cloud Portal overview](/kb/getting-started/cloud-portal-overview)
+- [Troubleshooting: agent offline or not updating](/kb/getting-started/troubleshooting-agent-offline)
+- [Product page: HostGuard IPS](/products/hostguard)

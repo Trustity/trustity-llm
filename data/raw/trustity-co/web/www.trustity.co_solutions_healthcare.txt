@@ -1,0 +1,104 @@
+SOURCE: https://www.trustity.co/solutions/healthcare
+
+Trustity | VisionX, GenGuard, Vault & HostGuard 
+
+Loading Trustity 
+
+Products Platform Solutions Contact Docs Partners 
+
+Cloud Portal Get Started 
+
+Back to Solutions 
+
+Security for Healthcare 
+
+Harden clinical endpoints against visual-channel leaks, unsanctioned SaaS, and host abuse. ePHI and HIPAA deployments are not supported unless a signed BAA and an approved scope are in place. 
+Talk to an Expert 
+
+Clinical Endpoint Controls Active 
+
+Incident Blocked: ePHI Leak 
+
+User attempted to upload patient records to unauthorized external SaaS. GenGuard intercepted and blocked the action. 
+
+Rotation Successful 
+
+Local admin passwords on 450 clinical workstations rotated successfully to prevent lateral movement. 
+
+Patient Data is Sacred 
+
+Healthcare providers are prime targets for ransomware and data theft. Trustity hardens your clinical endpoints and prevents staff from accidentally exposing patient data. 
+
+Stop ePHI Leaks 
+
+Block medical record numbers, diagnoses, and patient details from being shared to unsanctioned applications. 
+
+Harden Clinical Workstations 
+
+The TAO agent rotates local admin credentials on nurses' stations and clinical workstations to help stop ransomware spread. 
+
+Physical Screen Protection 
+
+Use VisionX to detect unauthorized photos of patient records from device screens and lock the workstation when policy requires it. 
+
+Unified endpoint, edge, and secure delivery - VisionX, GenGuard, Vault/PAM, HostGuard IPS, Trustity Axiom, and Trustity SecSend. 
+
+Products 
+
+VisionX 
+
+GenGuard 
+
+Vault & PAM 
+
+HostGuard IPS 
+
+Trustity Axiom 
+
+Trustity SecSend 
+
+All Products 
+
+Platform 
+
+Resources 
+
+Documentation 
+
+User Manual 
+
+Getting Started 
+
+Developer Central 
+
+Cloud Portal 
+
+Trustity Authenticator 
+
+Company 
+
+About Us 
+
+System Status 
+
+Release Notes 
+
+Trust Center 
+
+Contact Sales 
+
+Become a Partner 
+
+Partner login 
+
+Legal Center 
+
+Privacy Policy 
+
+Terms of Service 
+
+License Agreement 
+
+© 2026 Trustity 
+
+Privacy Terms Legal Security

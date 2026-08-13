@@ -1,0 +1,69 @@
+# VisionX overview and policy
+
+VisionX helps reduce **visual-channel data loss** - someone pointing a phone, camera, lens, or similar imaging device at a sensitive screen to photograph or otherwise exfiltrate what is on display. Detection runs on supported Windows endpoints through the TAO user-session component. Administrators control when detection is armed, how quickly a confirmed risk locks the workstation, how a confirmed detection is handled, and whether evidence is sent to the Cloud Portal.
+
+VisionX is a security control, not a substitute for physical security, user training, or incident response. Roll it out as part of a documented data-protection program.
+
+## Before you configure VisionX
+
+- Confirm that VisionX is included in your organization’s subscription.
+- Install a current TAO agent on a supported Windows endpoint (prefer **TAO 1.0.36+** from **Deployment** for dual VisionX detect with Model V1.1; see [Trustity VisionX Model V1](/kb/visionx/visionx-trustity-model-v1)).
+- Use an interactive console or supported remote user session for testing.
+- Identify which users, applications, and data workflows need protection.
+- Define who may review evidence and who may assist a locked user.
+- Complete privacy, employee-notice, and evidence-retention reviews required by your organization.
+
+Start with a small pilot representing normal cameras, docking stations, remote sessions, and high-risk applications. Do not begin with organization-wide locking.
+
+## Policy controls
+
+Open **Policies → VisionX** or the VisionX settings page available in your tenant.
+
+- **Activation mode** decides whether detection is always armed, never armed, or determined by foreground application rules. Standby means no monitoring; it is not a delayed or manually armed monitoring state.
+- **Lock response** is the primary speed-versus-accuracy control: **Faster lock**, **Balanced**, or **More accurate**. Each stop presets analysis performance, consecutive frames, and confidence. See [VisionX detection tuning](/kb/visionx/visionx-detection-tuning).
+- **Confidence threshold** sets the minimum confidence required for a candidate detection (also adjustable under Advanced tuning).
+- **Consecutive frames** requires the condition to persist across multiple frames before an action is taken.
+- **Cooldown** limits repeated alerts from the same continuing situation.
+- **Lock on detection** presents the VisionX lock experience after a qualifying detection.
+- **Capture evidence images** makes an image available with an event when capture succeeds.
+- **No-camera mode** controls what happens when a camera is unavailable:
+  - **Strict** - VisionX requires a connected camera. When none is available, the workstation locks and (on current agents) the portal records a **no-camera** incident/event so operations can see the lock even though there is no frame evidence.
+  - **Monitor** - work may continue without a camera; detection runs only while a camera is available. Prefer this while validating docking-station and privacy-shutter behavior.
+- **Admin unlock code** supports authorized recovery from applicable locks. Handle it through your approved support process and never place it in tickets or general documentation.
+- **Lock-screen branding** lets administrators provide an approved organization logo while retaining Trustity identification.
+
+Activation mode and no-camera mode are independent. For example, Standby remains unarmed even if no-camera mode is Strict because Standby disables VisionX monitoring.
+
+## Recommended rollout
+
+1. Set **On-demand** or **Always on** for a pilot group and begin with **Balanced** lock response (or conservative Advanced values).
+2. Leave screen locking off while you measure detections, operational noise, and camera readiness.
+3. If evidence is permitted, enable capture for the pilot and restrict event access to designated reviewers.
+4. Validate expected behavior in normal applications, approved remote sessions, camera-disconnected scenarios, and application switching - including phone, camera, and hard-angle tests.
+5. For no-camera Strict tests: disconnect or privacy-cover the camera, confirm the lock appears, then confirm a portal **Events** / **Incidents** entry with a `no_camera` (or equivalent) label - not only a local lock.
+6. Tune lock response (or confidence, consecutive frames, and cooldown) together. Change one variable at a time and record the result.
+7. Train helpdesk and security operations before enabling locks.
+8. Enable enforcement in stages and monitor events, endpoint health, and support volume after each stage.
+
+## Verify endpoint readiness
+
+In **Managed devices**, confirm the endpoint is online and reports VisionX status. Useful indicators include the activation mode, Armed or Idle state, user-session availability, model readiness, camera readiness, and whether an unlock code is configured.
+
+An online TAO service does not by itself prove VisionX can detect. VisionX also needs an eligible user session, a ready detection model, an available camera when the policy requires one, and an armed activation state.
+
+On the agent UI, VisionX may show **STANDBY** while starting or waiting for a session/camera; treat that as readiness, not as “policy off,” until **Managed devices** shows the expected Armed/Idle state for your activation mode.
+
+## Day-to-day operations
+
+- Review VisionX events on a defined schedule and route credible incidents through your normal investigation process.
+- Treat missing evidence as “no image available,” not proof that no detection occurred. Strict no-camera locks intentionally have no frame.
+- Revalidate policy after agent upgrades, camera or docking-station changes, and major application changes.
+- Keep unlock authority separate from evidence-review authority where staffing allows.
+- Record policy and unlock-related administrative activity in your change or audit process.
+
+## Related
+
+- [VisionX activation modes](/kb/visionx/visionx-activation-modes)
+- [VisionX detection tuning](/kb/visionx/visionx-detection-tuning)
+- [VisionX events, evidence, and helpdesk unlock workflow](/kb/visionx/visionx-events-evidence-helpdesk)
+- [Troubleshooting: agent offline or not updating](/kb/getting-started/troubleshooting-agent-offline)

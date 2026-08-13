@@ -3,19 +3,20 @@
 ## Phase 0 — Foundation (current)
 
 - [x] Repo + charter
-- [ ] Confirm compute / language / Trustity-docs policy (blocking questions to Tal)
-- [ ] Freeze base-model shortlist
-- [ ] Seed eval suite v0 (50–100 Qs)
-- [ ] Data policy + source list
+- [x] Confirm compute / language / Trustity-docs policy
+- [x] Lock decisions (`docs/DECISIONS.md`)
+- [x] Seed eval suite v0
+- [x] Ingest trustity.co + local trustity.dev docs → corpus v0 (390 chunks)
+- [x] Mac-friendly RAG preview script (`scripts/rag_ask.py`)
 
-**Exit:** we can start collecting/generating training data without re-litigating product scope.
+**Exit:** ready for Phase 1 grounded demo wiring into Labs.
 
-## Phase 1 — RAG MVP (public value fast)
+## Phase 1 — RAG MVP (next)
 
-- Build curated public security corpus (markdown/JSONL)
-- Simple retrieval + grounded answers (API)
-- Thin chat UI on Labs (“Trustity LLM — preview”)
-- Measure: faithfulness + on-topic rate
+- [ ] Package retrieval as tiny API
+- [ ] Optional: local MLX 3B/7B to *generate* from retrieved context on the Mac
+- [ ] Thin chat UI on Labs (“Trustity LLM — preview”)
+- [ ] Measure: faithfulness + on-topic rate on eval suite
 
 **Exit:** public preview that already feels more niche-correct than raw ChatGPT for our eval prompts.
 

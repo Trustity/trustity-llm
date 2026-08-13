@@ -1,0 +1,106 @@
+# Audit Logs in the Cloud Portal
+
+**Administration → Audit Logs** shows administrative actions and system changes recorded for your organization. Use it for change review, access investigations, evidence collection, and control validation.
+
+Audit history is not the same as every product event. GenGuard browser events, VisionX detections, and HostGuard IPS events have dedicated views; **Activity Log** provides a broader cross-module view.
+
+## What the page shows
+
+Each row contains:
+
+- **Timestamp** - displayed in your browser’s local time.
+- **Actor** - the user email when available.
+- **Action** - the recorded action type.
+- **Details** - context supplied by the originating workflow.
+- **IP** - source address when recorded.
+
+Examples may include user invitations, user removal, policy changes, TAO endpoint hardening updates, PAM rotation activity, and retention preference changes. A workflow appears only when it emits an audit record.
+
+## Search and review a change
+
+1. Open **Administration → Audit Logs**.
+2. Set **Show:** to **10**, **50**, **100**, or **500**. This controls how many newest events are loaded.
+3. Enter a value in **Search actor, action, details, IP…**. Search applies to the currently loaded rows.
+4. Optionally select an action from **All actions**. The list is derived from the loaded events.
+5. Review the matching **Timestamp**, **Actor**, **Action**, **Details**, and **IP**.
+6. Select **Refresh** before making a final determination about a recent change.
+7. Correlate the action with the approved change record and the relevant product page.
+
+### Validation checklist
+
+- The actor is the expected administrator or system identity.
+- The timestamp aligns with the approved change window.
+- The action and details match the intended change.
+- The source IP is expected for the operator’s access path, when present.
+- A follow-up event does not indicate failure, removal, tamper, or rollback.
+
+Treat a missing field as unavailable evidence, not proof that the action did not occur.
+
+## Export audit evidence
+
+1. Apply the search and **All actions** filter needed for the review.
+2. Confirm **Showing _n_ of _n_ loaded** reflects the intended working set. If the organization stores more events than are loaded, increase **Show:** before export.
+3. Select **Export CSV**.
+4. Verify the downloaded file name begins with `trustity_audit_` and includes the export date.
+5. Open the file in an approved analysis tool and confirm the header contains **Timestamp**, **Actor**, **Action**, **Details**, and **IP**.
+6. Store the file in your organization’s approved evidence repository with appropriate access controls.
+
+The export contains the filtered rows currently loaded in the browser. It is not automatically a complete historical export.
+
+## Set the retention preference
+
+1. Select **Retention**.
+2. In **Data Retention**, choose **30 Days**, **60 Days**, **90 Days**, or **365 Days**.
+3. Select **Save preference**.
+4. Confirm **Retention preference saved.**
+5. Select **Refresh** and reopen **Retention** to confirm the chosen value.
+6. Review **Audit Logs** for the retention update.
+
+The setting is your organization’s preferred retention window. Automatic purge of older rows is not enabled by this control. Contact Trustity Support if you require enforced deletion, and document the applicable plan and compliance requirement.
+
+## Choose the correct log view
+
+- Use **Audit Logs** for focused administrative and system change review.
+- Use [Activity Log](/kb/portal/activity-log) for cross-module search across GenGuard DLP, portal audit, security incidents, and PAM rotations.
+- Use **Browser Protection → Live Events** for GenGuard browser activity.
+- Use **VisionX Guard → Live Events** for VisionX detections.
+- Use **Trustity Vault → HostGuard IPS** for HostGuard events.
+- Use [Log Forwarding](/kb/portal/log-forwarding) to stream selected portal audit actions to an external destination.
+
+## Troubleshooting
+
+### No audit events recorded yet
+
+Confirm that you are in the expected organization, select **Refresh**, and increase **Show:**. New organizations remain empty until an audited workflow occurs.
+
+### No events match your filters
+
+Clear the search field, return the action selector to **All actions**, and refresh. Remember that both search and action filtering apply only to loaded rows.
+
+### Could not load audit events
+
+Select **Retry**. If the error persists, record the time and visible message and open a support ticket. Do not include confidential event details unless Support requests them through an approved channel.
+
+### A recent change is missing
+
+Select **Refresh**, increase **Show:**, and check the product-specific page or **Activity Log**. Some operational events are not administrative audit records, and only workflows that emit audit events appear here.
+
+### Export CSV is disabled
+
+No rows match the current filters. Clear or broaden the filters, then export again.
+
+## Security notes
+
+- Audit visibility is organization-scoped; always confirm the organization shown by your session.
+- Limit exported files to authorized reviewers and apply your evidence retention policy.
+- Do not alter the original export. Work from a copy when adding annotations.
+- Investigate unexpected administrators, source IPs, removals, policy changes, tamper events, and failed rotations.
+- Retention preference does not guarantee deletion. Obtain confirmation through Support when enforced purge is required.
+
+## Related guides
+
+- [Portal users and roles](/kb/portal/user-roles-and-invites)
+- [Activity Log](/kb/portal/activity-log)
+- [Log Forwarding](/kb/portal/log-forwarding)
+- [Support Center](/kb/portal/support-center)
+- [Welcome to Trustity](/kb/getting-started/welcome-to-trustity)

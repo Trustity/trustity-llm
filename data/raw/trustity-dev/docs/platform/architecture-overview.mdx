@@ -1,0 +1,57 @@
+# Platform architecture overview
+
+Trustity’s control plane is the **Cloud Portal** (`trustity.io`). Enforcement on endpoints is performed by the **TAO agent**, which runs entitled modules according to portal policy. Public product docs for operators live on `trustity.co/kb`. This hub (`trustity.dev`) is for integrators and partner engineers.
+
+```
+┌────────────────────┐         HTTPS          ┌─────────────────────┐
+│  Trustity Cloud    │ ◄────────────────────► │  TAO agent (device) │
+│  Portal (policy,   │     enroll / heartbeat │  + modules          │
+│  vault, audit,     │     / policy / report  │                     │
+│  invite/MFA)       │                        │                     │
+└────────────────────┘                        └─────────────────────┘
+         ▲
+         │  (separate identity)
+┌────────────────────┐
+│  trustity.dev      │  docs + invite-only community
+└────────────────────┘
+```
+
+## First-party install vs runtime update
+
+| Path | Who initiates | Notes |
+|------|---------------|-------|
+| **First install** | Customer IT | Download Setup/package from Portal **Deployment**; Trustity does not push binaries to unmanaged devices |
+| **In-place update** | Customer IT today | Redeploy a newer Setup from Deployment; enrollment should remain under ProgramData / Linux state |
+| **Future auto-update** | Already-enrolled agent | Planned control-plane feature; pilot/production targeting only makes sense once pull-update exists |
+
+## Modules (conceptual)
+
+| Module | Role on the endpoint |
+|--------|----------------------|
+| **VisionX** | Visual-channel risk detection in interactive sessions (phones, cameras, lenses / imaging devices); **Trustity VisionX Model** on-endpoint (TAO 1.0.34+) with COCO YOLO dual/fallback; portal **Lock response** (Faster / Balanced / Accurate); Strict no-camera locks report portal events |
+| **GenGuard** | Browser DLP (extension + portal policy) |
+| **Vault / PAM** | Local privileged account rotation & vault reporting |
+| **HostGuard IPS** | Failed-logon detection and host firewall blocks |
+| **Asset Inventory** | Installed-software snapshot reported to the portal |
+
+Exact entitlement is per organization in the Cloud Portal. Agents only activate modules they are licensed for.
+
+## Tenant isolation
+
+Each organization is a hard tenant boundary. Agents enroll with an **organization license key**; portal users are invited into a specific org. Provisioning a new customer tenant must not leak devices, inventory, vault secrets, or VisionX evidence across orgs — validate with a second test tenant before production cutover.
+
+## Enterprise controls (control plane)
+
+Identity, RBAC, MFA/session control, SSO/SCIM preview, alert routing, retention, audit export integrity, and Security Assurance readiness are **portal control-plane** concerns. See [Enterprise controls overview](/docs/platform/enterprise-controls). Endpoint modules still enforce policy locally via TAO.
+
+## Boundaries
+
+- **Portal UI & operator APIs** — authenticated tenant users (separate identity from Developer Central), including enterprise admin settings and MFA/session lifecycle.
+- **Agent runtime APIs** — device enrollment and ongoing agent traffic (license → long-lived agent credential model).
+- **Identity preview** — SSO domain discovery/broker start and SCIM Users lifecycle/discovery; customer IdP activation, Groups mapping, and full conformance are not GA.
+- **Developer Central** — this site; docs and invite-only customer community.
+- **Marketing / legal** — `trustity.co` (including `legal@trustity.co`); not the runtime portal domain.
+
+## What we intentionally do not publish here
+
+Full request schemas, secret storage internals, offline unlock algorithms, and unauthenticated route catalogs. Partner / NDA integrations can request deeper materials through Trustity Support.

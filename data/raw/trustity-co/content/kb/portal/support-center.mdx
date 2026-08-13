@@ -1,0 +1,84 @@
+# Support Center
+
+Use **Administration → Support Center** for technical assistance and ticket management. The page lists organization tickets with **All**, **Open**, **In Progress**, and **Resolved** filters.
+
+Ticket access follows the organization associated with your session. The current ticket-list workflow is owner-centered; if an invited member cannot see or create organization tickets, ask the organization Owner to submit the request.
+
+## Before opening a ticket
+
+1. Check the relevant guide and repeat the operation once only when safe.
+2. Record the affected feature, visible UI label, endpoint hostname when necessary, and approximate time with time zone.
+3. Capture the exact visible error, expected result, and actual result.
+4. Note recent approved changes and whether the issue affects one endpoint or the fleet.
+5. Remove passwords, license keys, MFA codes, tokens, uninstall or unlock codes, and sensitive evidence.
+
+Use **Critical** only for a severe active business or security impact. Priority does not replace clear impact and scope.
+
+## Open a ticket
+
+1. Open **Support Center**.
+2. Select **Open Ticket**.
+3. Under **New Support Request**, enter a concise **Subject**.
+4. Select **Low**, **Medium**, **High**, or **Critical** under **Priority**.
+5. In **Description**, provide:
+   - affected area and exact UI label;
+   - organization-safe device or user context;
+   - timestamp and time zone;
+   - expected and actual behavior;
+   - steps already attempted;
+   - business impact and number of affected endpoints.
+6. Review the request for confidential material.
+7. Select **Submit Ticket**.
+8. Confirm the ticket appears in the list with its status and short reference number.
+
+## Track and reply
+
+1. Use **All**, **Open**, **In Progress**, or **Resolved** to locate the ticket.
+2. Select the ticket card or **View**.
+3. Review the subject, status, reference number, date, and full conversation.
+4. Enter a reply in **Type a reply...** and use the send button. Pressing Enter also sends; use Shift+Enter for a new line.
+5. Select **Subscribe** if you want email notifications. The control changes to **Subscribed**.
+6. When the ticket is **Resolved**, the reply field reads **Ticket is closed.** and is disabled.
+
+Keep all follow-up for the same issue in the existing ticket so Support has a complete timeline.
+
+## Validate resolution
+
+1. Reproduce the original workflow using the agreed test case.
+2. Confirm the expected portal message, endpoint state, log event, or external delivery.
+3. Check adjacent controls for regression when appropriate.
+4. Record the validation time and result in the ticket before closure.
+5. Remove temporary diagnostics or test configuration through an approved change.
+
+## Troubleshooting
+
+### No support tickets found
+
+Confirm the **All** filter and the organization associated with your account. An invited member may need the organization Owner to access the owner-centered ticket workflow.
+
+### A submitted ticket does not appear
+
+Refresh **Support Center** and check the active filter. Avoid duplicate submission until you verify whether the first request exists.
+
+### Replies do not send
+
+Confirm the ticket is not **Resolved**, the reply is not blank, and the session is still active. Preserve the text locally without confidential content, refresh, and retry once.
+
+### Subscription does not produce email
+
+Confirm the control shows **Subscribed**, check quarantine, and verify that your portal email is current. Continue checking the ticket directly while mail delivery is investigated.
+
+## Security notes
+
+- Never submit passwords, passkeys, MFA or recovery codes, private keys, bearer tokens, organization license keys, uninstall codes, or VisionX unlock codes.
+- Redact unrelated users, hosts, IP addresses, and event content from screenshots.
+- Share the minimum diagnostic information needed and use an approved secure channel if Support requests sensitive evidence.
+- Do not grant remote access or disable protection controls unless explicitly approved through your organization’s process.
+
+## Related guides
+
+- [Audit Logs in the Cloud Portal](/kb/portal/audit-logs)
+- [Activity Log](/kb/portal/activity-log)
+- [Log Forwarding](/kb/portal/log-forwarding)
+- [Manage your account and MFA](/kb/portal/manage-account-and-mfa)
+- [Troubleshoot an offline TAO agent](/kb/getting-started/troubleshooting-agent-offline)

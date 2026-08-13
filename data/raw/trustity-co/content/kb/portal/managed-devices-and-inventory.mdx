@@ -1,0 +1,106 @@
+# Managed devices and software inventory
+
+Open **Secure Vault → Trustity Vault → Devices** to reach **Managed devices**. The page combines heartbeat, TAO health, module status, PAM state, and software inventory, and automatically refreshes every 15 seconds.
+
+Access depends on the **Vault** entitlement. A **Vault**-scoped membership is intentionally limited to the **Secure Vault** sidebar. Some actions can affect endpoints or privileged local accounts; use an authorized operational role and approved change record.
+
+## Review fleet health
+
+1. Review the totals for **online**, **devices**, **TAO managed**, and **software items**.
+2. Use **All**, **Online**, **Offline**, **Pending**, or **VisionX**.
+3. Search with **Search hostname, user, IP…**.
+4. Confirm **Auto-refresh every 15s** or select **Refresh**.
+5. For each device, review **Communication**, **TAO**, **Inventory**, and **PAM**.
+6. Treat **Rotation pending**, **Scan pending**, or **Rotation & scan pending** as queued work awaiting agent communication.
+
+An **Online** label reflects recent communication, not proof that every module is healthy. Review TAO health, version, policy version, module badges, and any VisionX detail.
+
+## Inspect one device
+
+1. Select the hostname for device detail, or review the summary card.
+2. Confirm hostname, IP, operating system, and **Last heartbeat**.
+3. Under **TAO**, confirm health, agent version, policy version, and expected modules.
+4. For VisionX devices, select **Details** and review **Session helper**, **Model ready**, **Unlock code set**, **Camera ready**, activation mode, and any **Lock readiness** message.
+5. Under **Inventory**, review app count, last scan time, and **No scan yet**, **Scan is stale**, **Scan requested**, or **Inventory is fresh**.
+
+## Request and review software inventory
+
+Asset Inventory runs on the endpoint: TAO enumerates installed software (Windows Uninstall registry keys; Linux package managers) and reports a snapshot to the portal. The portal replaces the previous snapshot for that device on each successful report.
+
+1. On the device, select **Scan**.
+2. Confirm **Inventory scan requested. Results appear after the next TAO heartbeat.**
+3. Wait for the device to communicate; the card shows **Scan requested** while pending.
+4. Select **Inventory** to open **Software Inventory**.
+5. Review **Name**, **Version**, **Publisher**, and **Install Date**.
+6. Confirm the last-scan time and total item count.
+
+A scan request is asynchronous. Repeated clicks do not make an offline device return faster.
+
+On the agent UI, **Asset Inventory** should show **LIVE** after a successful report. A message such as **Report failed: portal error … inventory insert failed** means the endpoint collected data but the portal rejected the write - capture hostname, time, and exact text for Support. After a portal fix or retry, request **Scan** again and reopen the inventory modal.
+
+## Search software across the fleet
+
+1. Select **Software**.
+2. In **Fleet Software Search**, enter at least two characters of a software name or publisher.
+3. Optionally use **Filter by device hostname...** and **All publishers**.
+4. Review result totals, affected devices, publishers, and baseline status.
+5. Select **Export CSV** to export the currently filtered results.
+
+The search may show **showing first 100 matches**. Narrow the query or filters before drawing fleet-wide conclusions.
+
+## Manage a software baseline
+
+1. In **Fleet Software Search**, locate a row with a valid version.
+2. Confirm the software name, publisher, device, and installed version.
+3. Select **Use current as baseline** only after the version is approved.
+4. Wait for **Baseline saved for _software_.**
+5. Search again and review **Match**, **Drift**, or **No baseline**.
+
+A baseline is a comparison reference, not an automatic remediation action. Investigate drift before upgrading, removing, or approving software.
+
+## PAM and destructive-action caveats
+
+The page may also expose local-account rotation and password controls. PAM manages local accounts only; domain or Active Directory users are not managed here. Restrict **Reveal password**, **Copy password**, **Rotate**, local-account selection, and **Delete** to specifically authorized operators.
+
+Removing a device from the portal does not uninstall the agent. If TAO remains installed, the station can register again on a later heartbeat.
+
+## Troubleshooting
+
+### No devices enrolled yet
+
+Select **Open Deployment Center**, install and enroll TAO with the correct organization key, and wait for the first heartbeat.
+
+### Inventory remains pending
+
+Confirm the endpoint is **Online**, the Inventory module is present, and TAO is healthy. Wait for the next heartbeat before requesting again.
+
+### Inventory modal shows 0 items after a completed scan
+
+1. Confirm **Asset Inventory** is entitled and Live on the agent.
+2. Confirm the agent version is current enough for your tenant (prefer the build published under **Deployment**).
+3. Check the agent detail for a portal report error.
+4. Retry **Scan** once after the device is Online.
+5. If the problem is limited to one new organization while others work, note the organization name and time for Support - tenant provisioning and inventory schema issues have historically presented this way.
+
+### Local accounts are missing
+
+The page can show **Waiting for agent to report local accounts**. Confirm the endpoint runs a supported TAO version and has recently communicated.
+
+### No devices match your filters
+
+Select **Clear filters**, then search by exact hostname. Check that the **Online**, **Offline**, **Pending**, or **VisionX** chip is not excluding the device.
+
+## Security notes
+
+- Inventory data can reveal sensitive software and host context; restrict exports accordingly.
+- Investigate unexpected software and drift, but validate business ownership before remediation.
+- Never expose vaulted passwords in screenshots, tickets, or exported evidence.
+- Require explicit approval before **Remove device**, password rotation, or changing the selected PAM account.
+
+## Related guides
+
+- [Deployment Center](/kb/portal/deployment-center)
+- [Security Policies hub](/kb/portal/security-policies-hub)
+- [TAO endpoint hardening](/kb/portal/tao-endpoint-hardening)
+- [Audit Logs in the Cloud Portal](/kb/portal/audit-logs)
+- [Troubleshoot an offline TAO agent](/kb/getting-started/troubleshooting-agent-offline)

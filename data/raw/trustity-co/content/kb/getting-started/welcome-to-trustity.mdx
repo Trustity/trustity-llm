@@ -1,0 +1,77 @@
+# Welcome to Trustity
+
+Trustity brings endpoint security policy, device visibility, and security operations into one organization-scoped Cloud Portal. Endpoint capabilities are delivered by the **Trustity Agent (TAO)** and, for browser controls, the **GenGuard browser extension**.
+
+## Scope
+
+This article is the starting point for organization owners, security administrators, endpoint engineers, and helpdesk teams preparing a Trustity deployment. It explains the operating model and the sequence to follow before a production rollout.
+
+## Platform components
+
+| Component | Purpose |
+|---|---|
+| **Cloud Portal** | Manages organization users, entitlements, deployment downloads, policies, managed devices, events, and audit records |
+| **TAO agent** | Enrolls Windows and supported Linux endpoints, reports health and inventory, and enforces entitled endpoint modules |
+| **GenGuard browser extension** | Applies entitled browser DLP controls in managed Chrome or Edge environments |
+| **Security modules** | Add capabilities such as VisionX, GenGuard, Vault/PAM, HostGuard IPS, and asset inventory |
+
+Entitlements determine which portal pages, policies, downloads, and endpoint capabilities are available to your organization. A downloaded installer is not customized per device; after enrollment, the endpoint receives the policy and module configuration assigned to its organization.
+
+## Prerequisites
+
+Before deployment, identify:
+
+- The person who owns the Trustity organization and at least one backup administrator
+- The modules included in your subscription
+- A small Windows or Linux pilot group that represents your production environment
+- The endpoint-management method you will use, such as Intune, SCCM, another MDM, or a controlled manual install
+- Your proxy, TLS inspection, and outbound HTTPS requirements
+- A support and rollback owner for the pilot
+
+## Recommended getting-started sequence
+
+1. Sign in to the Cloud Portal at `https://trustity.io`.
+2. Confirm the organization name, enabled modules, and administrator access.
+3. Review **Security policies** before installing endpoints. Start with settings appropriate for a pilot rather than immediately enabling strict enforcement.
+4. Open **Deployment**. Copy the organization license key only into an approved credential-handling workflow.
+5. Download the current Windows or Linux TAO package from Deployment. If GenGuard is entitled, use the extension and managed-browser materials presented there.
+6. Install and enroll one representative endpoint.
+7. Confirm the endpoint is online in **Managed devices**, reports the expected inventory, and shows the expected entitled modules.
+8. Perform a controlled module test and review the corresponding event view.
+9. Expand through deployment rings only after documenting pilot results and support procedures.
+
+## Verification
+
+A successful first deployment has all of these characteristics:
+
+- The expected portal sections are visible for the organization's entitlements
+- The pilot endpoint appears in **Managed devices**
+- The TAO service is running and the endpoint reports a recent heartbeat
+- The endpoint reports the expected agent version and operating-system details
+- Entitled policy is visible or active on the endpoint
+- Operators can locate relevant module events and administrative changes
+- The organization license key is not stored in tickets, public repositories, screenshots, or shared documents
+
+Installation success by itself is not sufficient. Treat portal visibility, recent health, and a controlled policy test as the acceptance criteria.
+
+## Security and operational guidance
+
+- Treat the organization license key as a deployment credential. Use placeholders such as `<TRUSTITY_LICENSE_KEY>` in documentation and scripts.
+- Use least-privilege portal roles. Keep Owner/Admin membership small and provide Viewer or Vault access only where needed.
+- Pilot enforcement changes before broad assignment, especially camera, browser, password-rotation, firewall, or endpoint-hardening controls.
+- Keep a documented break-glass and endpoint recovery process outside the managed device.
+- Use Audit Logs to review important administrative changes; use each module's event page for security detections.
+- Do not distribute installers obtained from third-party mirrors.
+
+## Troubleshooting
+
+If Deployment shows no assets, first confirm that the organization has an enabled module that uses TAO or GenGuard. If an installed endpoint does not appear, verify enrollment, service health, DNS, and outbound HTTPS before changing policy.
+
+## Related links
+
+- [Organization onboarding runbook](/kb/getting-started/organization-onboarding)
+- [Entitlements and module matrix](/kb/getting-started/entitlements-module-matrix)
+- [Network requirements](/kb/getting-started/network-requirements)
+- [Verify your first healthy device](/kb/getting-started/first-healthy-device)
+- [Pilot-to-production rollout](/kb/getting-started/pilot-to-production-rollout)
+- [Contact Trustity](/contact)

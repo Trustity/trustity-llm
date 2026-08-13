@@ -1,0 +1,37 @@
+# Security Assurance readiness
+
+**Security Assurance** (Owner/Admin) summarizes configuration and measured operational-readiness signals for enterprise controls. It does **not** certify your organization or Trustity against SOC 2, ISO 27001, or any auditor report.
+
+## Open the dashboard
+
+1. Sign in as Owner or Admin.
+2. Open **Security Assurance** from the sidebar.
+3. Review control rows such as MFA policy, SSO metadata staging, alert routing, and audit archive/export posture.
+4. Review measured signals: recent alert delivery rate / five-minute SLO, restore-drill age, privileged-operator count, and the current operator’s MFA assurance signal.
+5. Use deep links to fix gaps (Identity, Sessions, Retention, Alerts).
+
+## How to read statuses
+
+| Status language | Meaning |
+|-----------------|---------|
+| Enforced / On | Control is configured for the tenant |
+| Staged / Preview | Metadata or partial capability saved; full GA behavior may still be missing |
+| Optional / Off | Not enabled |
+| Archive mode / SHA-256 header | Export integrity metadata available - **not** a signed or concurrency-safe tamper-evident attestation |
+
+Measured signals are bounded operational indicators:
+
+- The current MFA percentage is based on the active privileged session, not yet a complete factor census for every user.
+- Restore drill age is based on an operator-recorded drill.
+- Alert percentages use the recent outbox sample and should not be treated as a contractual SLA.
+
+## What to request from Trustity
+
+For procurement packages, email [security@trustity.co](mailto:security@trustity.co) and ask for a **Security Assurance readiness package**. Do not treat marketing Trust Center language as proof of a completed SOC 2 audit opinion.
+
+## Related guides
+
+- [SSO and SCIM preview](/kb/portal/sso-and-scim-preview)
+- [Evidence retention and audit integrity](/kb/portal/evidence-retention)
+- [Manage your account and MFA](/kb/portal/manage-account-and-mfa)
+- Trust Center on [trustity.co/trust](https://trustity.co/trust)

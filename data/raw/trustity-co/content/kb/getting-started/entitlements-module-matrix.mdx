@@ -1,0 +1,102 @@
+# Entitlements and module matrix
+
+Trustity exposes product capabilities according to the modules enabled for an organization. Entitlements affect portal navigation, policy tabs, deployment assets, endpoint behavior, and event views.
+
+## Scope
+
+Use this matrix during onboarding, deployment design, and troubleshooting. The Cloud Portal remains the source of truth for the modules currently enabled in your organization. Names and packaging can evolve as subscriptions change.
+
+## Prerequisites
+
+- Portal access to the target organization
+- An approved subscription or order record
+- Understanding of the endpoint operating systems in scope
+- Named owners for policy, deployment, and event response
+
+## Customer-facing matrix
+
+| Module or capability | Primary component | Current platform scope | Portal and operational outcome |
+|---|---|---|---|
+| **TAO Agent** | TrustityAgent service and endpoint UI | Windows; Linux package for supported Linux capabilities | Enrollment, heartbeat, policy, inventory, and endpoint hardening where exposed |
+| **Asset inventory** | TAO | Windows and supported x86_64 Linux | Managed-device OS, agent, and installed-software visibility |
+| **VisionX** | TAO service plus session helper | Windows with an active local or RDP session | Visual DLP policy, module health, detections, and evidence when enabled |
+| **GenGuard** | Managed Chrome or Edge extension; TAO can provide entitled browser-host controls | Managed browser environments; TAO-dependent controls are Windows endpoint capabilities | Browser DLP policy, extension deployment materials, and GenGuard events |
+| **Vault / File Vault** | Cloud Portal Vault workflows | Cloud | Encrypted file vault and share controls |
+| **PAM (rotated passwords)** | TAO plus Cloud Portal PAM vault | Supported Windows and Linux local accounts | Local-account discovery and rotation, managed-device operations, and vaulted outcomes |
+| **HostGuard IPS** | TAO and the endpoint firewall | Windows endpoint | Failed-logon detection, local blocks, policy thresholds, and HostGuard events |
+| **TAO endpoint hardening** | TAO | Windows endpoint | Controls such as authorized uninstall, service-stop protection, and standard-user UI restrictions |
+
+The portal may show additional entitled products or controls. Use their in-product descriptions and Trustity-provided onboarding materials rather than assuming they share the matrix above.
+
+## Important boundaries
+
+- **Entitled does not mean deployed.** A module can be visible in the portal while no endpoint component is installed.
+- **Installed does not mean healthy.** TAO must enroll, heartbeat, receive policy, and satisfy module prerequisites.
+- **Policy visible does not mean active everywhere.** Delivery is asynchronous and depends on endpoint health.
+- **Vault/PAM rotates supported local accounts.** It does not rotate Active Directory or domain-account passwords through the local-account workflow.
+- **VisionX is session-dependent.** The Windows service can be healthy while no interactive session is available.
+- **Linux TAO is not feature-identical to Windows TAO.** Current Linux scope centers on inventory and entitled local-account PAM workflows.
+- **GenGuard extension deployment is separate from TAO installation.** Use the extension and tenant configuration presented in Deployment.
+- **File Vault, PAM, and HostGuard are separate entitlements.** Legacy packages that only listed `vault` still unlock PAM + HostGuard until the package is re-saved with explicit modules.
+
+## Confirm entitlements in the portal
+
+1. Sign in to the correct organization.
+2. Review the main navigation and dashboard product areas.
+3. Open **Security policies** and list the visible tabs.
+4. Open **Deployment** and list the available TAO and GenGuard assets.
+5. Identify each module's event or operations page.
+6. Compare the result with the approved subscription.
+7. Resolve discrepancies before writing deployment or test plans.
+
+Do not infer entitlement from an old installer, screenshot, or another tenant.
+
+## Build a deployment plan from the matrix
+
+For every entitled module, record:
+
+1. Required endpoint component
+2. Target OS and browser population
+3. Policy owner and initial pilot setting
+4. Technical prerequisite, such as an interactive session or endpoint firewall
+5. Verification behavior and expected portal signal
+6. Exception and recovery path
+7. Support owner
+
+### Example acceptance mapping
+
+| Capability | Endpoint check | Portal check |
+|---|---|---|
+| TAO enrollment | Service running; expected organization shown | Device online in Managed devices |
+| Inventory | Local inventory command succeeds where available | OS and software details populated |
+| VisionX | Module healthy in an active session | Controlled test appears in VisionX events |
+| GenGuard | Extension force-installed and enabled | Controlled browser test appears in GenGuard events |
+| Vault/PAM | Designated local test account and recovery path ready | Authorized test rotation completes and is recorded |
+| HostGuard IPS | Policy active and firewall compatible | Approved simulation produces expected HostGuard signal |
+
+## Verification
+
+The entitlement review passes when:
+
+- Portal pages match the approved subscription
+- Every enabled module has a named component and target population
+- Unsupported OS/module combinations are excluded
+- Deployment assets are available for the planned components
+- Each module has a safe verification step and expected event destination
+- Access to sensitive module functions is limited by role
+
+## Troubleshooting and security
+
+- **Module missing:** verify organization and role, then compare with the subscription owner.
+- **TAO download visible for a browser-focused subscription:** TAO can support additional entitled endpoint controls; confirm planned scope before deploying it.
+- **Policy tab visible but no events:** confirm the component is deployed, the endpoint is online, policy has refreshed, and a valid controlled test occurred.
+- **Different behavior across operating systems:** compare against current platform scope rather than assuming parity.
+- Do not expose tenant identifiers, license keys, policy exports containing credentials, or sensitive event evidence while reconciling entitlements.
+
+## Related links
+
+- [Cloud Portal overview](/kb/getting-started/cloud-portal-overview)
+- [Organization onboarding runbook](/kb/getting-started/organization-onboarding)
+- [Install TAO on Windows](/kb/getting-started/install-tao-windows)
+- [Install TAO on Linux](/kb/getting-started/install-tao-linux)
+- [Deploy the GenGuard browser extension](/kb/genguard/deploy-genguard-extension)

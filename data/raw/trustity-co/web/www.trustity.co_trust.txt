@@ -1,0 +1,172 @@
+SOURCE: https://www.trustity.co/trust
+
+Trust Center | Trustity | Trustity 
+
+Loading Trustity 
+
+Products Platform Solutions Contact Docs Partners 
+
+Cloud Portal Get Started 
+
+Security Assurance 
+
+Trust Center 
+
+Practical details for security reviewers: how data moves, what we encrypt, what zero-knowledge covers, and how to request a Security Assurance readiness package. 
+
+Last updated August 11, 2026 
+Request Security Assurance package 
+
+Security posture 
+
+We design controls for enterprise security and privacy requirements. Security Assurance materials and readiness evidence are shared under NDA with qualified prospects and customers. This page does not claim a completed SOC 2 or ISO 27001 certification or a published audit report. 
+
+SOC 2 
+
+Controls are mapped to the Trust Services Criteria. No SOC 2 audit report has been issued. 
+
+Not certified 
+
+ISO/IEC 27001 
+
+Security program aligned to selected ISO/IEC 27001:2022 controls. Trustity is not ISO 27001 certified. 
+
+Not certified 
+
+GDPR 
+
+DPA and international-transfer support available for applicable deployments. GDPR is not a certification. 
+
+DPA on request 
+
+Healthcare / ePHI 
+
+Not currently supported unless a signed BAA and an approved deployment scope are in place. 
+
+Not currently supported 
+
+Data flow (high level) 
+
+Endpoints run the TAO agent (and GenGuard in the browser where deployed). Policy and telemetry travel to the Trustity Cloud Portal over TLS. Operators manage fleet policy there - not on this marketing site. 
+
+1 
+
+Endpoint / browser 
+
+TAO enforces VisionX, HostGuard, and local PAM rotation. GenGuard applies browser policy where installed. VisionX detection is designed to run on the device. 
+
+2 
+
+Encrypted channel 
+
+Agent and portal APIs use TLS in transit. Cloud databases and object storage use provider-managed encryption at rest with industry-standard cryptography. 
+
+3 
+
+Cloud Portal (tenant-isolated) 
+
+Each customer organization is isolated. Admins see only their tenant’s devices, policies, and audit events. 
+
+4 
+
+Vaulted credentials (ZK scope) 
+
+Vault wrapping keys are designed so Trustity cannot read customer vault secrets in cleartext. This does not apply to every telemetry field in the portal. 
+
+Security by design 
+
+Least privilege, tenant isolation, and zero-knowledge vault design for secrets that customers entrust to the portal. 
+
+Encryption in transit and at rest 
+
+TLS for portal and agent traffic. Provider-managed encryption at rest for cloud databases and storage, using industry-standard cryptography. 
+
+Zero-knowledge vault (scoped) 
+
+Applies to vaulted secrets / credentials under split-key wrapping - not to every telemetry field in the portal. 
+
+Monitoring & disclosure 
+
+Operational monitoring plus a documented channel at security@trustity.co. Researchers can also use /.well-known/security.txt. 
+
+Subprocessors 
+
+Current processors used to operate the product. Ask security@trustity.co for the signed schedule under NDA, including regions and transfer mechanisms. 
+
+Provider Purpose Scope 
+Supabase Database, auth, storage Cloud Portal / SecSend 
+Vercel Application hosting Websites and apps 
+Cloudflare DNS / edge, where configured Public sites 
+Resend Transactional email Notifications / SecSend 
+Twilio SMS delivery SecSend unlock codes 
+
+Report a vulnerability 
+
+If you found a potential issue in Trustity systems, contact us promptly. Do not include customer secrets or exploit payloads in public channels. Testing is limited to systems you are authorized to assess; denial-of-service and social engineering are out of scope. 
+Contact Security Team 
+
+Looking for product docs or a technical deep-dive for integrators? 
+
+Documentation Developer Central Legal Center 
+
+Unified endpoint, edge, and secure delivery - VisionX, GenGuard, Vault/PAM, HostGuard IPS, Trustity Axiom, and Trustity SecSend. 
+
+Products 
+
+VisionX 
+
+GenGuard 
+
+Vault & PAM 
+
+HostGuard IPS 
+
+Trustity Axiom 
+
+Trustity SecSend 
+
+All Products 
+
+Platform 
+
+Resources 
+
+Documentation 
+
+User Manual 
+
+Getting Started 
+
+Developer Central 
+
+Cloud Portal 
+
+Trustity Authenticator 
+
+Company 
+
+About Us 
+
+System Status 
+
+Release Notes 
+
+Trust Center 
+
+Contact Sales 
+
+Become a Partner 
+
+Partner login 
+
+Legal Center 
+
+Privacy Policy 
+
+Terms of Service 
+
+License Agreement 
+
+© 2026 Trustity 
+
+Privacy Terms Legal Security

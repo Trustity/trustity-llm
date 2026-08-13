@@ -1,0 +1,186 @@
+SOURCE: https://www.trustity.co/
+
+Trustity | VisionX, GenGuard, Vault & HostGuard 
+
+Loading Trustity 
+
+Products Platform Solutions Contact Docs Partners 
+
+Cloud Portal Get Started 
+
+Trustity 
+
+Stop data leaving the endpoint - before it reaches GenAI, a camera, or an attacker. 
+
+VisionX, GenGuard, Vault/PAM, HostGuard IPS, Trustity Axiom, and Trustity SecSend - endpoint controls, edge security, and secure document delivery across the Trustity portfolio. 
+
+Request Access Book a Demo 
+
+One portal · four controls · one agent 
+
+VisionX GenGuard Vault & PAM HostGuard IPS TAO Agent 
+
+Security & Trust Center Privacy by design Privacy Policy 
+
+How it fits together 
+
+Policy lives in the Cloud Portal. Enforcement happens on the endpoint and in the browser. 
+
+TAO Agent 
+
+VisionX detection, PAM rotation, HostGuard IPS, browser DLP hooks, and asset inventory - one runtime. 
+
+GenGuard 
+
+Browser DLP intercepts sensitive pastes into GenAI and unsanctioned SaaS before data leaves the session. 
+
+Vault & Portal 
+
+Zero-knowledge secrets, credential rotation, and a single operational console for policy and alerts. 
+
+VisionX 
+
+See the model catch visual-channel risk in seconds 
+
+On-device detection for phones, cameras, and lenses aimed at sensitive screens - evidence and lock when policy requires it. 
+Explore VisionX 
+
+Product suite 
+
+Visual DLP, browser DLP, privileged access, host IPS, edge security, and secure delivery - designed to work as one Trustity portfolio. 
+
+VisionX 
+
+Visual-channel data loss prevention 
+
+Detects phones, cameras, and lenses aimed at screens, captures evidence, and locks the workstation when policy requires it. 
+Explore VisionX 
+GenGuard 
+
+Browser DLP for GenAI and Shadow IT 
+
+Blocks sensitive pastes into LLMs, controls risky domains, and surfaces unsanctioned SaaS usage. 
+Explore GenGuard 
+Vault & PAM 
+
+Secrets and credential rotation 
+
+Zero-knowledge vault plus scheduled local admin password rotation via the TAO agent. 
+Explore Vault 
+HostGuard IPS 
+
+Host brute-force detection and blocking 
+
+Watches failed logons, blocks offending IPs at the host firewall, and alerts in the portal. 
+Explore HostGuard 
+Trustity Axiom 
+
+Edge SMB & DNS security 
+
+Inline SMB proxy and policy-driven DNS nodes - air-gap capable, no endpoint agents for this path. 
+Explore Axiom 
+Trustity SecSend 
+
+Secure document delivery 
+
+Deliver sensitive customer files as sealed packages. Recipients unlock with a one-time SMS code - not another shared password. 
+Explore SecSend 
+
+View all products 
+
+Cloud Portal 
+
+One operational view for policy, agents, and alerts 
+
+Security teams stop juggling consoles. Configure modules, watch live events, and manage the fleet from the Trustity Cloud Portal. 
+Explore the Portal 
+
+Built for deployment at scale 
+
+Flexible footprint for your organization. Pricing is delivered personally - contact us for a quote. 
+
+Agents 
+
+Deploy TAO across endpoints - Windows and Linux - from small teams to enterprise fleets. 
+
+Vault Storage 
+
+Personal encrypted storage for user-owned documents, plus managed PAM controls for credentials. 
+
+Credential Rotation 
+
+Automated local-admin rotation for servers and workstations, with control over frequency and scope. 
+
+Support & SLA 
+
+From community support through dedicated CSM and custom SLAs as you scale. 
+
+Contact Sales for a Quote 
+
+Trustity Credits 
+
+Report bugs, suggest features, and earn credits toward your subscription. A community program for teams that want to shape the platform. 
+
+Join Program Learn More 
+
+Unified endpoint, edge, and secure delivery - VisionX, GenGuard, Vault/PAM, HostGuard IPS, Trustity Axiom, and Trustity SecSend. 
+
+Products 
+
+VisionX 
+
+GenGuard 
+
+Vault & PAM 
+
+HostGuard IPS 
+
+Trustity Axiom 
+
+Trustity SecSend 
+
+All Products 
+
+Platform 
+
+Resources 
+
+Documentation 
+
+User Manual 
+
+Getting Started 
+
+Developer Central 
+
+Cloud Portal 
+
+Trustity Authenticator 
+
+Company 
+
+About Us 
+
+System Status 
+
+Release Notes 
+
+Trust Center 
+
+Contact Sales 
+
+Become a Partner 
+
+Partner login 
+
+Legal Center 
+
+Privacy Policy 
+
+Terms of Service 
+
+License Agreement 
+
+© 2026 Trustity 
+
+Privacy Terms Legal Security

@@ -1,0 +1,100 @@
+SOURCE: https://www.trustity.co/products/axiom
+
+Trustity Axiom | Edge SMB & DNS Security | Trustity | Trustity 
+
+Loading Trustity 
+
+Products Platform Solutions Contact Docs Partners 
+
+Cloud Portal Get Started 
+
+Back to Products 
+Edge security 
+
+Trustity Axiom 
+
+Secure SMB and DNS at the edge - without agents on every endpoint. 
+
+Axiom is Trustity’s edge security product for file-server and DNS traffic. It places an inline SMB reverse proxy in front of your shares and a policy-driven DNS security node inside your network, with centralized management, offline licensing, and air-gap-ready operation. 
+
+Visit Trustity Axiom Product site 
+
+Why Trustity Axiom? 
+
+Inline SMB protection. Sit between users and file servers. Inspect write streams, apply reputation policy, and keep evidence without deploying endpoint agents for this path. 
+
+DNS security gateway. Forward, cache, and enforce domain policy close to the traffic - including air-gap-friendly block pages. 
+
+Part of the Trustity portfolio. Sold and licensed as its own product (axmapp.com), alongside Trustity Cloud Portal endpoint controls like VisionX and GenGuard. 
+
+Licensing, customer portal, and node management for Axiom remain on the Axiom product surfaces - not the Trustity Cloud Portal. 
+
+Trustity Axiom site 
+
+Explore Trustity Axiom 
+
+Open the Axiom product site for architecture, docs, and demos - or talk to Trustity sales about the full portfolio. 
+
+Visit Trustity Axiom Explore Platform 
+
+Unified endpoint, edge, and secure delivery - VisionX, GenGuard, Vault/PAM, HostGuard IPS, Trustity Axiom, and Trustity SecSend. 
+
+Products 
+
+VisionX 
+
+GenGuard 
+
+Vault & PAM 
+
+HostGuard IPS 
+
+Trustity Axiom 
+
+Trustity SecSend 
+
+All Products 
+
+Platform 
+
+Resources 
+
+Documentation 
+
+User Manual 
+
+Getting Started 
+
+Developer Central 
+
+Cloud Portal 
+
+Trustity Authenticator 
+
+Company 
+
+About Us 
+
+System Status 
+
+Release Notes 
+
+Trust Center 
+
+Contact Sales 
+
+Become a Partner 
+
+Partner login 
+
+Legal Center 
+
+Privacy Policy 
+
+Terms of Service 
+
+License Agreement 
+
+© 2026 Trustity 
+
+Privacy Terms Legal Security

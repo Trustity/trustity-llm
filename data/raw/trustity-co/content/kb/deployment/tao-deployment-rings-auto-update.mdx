@@ -1,0 +1,22 @@
+# TAO deployment rings and auto-update
+
+From **TAO 1.0.34+** (stable line **1.0.35+**), Windows agents can upgrade themselves when the Cloud Portal advertises a newer **target version** for the device’s deployment ring.
+
+## How it works
+
+1. In **Deployment Center → Deployment Control**, set **pilot** and/or **production** target versions (for example `1.0.35`).
+2. Assign trusted machines to the **pilot** ring first.
+3. On each heartbeat, the agent receives `targetTaoVersion` (and usually an installer URL for that GitHub Release tag).
+4. If the target is newer than the running binary, the agent downloads `Trustity-Agent-Setup.exe`, verifies SHA-256 when available, and runs Setup **`/quiet`** without a license key so `%ProgramData%\Trustity\TAO` enrollment is preserved.
+
+## Operator checklist
+
+- Publish the Windows installer (GitHub Release asset and/or portal `public/exe/`) before setting the ring target.
+- Pilot first; soak; then promote the same version to production.
+- Leave ring targets empty to disable auto-update for that ring.
+- Override the download URL on an endpoint with `TAO_INSTALLER_URL` only when debugging.
+
+## Notes
+
+- Linux still uses manual `sudo tao-agent update` (or package refresh); ring targeting is primarily for Windows fleets today.
+- Auto-update is independent of VisionX model iterations: ship a new TAO build when Model V1.x weights change.

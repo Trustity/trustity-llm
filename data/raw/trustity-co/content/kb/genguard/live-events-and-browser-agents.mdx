@@ -1,0 +1,70 @@
+# GenGuard Live Events and Browser Agents
+
+Use **Browser Agents** to answer “Is the extension reporting?” and **Live Events** to answer “What policy activity has been observed?” Neither view alone proves complete deployment coverage.
+
+## Browser Agents
+
+The Browser Agents view can show the endpoint hostname, user, network information, operating system, agent version, status, and last-seen time. Use it to validate deployment and find stale installations.
+
+An Active status indicates a recent check-in. Offline may mean the browser is closed, the endpoint is unavailable, network access is interrupted, management configuration is missing, or the extension is unhealthy.
+
+### Health-review procedure
+
+1. Compare expected deployment scope with the agents listed.
+2. Look for missing hostnames, duplicate or unexpected users, outdated versions, and stale Last Seen values.
+3. Confirm that recently used managed browsers report as Active.
+4. For missing agents, verify force-install and tenant configuration through the browser’s effective managed policy.
+5. Track unresolved gaps through endpoint-management operations.
+
+Do not treat Browser Agents as a full device inventory. It represents GenGuard browser-extension reporting, which depends on browser use.
+
+## Live Events
+
+Live Events provides recent GenGuard activity and summary counts, including total events and blocked events. The event list is an operational queue, not a complete incident verdict.
+
+### Triage procedure
+
+1. Confirm the event time, user, endpoint, destination or application context shown, matched control, and status.
+2. Determine whether the activity was blocked, observed, or otherwise handled as expected.
+3. Compare the match with the current keyword, domain, and category policy.
+4. Decide whether it is an approved test, expected enforcement, a false positive, a policy gap, or an investigation candidate.
+5. Correlate credible incidents with your approved security tools and process.
+6. Record the minimum necessary event reference; do not copy sensitive event content into unapproved tickets or chat.
+
+Use synthetic content for validation. Never reproduce an event with real passwords, personal information, source code, or customer data.
+
+## Distinguish common conditions
+
+### Extension present, agent absent
+
+The extension may be installed without valid organization configuration, may not have restarted, or may be overridden by another browser policy. Inspect effective management before changing GenGuard policy.
+
+### Agent active, no events
+
+The policy may not match the test, the test may be allowed, or the current browser workflow may not trigger the configured control. Confirm saved policy and use a known synthetic test.
+
+### Events continue after a policy change
+
+Compare event time with the save time and allow for agent refresh. Confirm the Browser Agent checked in after the change and that another keyword, domain, or category rule is not producing the event.
+
+### High event volume
+
+Separate repeated expected blocks from noisy keyword or category matches. Adjust the narrowest responsible control and validate in the pilot; do not add a broad allowed-domain exception merely to reduce volume.
+
+## Operating cadence
+
+- Daily or according to risk: triage blocked and high-priority events.
+- Weekly: review stale Browser Agents and unresolved deployment gaps.
+- After policy changes: verify agent refresh and controlled event outcomes.
+- After browser or extension updates: retest installation, reporting, and policy behavior.
+- Periodically: review exceptions, ownership, and event-retention requirements.
+
+## Escalation handoff
+
+Include event time, affected user and hostname, policy match, handling status, business context, and related event reference. Exclude credentials and unnecessary sensitive content. If reporting itself appears compromised or broadly unavailable, involve browser-management and security operations owners together.
+
+## Related
+
+- [Deploy the GenGuard browser extension](/kb/genguard/deploy-genguard-extension)
+- [GenGuard: GPO and Intune rollout](/kb/genguard/gpo-intune-rollout)
+- [GenGuard policy templates, keywords, domains, and categories](/kb/genguard/policy-templates-keywords-domains-categories)

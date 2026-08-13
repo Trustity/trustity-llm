@@ -1,0 +1,64 @@
+# Vault: force-rotate and RID-500 admin notes
+
+Force rotation requests a new password for the selected local account outside its normal schedule. Use it for a defined operational reason and verify completion rather than treating request submission as success.
+
+## When to force rotate
+
+Appropriate reasons include:
+
+- A local admin password may have been exposed
+- Authorized emergency or third-party support used the credential
+- An endpoint returns from repair or temporary custody
+- A security incident requires credential containment
+- A controlled pilot is validating the rotation workflow
+
+Avoid repeated force-rotation requests to “make it work.” A pending request normally needs endpoint communication and processing. Repeated requests can complicate diagnosis and operator expectations.
+
+## Force-rotation procedure
+
+1. Verify the endpoint hostname and selected local account.
+2. Confirm the account is local, approved for rotation, and not a domain or directory identity.
+3. Check endpoint online status, TAO health, last communication, and whether another rotation is pending.
+4. Record the reason and authorizer in your approved change or incident system without including a credential.
+5. Select **Rotate** and confirm the action.
+6. Wait for the endpoint to process the request and report a later heartbeat.
+7. Confirm that pending status clears, **Vaulted password ready** is shown, and last-rotation time advances.
+8. If validation is required, reveal the credential only to an authorized operator and test through an approved administrative path.
+9. Close the change or incident record with the outcome.
+
+## Built-in administrator (RID 500)
+
+The Windows built-in Administrator account is identified by its local security identifier ending in RID 500. The account may be renamed, so display name alone is not a reliable way to identify it.
+
+When your endpoint and tenant expose RID-500 handling, verify that the resolved account is the intended local administrative or recovery identity. Do not rename an account simply to make it look like “Administrator,” and do not assume every account named Administrator is the built-in account.
+
+Before rotation, check whether the built-in account is disabled, governed by another control, or used by a documented recovery process. Coordinate with endpoint engineering so two password-management systems do not compete.
+
+## After suspected exposure
+
+Force rotation is one containment step. Also:
+
+- Determine where the credential was exposed and remove unauthorized copies.
+- Review relevant endpoint and administrative activity.
+- Confirm the new credential is not copied into the same unsafe channel.
+- Reassess who can reveal credentials and whether the role assignment remains justified.
+- Follow the organization’s incident-response process for broader compromise.
+
+## If rotation does not complete
+
+Check endpoint communication, pending status, current local-account inventory, and account availability. If the endpoint is offline, use the documented recovery process rather than relying on an uncompleted cloud request. Escalate persistent failures with hostname, account name, request time, and non-sensitive status information only.
+
+## Break-glass hygiene
+
+- Keep a documented recovery path independent of one endpoint and one operator.
+- Define who can authorize use, who can reveal, and who reviews the audit trail.
+- Rotate promptly after approved use.
+- Never place vaulted credentials in tickets, chat, email, documentation, or web forms.
+- Test recovery periodically with synthetic or controlled procedures.
+
+## Related
+
+- [PAM: local account password rotation](/kb/vault/pam-local-account-rotation)
+- [Vault credential reveal and role hygiene](/kb/vault/credential-reveal-and-role-hygiene)
+- [Audit Logs in the Cloud Portal](/kb/portal/audit-logs)
+- [Product page: Vault & PAM](/products/vault)

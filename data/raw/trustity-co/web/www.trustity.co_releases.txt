@@ -1,0 +1,253 @@
+SOURCE: https://www.trustity.co/releases
+
+Release Notes | Trustity | Trustity 
+
+Products Platform Solutions Contact Docs Partners 
+
+Cloud Portal Get Started 
+
+Loading releases 
+
+Unified endpoint, edge, and secure delivery - VisionX, GenGuard, Vault/PAM, HostGuard IPS, Trustity Axiom, and Trustity SecSend. 
+
+Products 
+
+VisionX 
+
+GenGuard 
+
+Vault & PAM 
+
+HostGuard IPS 
+
+Trustity Axiom 
+
+Trustity SecSend 
+
+All Products 
+
+Platform 
+
+Resources 
+
+Documentation 
+
+User Manual 
+
+Getting Started 
+
+Developer Central 
+
+Cloud Portal 
+
+Trustity Authenticator 
+
+Company 
+
+About Us 
+
+System Status 
+
+Release Notes 
+
+Trust Center 
+
+Contact Sales 
+
+Become a Partner 
+
+Partner login 
+
+Legal Center 
+
+Privacy Policy 
+
+Terms of Service 
+
+License Agreement 
+
+© 2026 Trustity 
+
+Privacy Terms Legal Security 
+
+Products Platform Solutions Contact Docs Partners 
+
+Cloud Portal Get Started 
+
+Release Notes 
+
+Stay up to date with Trustity Cloud Portal, TAO Agent, GenGuard, and VisionX model releases. 
+
+TCP Portal TAO Agent GenGuard Extension Trustity VisionX Model 
+
+Currently in Prod 
+
+v 2.0 Deployed: Aug 4, 2026 
+
+Previous Version 
+
+v 1.3.0 
+
+UI Refresh 
+
+v 2.0 Aug 4, 2026 
+
+Trustity Cloud Portal visual refresh: softer indigo rail, elevated cards, and readable dusk surfaces across VisionX and dashboard chrome. 
+
+improvement Soft dusk theme with elevated cards and improved contrast for summary metrics and event grids. 
+
+fix Removed duplicate root Privacy Policy footer under the full-height dashboard shell. 
+
+improvement Sidebar and home cards use calmer human styling without neon cyber mesh. 
+
+Applies to: Trustity Cloud Portal customers 
+
+Enterprise controls and Security Assurance 
+
+v 1.3.0 Jul 30, 2026 
+
+Owner/Admin enterprise operations: RBAC roles, MFA enforcement, SSO/SCIM preview, sessions, alerts, rings, retention, and Security Assurance readiness. 
+
+feature Portal roles Owner / Admin / Analyst / Viewer with invite and entitlement-aware navigation. 
+
+feature Optional MFA enforcement for Owners/Admins, session control, critical alert routing, policy history/rollback, and deployment rings. 
+
+feature SSO metadata staging and initial SCIM Users provisioning (preview — password + MFA remains the live sign-in path). 
+
+feature Evidence retention preferences, audit JSONL export with SHA-256 integrity header, and Security Assurance readiness dashboard (not a SOC 2 certification claim). 
+
+improvement Trust Center and Knowledge Base language updated to describe readiness controls accurately. 
+
+Applies to: Trustity Cloud Portal customers 
+
+* Preview-gated identity features (full SSO login, full SCIM 2.0) remain incomplete until a later GA wave. 
+
+Enterprise identity and control-plane hardening 
+
+v 1.3.1 Jul 30, 2026 
+
+Preview-gated SSO discovery, expanded SCIM Users lifecycle provisioning, multi-org switching, durable alerts, append-only audit enforcement, and measured assurance signals. 
+
+feature Authorized multi-organization switcher with membership validation before active tenant selection. 
+
+feature SCIM Users pagination/lifecycle operations and discovery surfaces for ServiceProviderConfig, Schemas, and ResourceTypes; Groups remain preview-only. 
+
+feature SSO email-domain discovery and broker start path, pending customer-specific IdP/Supabase Auth configuration and validation. 
+
+improvement Atomic alert claiming/deduplication, database-enforced append-only audit, and measured Security Assurance readiness signals. 
+
+fix Dashboard PAM rotation activity now uses the canonical audit stream for consistent reporting. 
+
+Applies to: Trustity Cloud Portal enterprise customers 
+
+* SSO and SCIM remain preview-gated until customer-specific integration/conformance tests pass. SCIM Groups writes are not implemented. 
+
+Custom branding 
+
+v 1.2.0 Feb 20, 2026 
+
+Major security and management features added to the portal. 
+
+feature Custom branding options for the portal. 
+
+feature New Patch Management dashboard. 
+
+feature Selective syslog data streaming. 
+
+fix Resolved early user session timeouts. 
+
+Applies to: Trustity Cloud Portal customers 
+
+* This release was deployed to all customers and takes effect within 72 hours. 
+
+VisionX timezone fix 
+
+v 1.1.0 Feb 15, 2026 
+
+Fix for VisionX timezone handling for affected customers. 
+
+fix Resolved VisionX timezone issue impacting some customers. 
+
+Applies to: Trustity Cloud Portal customers 
+
+* This release was deployed to all customers and takes effect within 72 hours. 
+
+First release 
+
+v 1.0.0 Feb 1, 2026 
+
+Trustity Cloud Portal launch. 
+
+feature General UI and stability improvements. 
+
+feature TAO Agent release for PAM rotation, HostGuard IPS, and Vault. 
+
+feature Syslog integration for SIEM. 
+
+feature Portal 2FA option added. 
+
+Applies to: Trustity Cloud Portal customers 
+
+* This release was deployed to all customers and takes effect immediately. 
+
+Unified endpoint, edge, and secure delivery - VisionX, GenGuard, Vault/PAM, HostGuard IPS, Trustity Axiom, and Trustity SecSend. 
+
+Products 
+
+VisionX 
+
+GenGuard 
+
+Vault & PAM 
+
+HostGuard IPS 
+
+Trustity Axiom 
+
+Trustity SecSend 
+
+All Products 
+
+Platform 
+
+Resources 
+
+Documentation 
+
+User Manual 
+
+Getting Started 
+
+Developer Central 
+
+Cloud Portal 
+
+Trustity Authenticator 
+
+Company 
+
+About Us 
+
+System Status 
+
+Release Notes 
+
+Trust Center 
+
+Contact Sales 
+
+Become a Partner 
+
+Partner login 
+
+Legal Center 
+
+Privacy Policy 
+
+Terms of Service 
+
+License Agreement 
+
+© 2026 Trustity 
+
+Privacy Terms Legal Security

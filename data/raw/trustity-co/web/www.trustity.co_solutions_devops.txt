@@ -1,0 +1,114 @@
+SOURCE: https://www.trustity.co/solutions/devops
+
+Trustity | VisionX, GenGuard, Vault & HostGuard 
+
+Loading Trustity 
+
+Products Platform Solutions Contact Docs Partners 
+
+Cloud Portal Get Started 
+
+Back to Solutions 
+
+Security Infrastructure for DevOps 
+
+Eliminate hardcoded secrets in repositories. Use the Trustity Cloud Portal Vault with a developer-friendly Zero-Knowledge model for CI/CD and infrastructure credentials. 
+Talk to an Expert 
+
+Split-Key Vault Architecture 
+
+Trustity applies True Zero-Knowledge principles to Enterprise Secrets Management. Not even us at Trustity have the keys to decrypt your production secrets. 
+
+Dynamic API Keys 
+
+Issue short-lived API keys dynamically during CI builds rather than relying on static, long-lived credentials spanning multiple repositories. 
+
+Infrastructure as Code (IaC) Integration 
+
+Natively inject secrets directly into Terraform, Kubernetes, and Ansible without modifying your existing git workflows. 
+
+Break-Glass Procedures 
+
+Configure automated break-glass procedures for sudden production outages, granting full access only with multi-party quorum approval. 
+
+Vault Live Logs 
+
+09:41:02 UTC 
+
+Service api-gateway-prod requested secret STRIPE_API_KEY 
+
+✓ Access Granted via IAM Role 
+
+09:44:15 UTC 
+
+Service ci-runner-52 rotated secret AWS_ACCESS_KEY_ID 
+
+✓ Rotation Successful 
+
+09:45:00 UTC 
+
+User ext_contractor requested secret PROD_DB_PASS 
+
+✗ Access Denied (Policy: Require MFA + Quorum) 
+
+Unified endpoint, edge, and secure delivery - VisionX, GenGuard, Vault/PAM, HostGuard IPS, Trustity Axiom, and Trustity SecSend. 
+
+Products 
+
+VisionX 
+
+GenGuard 
+
+Vault & PAM 
+
+HostGuard IPS 
+
+Trustity Axiom 
+
+Trustity SecSend 
+
+All Products 
+
+Platform 
+
+Resources 
+
+Documentation 
+
+User Manual 
+
+Getting Started 
+
+Developer Central 
+
+Cloud Portal 
+
+Trustity Authenticator 
+
+Company 
+
+About Us 
+
+System Status 
+
+Release Notes 
+
+Trust Center 
+
+Contact Sales 
+
+Become a Partner 
+
+Partner login 
+
+Legal Center 
+
+Privacy Policy 
+
+Terms of Service 
+
+License Agreement 
+
+© 2026 Trustity 
+
+Privacy Terms Legal Security

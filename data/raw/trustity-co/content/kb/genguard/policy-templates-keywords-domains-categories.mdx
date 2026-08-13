@@ -1,0 +1,78 @@
+# GenGuard policy templates, keywords, domains, and categories
+
+GenGuard policy combines quick-start templates with keyword, domain, and category controls. Treat templates as editable starting points, not compliance certifications or complete policies.
+
+## Prepare a policy design
+
+Identify the business objective, in-scope user group, approved web services, prohibited destinations, test cases, exception owner, and rollback owner. Begin with a pilot and synthetic data.
+
+## Quick Start Templates
+
+Templates add recommended entries for common objectives such as securing GenAI use, protecting personal or payment information, protecting source code, or restricting selected browsing categories.
+
+Applying a template merges its entries into the current draft. It does not replace the whole policy and does not deploy until you review and save. After applying one:
+
+1. Review every added keyword, domain, and category.
+2. Remove entries that do not match your business or legal requirements.
+3. Add approved domains needed by pilot users.
+4. Save and validate with controlled tests.
+
+Applying several templates can create a broad combined policy. Review the resulting lists rather than assuming template names describe the final behavior.
+
+## DLP keywords
+
+Keywords help identify browser content or actions that contain configured terms. Choose terms that are distinctive enough to represent risk.
+
+- Prefer organization-specific classification phrases over common words.
+- Avoid real credentials, personal data, customer records, or secret values in policy entries.
+- Consider language, spelling, abbreviations, and case variations used by your workforce.
+- Test both true-positive and benign contexts.
+- Review noisy terms periodically and remove those that create little security value.
+
+Keyword matching is one signal. Do not assume it understands document meaning or proves that data loss occurred.
+
+## Domain rules
+
+Use **Allowed domains** for reviewed business destinations that must remain available and **Blocked domains** for specific prohibited destinations.
+
+- Enter hostnames without paths, query strings, credentials, or copied full URLs.
+- Use the narrowest domain that satisfies the business need.
+- Confirm whether a service uses additional login, upload, or content-delivery domains before production enforcement.
+- Require an owner, reason, and review date for exceptions.
+- Retest allowed domains after service-provider changes.
+
+An allowed-domain entry should be a deliberate exception, not a general workaround for an unexplained block. If behavior is unexpected, review keyword and category matches as well as domain lists.
+
+## Web categories
+
+Category controls cover groups such as Generative AI, Social Media, File Storage, Streaming, Gambling, and Adult Content. Categories are efficient for broad control but can affect legitimate services.
+
+Before blocking a category, inventory business dependencies and establish an exception process. Pilot category changes with teams most likely to use affected services.
+
+## Recommended change procedure
+
+1. Export or record the current policy through your approved change process.
+2. Change one policy objective at a time.
+3. Apply a template or edit the relevant lists.
+4. Review the combined policy before saving.
+5. Save changes and allow Browser Agents to refresh.
+6. Run synthetic allowed and blocked tests in each supported browser.
+7. Review Live Events for the expected result and unexpected matches.
+8. Expand assignment only after business owners approve pilot outcomes.
+
+## Troubleshooting unexpected behavior
+
+- If a business site is blocked, check blocked domains, allowed domains, category membership, and keywords.
+- If a prohibited site remains available, verify the agent is active, policy was saved, the tested hostname matches the intended rule, and no approved exception applies.
+- If keyword events are noisy, replace generic terms with more distinctive phrases rather than creating broad domain exceptions.
+- If policy appears stale, check Browser Agents **Last Seen** and browser management health.
+
+## Governance
+
+Review policy at least when business applications change, a new AI service is approved, an exception expires, or event volume shifts materially. Keep policy editing, exception approval, and event investigation separated where staffing allows.
+
+## Related
+
+- [Deploy the GenGuard browser extension](/kb/genguard/deploy-genguard-extension)
+- [GenGuard: GPO and Intune rollout](/kb/genguard/gpo-intune-rollout)
+- [GenGuard Live Events and Browser Agents](/kb/genguard/live-events-and-browser-agents)

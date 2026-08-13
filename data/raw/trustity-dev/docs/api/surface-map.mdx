@@ -1,0 +1,21 @@
+# API surface map
+
+Trustity exposes several HTTPS JSON surfaces. Callers should use only the surface that matches their role.
+
+| Surface | Intended caller | Notes |
+|---------|-----------------|-------|
+| **TAO agent APIs** (`/api/tao/*`) | Official TAO agent | Enrollment + authenticated device runtime |
+| **Cloud Portal session APIs** | Browser sessions for tenant users | Org-scoped; not for third-party scrapers |
+| **Enterprise admin / identity** | Owner/Admin sessions + SCIM connectors | Active-org, MFA/session/rings/retention/assurance; SSO discovery/start preview; SCIM Users lifecycle + discovery — see [Enterprise admin API surfaces](/docs/api/enterprise-admin-surfaces) |
+| **Legacy agent routes** | Older packages still in field | Prefer TAO paths for new work |
+| **Developer Central** | This site | No Cloud Portal service credentials |
+
+## Guidance for partners
+
+- Build against the **supported TAO agent** and portal Deployment artifacts.
+- Do not hardcode undocumented admin or cron endpoints.
+- Request deeper contracts under NDA via Support if you are building a certified integration.
+
+## Error handling (general)
+
+Expect standard HTTP statuses (`400`, `401`, `403`, `404`, `429`, `500`). Agents should back off on `429` and treat `401` after enrollment as a re-enroll / credential-rotation signal after operator review.

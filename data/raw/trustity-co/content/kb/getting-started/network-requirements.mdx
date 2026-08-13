@@ -1,0 +1,100 @@
+# Network requirements for Trustity deployment
+
+Trustity cloud-managed endpoints initiate outbound HTTPS connections to enroll, report health and inventory, receive policy, and send entitled security events. No inbound connection from the Trustity cloud to a normally deployed endpoint is required.
+
+## Scope
+
+This runbook covers public cloud connectivity for the Cloud Portal, Windows and Linux TAO agents, and GenGuard deployment. Organizations using a separately designed on-premises deployment should follow the network plan supplied for that environment.
+
+## Prerequisites
+
+- Network and proxy owner
+- Representative Windows and/or Linux pilot endpoint
+- A pilot user with Cloud Portal access
+- Knowledge of endpoint firewalls, secure web gateways, TLS inspection, and system proxy configuration
+- Browser management access if GenGuard is in scope
+
+## Required connectivity
+
+| Source | Destination or service | Port and direction | Purpose |
+|---|---|---|---|
+| Administrator browser | `trustity.io` and `www.trustity.io` | Outbound TCP 443 | Portal access and customer deployment downloads |
+| Windows or Linux TAO | `trustity.io` | Outbound TCP 443 | Enrollment, heartbeat, policy, inventory, module operations, and updates |
+| Managed Chrome or Edge endpoint | Trustity service shown by Deployment | Outbound TCP 443 | GenGuard organization configuration, policy, and events |
+| Managed Chrome endpoint | Chrome Web Store and Google extension update services | Outbound TCP 443 | Extension installation and updates |
+| Managed Edge endpoint | Browser store/update services used by your approved GenGuard deployment | Outbound TCP 443 | Extension installation and updates |
+
+Permit DNS resolution for required hostnames. Prefer hostname-based egress policy because service addresses can change; do not pin undocumented IP addresses.
+
+If your egress policy requires a definitive tenant-specific list, contact Trustity before rollout. Do not discover or document private application paths as firewall rules.
+
+## Proxy requirements
+
+1. Determine whether endpoints connect directly or through an explicit proxy.
+2. Confirm the proxy is available to the **system service context**, not only to an interactive user's browser.
+3. Ensure the proxy permits HTTPS to the required Trustity and browser-vendor services.
+4. Review authentication requirements. A proxy that requires interactive user authentication can prevent a background service from enrolling or heartbeating.
+5. Test on the same network segment and device policy used by the pilot ring.
+
+The ability to open the Cloud Portal in a browser does not prove that the TAO service can connect.
+
+## TLS inspection
+
+Trustity connections require normal certificate validation. TLS inspection or a secure web gateway can cause enrollment, heartbeat, downloads, or browser extension communication to fail if:
+
+- The inspection root is not trusted in the service context
+- Certificate properties are modified incompatibly
+- HTTPS methods or response bodies are blocked
+- Large installer downloads are scanned or interrupted
+
+Use your approved security process to test inspection behavior. If an exception is needed, scope it to the published Trustity hostnames and pilot group rather than disabling endpoint protection.
+
+## Prepare the network
+
+1. Confirm DNS resolution for `trustity.io` and `www.trustity.io`.
+2. Approve outbound TCP 443 from pilot endpoints.
+3. Confirm browser-store and update connectivity when GenGuard is in scope.
+4. Validate system date and time synchronization; incorrect time can break TLS validation.
+5. Confirm the portal and deployment download work from an administrator workstation.
+6. Confirm connectivity from the endpoint's service context using your standard network diagnostic tooling.
+7. Install and enroll one pilot endpoint.
+8. Observe successful enrollment, heartbeat, policy refresh, and a controlled event.
+9. Review proxy and firewall logs for unexpected denies before expanding the ring.
+
+## Verification
+
+Network readiness passes when:
+
+- Required names resolve on the pilot network
+- HTTPS connections complete without certificate warnings
+- The current installer downloads from Deployment and matches the published checksum when shown
+- TAO enrolls and the device becomes online in Managed devices
+- Policy refresh and inventory reporting succeed
+- GenGuard installs or updates through the approved browser channel when entitled
+- No inbound endpoint firewall opening was required
+- Proxy and firewall logs show only expected destinations
+
+## Troubleshooting
+
+- **Portal opens, agent stays offline:** compare browser-user connectivity with system-service proxy and trust settings.
+- **Enrollment fails immediately:** check DNS, time synchronization, outbound TCP 443, and TLS inspection logs.
+- **Installer download fails:** verify `www.trustity.io` access, content filtering, download-size limits, and the availability shown in Deployment.
+- **GenGuard does not install:** verify browser store/update services and the managed force-install policy.
+- **Intermittent heartbeat:** review proxy idle handling, gateway resets, endpoint sleep, and network transitions.
+- **Certificate error:** preserve the certificate chain and gateway event; do not disable certificate validation.
+
+## Security guidance
+
+- Allow only outbound connectivity required by the deployment.
+- Do not expose TAO as an inbound listener or create public endpoint port-forwarding.
+- Do not place organization license keys in proxy URLs, packet captures, or test commands shared outside the authorized team.
+- Redact cookies, authorization data, device identifiers, and user data from network captures.
+- Time-limit and review any pilot bypass created for inspection or filtering.
+
+## Related links
+
+- [Install TAO on Windows](/kb/getting-started/install-tao-windows)
+- [Install TAO on Linux](/kb/getting-started/install-tao-linux)
+- [Troubleshoot an offline or stale agent](/kb/getting-started/troubleshooting-agent-offline)
+- [Deploy the GenGuard browser extension](/kb/genguard/deploy-genguard-extension)
+- [Contact Trustity](/contact)

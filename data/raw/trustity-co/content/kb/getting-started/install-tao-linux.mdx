@@ -1,0 +1,113 @@
+# Install the TAO agent on Linux
+
+TAO for Linux is a terminal-first agent for **asset inventory** and entitled **PAM local-account rotation**. It runs as a systemd service and stores system enrollment state in `/var/lib/trustity/tao`.
+
+## Scope
+
+This runbook applies to x86_64 Linux hosts using systemd and either `dpkg-query` or `rpm` for software inventory. Linux capabilities differ from the Windows unified agent; do not use the Windows module checklist as Linux acceptance criteria.
+
+## Prerequisites
+
+- A supported x86_64 Linux pilot host with systemd
+- `sudo` or equivalent approved root access
+- An entitled Trustity organization
+- Access to **Cloud Portal → Deployment**
+- The current Linux tarball downloaded from Deployment
+- The portal-published SHA-256, if shown
+- Outbound HTTPS access that meets the [network requirements](/kb/getting-started/network-requirements)
+
+The Cloud Portal is the source of truth for the customer package. Download the tarball there first, then transfer it to the target through your approved software-distribution method. Do not build deployment instructions around an unverified third-party or memorized direct URL.
+
+Use `<TRUSTITY_LICENSE_KEY>` in examples and substitute the real value only in an approved secure workflow.
+
+## Install and enroll
+
+1. In the Cloud Portal, open **Deployment** and download `Trustity-TAO-Linux-x86_64.tar.gz`.
+2. If Deployment shows a SHA-256, verify the transferred file:
+
+   ```bash
+   sha256sum Trustity-TAO-Linux-x86_64.tar.gz
+   ```
+
+3. Extract the package into a controlled temporary directory:
+
+   ```bash
+   mkdir -p /tmp/trustity-tao-install
+   tar -xzf Trustity-TAO-Linux-x86_64.tar.gz -C /tmp/trustity-tao-install
+   cd /tmp/trustity-tao-install/Trustity-TAO-Linux-x86_64
+   ```
+
+4. Install the binary and systemd unit:
+
+   ```bash
+   sudo ./install.sh
+   ```
+
+5. Enroll as root so the command and systemd service use the same state directory:
+
+   ```bash
+   sudo tao-agent enroll --license-key <TRUSTITY_LICENSE_KEY>
+   ```
+
+6. Enable and start the service:
+
+   ```bash
+   sudo systemctl enable --now trustity-tao
+   ```
+
+Always run enrollment with `sudo`. A non-root enrollment can create state unavailable to the system service, leaving installation apparently complete while the service remains unenrolled.
+
+## Verification
+
+Run:
+
+```bash
+sudo tao-agent status
+sudo tao-agent --version
+sudo tao-agent inventory
+sudo systemctl status trustity-tao
+sudo journalctl -u trustity-tao -n 100 --no-pager
+```
+
+Then verify in the Cloud Portal:
+
+1. The expected hostname appears in **Managed devices**.
+2. The device shows a recent online state and expected version.
+3. OS and software inventory are populated.
+4. If Vault/PAM is entitled, the expected local-account workflow is available after policy refresh.
+
+Do not perform a password rotation on a production account as the first test. Use a designated pilot local account and confirm that an independent recovery path exists.
+
+## Update
+
+For an approved update, either use the agent update command:
+
+```bash
+sudo tao-agent update
+```
+
+or download the current tarball from Deployment and rerun `sudo ./install.sh`. The update replaces the installed binary and unit file while preserving enrollment under `/var/lib/trustity/tao`. Re-run the full verification set after updating.
+
+## Troubleshooting
+
+- **Service exits immediately:** run `sudo tao-agent status` and inspect the journal. Confirm enrollment state is available under `/var/lib/trustity/tao`.
+- **Previously enrolled without sudo:** perform an authorized re-enrollment with `sudo` so service and CLI share system state.
+- **Host absent from Managed devices:** validate DNS, system time, proxy behavior, and outbound HTTPS.
+- **Inventory missing:** confirm the host has `dpkg-query` or `rpm`, run `sudo tao-agent inventory`, and inspect service logs.
+- **PAM rotation reports a password utility error:** update to the latest package from Deployment so the current systemd unit is installed, then retest only with the designated pilot account.
+- **License rejected:** recopy the organization key from Deployment. An organization ID is not a license key.
+
+## Security guidance
+
+- Treat the license key as a deployment credential. Do not place it in shell history, public repositories, tickets, screenshots, or world-readable scripts.
+- Restrict `/var/lib/trustity/tao` to the service and authorized administrators.
+- Keep an out-of-band recovery method before enabling local-account rotation.
+- Do not remove enrollment state as routine troubleshooting; preserve logs and contact support first.
+- Apply your normal artifact scanning, change approval, and privileged-command auditing to the package.
+
+## Related links
+
+- [Entitlements and module matrix](/kb/getting-started/entitlements-module-matrix)
+- [Verify your first healthy device](/kb/getting-started/first-healthy-device)
+- [Troubleshoot an offline or stale agent](/kb/getting-started/troubleshooting-agent-offline)
+- [PAM local-account password rotation](/kb/vault/pam-local-account-rotation)

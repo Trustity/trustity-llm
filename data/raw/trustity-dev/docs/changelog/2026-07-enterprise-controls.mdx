@@ -1,0 +1,29 @@
+# 2026-07 — Enterprise controls
+
+## Added
+
+- Platform overview for RBAC, MFA/session lifecycle, SSO metadata + initial SCIM Users, deployment rings, retention, and Security Assurance readiness
+- API guide for enterprise admin / SCIM / assurance surfaces with GA honesty limits
+- Surface map and architecture updates for control-plane enterprise concerns
+- Membership-validated active-organization selector
+- SCIM Users pagination/lifecycle operations plus ServiceProviderConfig, Schemas, and ResourceTypes discovery
+- Email-domain SSO discovery and Supabase broker start path (customer IdP wiring remains preview-gated)
+- Atomic alert outbox claim/deduplication and agent-offline cooldown
+- Database-enforced append-only audit with restricted archive/purge function
+- Measured assurance signals for alert delivery, restore drill age, privileged operators, and current-session MFA
+
+## Clarified
+
+- Password + MFA remains the live Cloud Portal auth path
+- SSO and SCIM solve separate identity problems: authentication vs account lifecycle
+- SCIM Groups writes and full IdP conformance are not GA
+- Audit JSONL export uses SHA-256 integrity headers (not cryptographic signatures)
+- Security Assurance is configuration readiness — not SOC 2 certification
+
+## Coming later (separate preview-gated releases)
+
+- Customer-by-customer SAML/OIDC enterprise connection activation and conformance testing
+- SCIM Groups mapping and broader filter/conformance coverage
+- Completion of active-org migration for remaining legacy dashboard lookups
+- Full privileged-user MFA census (beyond current-session signal)
+- Automated restore evidence and longer-window delivery SLO snapshots

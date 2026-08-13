@@ -1,0 +1,37 @@
+# Trustity VisionX Model V1 / V1.1
+
+Starting with **TAO 1.0.34**, VisionX ships a **Trustity-trained** detection model that runs entirely on the endpoint - no cloud inference for the detector path.
+
+From **TAO 1.0.35 (Stable)**, VisionX uses **dual detection**: stock COCO and Trustity both run on each frame. A lock fires when **either** model confirms a configured class. Endpoint logs and portal alerts record which model(s) scored the hit.
+
+From **TAO 1.0.36**, the Trustity dual partner is **VisionX Model V1.1** - more motion, close-range, and hard-negative training on top of V1.
+
+## What ships in the installer
+
+| Artifact | Role |
+|----------|------|
+| `yolov8n.onnx` | **Stable baseline** (COCO) - strong coverage for phone / handheld imaging at screen |
+| `trustity-visionx-v1.1.onnx` | Trustity VisionX Model V1.1 - first-party dual partner |
+| `trustity-visionx-v1.1.labels.json` | Class names: `phone`, `camera` |
+
+Override for lab/debug only: environment variable `TAO_VISIONX_MODEL` forces a single ONNX path.
+
+## Classes and threat framing
+
+Portal policy emits violation classes **`phone`** and **`camera`**. Older policies that still say `cell phone` continue to match phones on the agent (COCO label alias).
+
+Product intent is broader than the label names: VisionX protects against **visual-channel exfiltration** - phones, dedicated cameras, lenses, and similar imaging devices aimed at a sensitive display. Model labels remain `phone` / `camera` today; coverage for additional imaging form-factors improves with later training iterations shipped in TAO builds.
+
+- **Phone** - covered by both COCO and Trustity V1.1 in dual mode.
+- **Camera** - Trustity class slot for dedicated imaging devices; coverage improves as the training set grows.
+
+## Operator notes
+
+- Prefer TAO **1.0.36+** from **Deployment** for V1.1 + dual detect.
+- In agent logs look for `VisionX models loaded` with `trustity-visionx-v1.1`.
+- **Lock response** in the Cloud Portal (**Faster lock** / **Balanced** / **More accurate**) is the customer-facing control for analysis speed versus confirmation strictness. It maps to performance profile, consecutive frames, and confidence - see [VisionX detection tuning](/kb/visionx/visionx-detection-tuning).
+- Model updates ship with TAO agent builds. They are independent of Cloud Portal version numbers.
+
+## Honesty for rollout conversations
+
+V1.1 is a second training pass. Dual mode keeps production detection **at least as good as COCO** while Trustity weights improve toward (and beyond) that baseline on real Windows desks. Treat dedicated camera / lens coverage as improving over releases, not as finished for every imaging device on day one.

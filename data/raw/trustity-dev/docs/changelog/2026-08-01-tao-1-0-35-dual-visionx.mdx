@@ -1,0 +1,19 @@
+# TAO 1.0.35 — Dual VisionX detect (Stable)
+
+## Why
+
+Trustity VisionX Model V1 (shipped in 1.0.34) is a first training pass. On live Windows
+endpoints it underperformed stock COCO for fast handheld / phone confirmation. Production needed a
+reliable agent **now**, while we keep improving the first-party model.
+
+## Behavior
+
+- Resolve **both** `yolov8n.onnx` and `trustity-visionx-v1.onnx` when present.
+- Inference order: COCO, then Trustity.
+- A frame is positive if **either** model scores a policy violation class ≥ threshold.
+- Logs: model ids at load, near-miss model, confirmation models.
+- Portal VisionX events accept optional `models[]` and surface them on critical alerts.
+
+## Channel
+
+Portal default channel for this line: **stable** (`NEXT_PUBLIC_TAO_AGENT_CHANNEL`).

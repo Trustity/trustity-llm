@@ -1,0 +1,95 @@
+# Pilot to production rollout
+
+A successful Trustity deployment starts with a controlled pilot, not an organization-wide policy flip. Use this guide after at least one healthy enrolled endpoint and after the relevant modules have been validated in a low-risk environment.
+
+## Scope
+
+This article covers change management for TAO, GenGuard, VisionX, Vault/PAM, HostGuard IPS, and portal administration. It does not replace module-specific runbooks.
+
+Trustity does **not** automatically push agent packages to the fleet today. “Rings” below are **your** staged deployment groups (Intune rings, OU collections, pilot VLANs, and so on). Download each new installer from **Cloud Portal → Deployment** and promote it through those groups yourself.
+
+## Prerequisites
+
+- Organization onboarding and entitlements confirmed
+- Deployment downloads available from **Cloud Portal → Deployment**
+- At least one verified healthy endpoint per major OS in scope
+- Named owners for policy, deployment, helpdesk, and security response
+- Documented exception process before aggressive enforcement
+- Related module guides reviewed for entitled capabilities
+
+## Recommended rings (organizational)
+
+| Ring | Audience | Goal |
+|---|---|---|
+| **0 - Lab** | Dedicated test devices | Validate install, enrollment, policy refresh, and low-impact tests |
+| **1 - IT / Security** | Endpoint engineers and security operators | Confirm admin workflows, event triage, unlock/reveal hygiene, and support readiness |
+| **2 - Pilot business unit** | Representative users and jump hosts | Measure false positives, helpdesk volume, and operational friction |
+| **3 - Broad production** | Remaining entitled devices and browsers | Expand only after exit criteria are met |
+
+Do not skip Ring 1 for modules that can lock screens, block browser actions, rotate passwords, or create firewall blocks.
+
+When Trustity ships agent auto-update, portal-side pilot/production targeting will map cleanly onto this model. Until then, keep ring membership in your MDM or change records - not as a substitute for downloading the correct Setup package.
+
+## Rollout procedure
+
+1. Freeze a written pilot plan: modules, rings, start date, success metrics, rollback owner, and support hours.
+2. Confirm packaging and license handling remain tenant-specific. Use placeholders in documentation and scripts; never publish live organization license keys.
+3. Deploy TAO and, where entitled, GenGuard force-install to the next ring only.
+4. Start with observe-friendly settings where available:
+   - VisionX: pilot activation and tuning before org-wide Strict or Always-on enforcement; confirm Strict no-camera locks appear in portal Events/Incidents on a current agent
+   - HostGuard: **Report only** before firewall enforcement
+   - GenGuard: limited templates or allow-listed tools before aggressive blocks
+   - Vault/PAM: targeted local accounts and force-rotate validation before broad schedules
+5. Save policy, wait for entitled online agents to refresh, and verify health in **Managed devices**.
+6. Run the module validation checklist from the relevant KB article.
+7. Review **Audit Logs**, module Live Events, and **Activity Log** for unexpected volume or failures.
+8. Hold a go/no-go review before promoting the next ring (including a newer TAO Setup version).
+
+## Exit criteria for each ring
+
+Promote only when all of the following are true for that ring:
+
+- Enrollment success rate meets the agreed threshold
+- Agent online rate and version currency are acceptable
+- Policy changes appear on sample endpoints after a normal refresh window
+- Helpdesk can execute unlock, reveal, or unblock procedures without sharing secrets in tickets
+- False-positive or exception volume is understood and owned
+- Audit and event views show the actions operators expect
+- Inventory scans return expected item counts on sample hosts
+- Rollback or ring-pause steps are documented and tested enough to use under pressure
+
+## Change control
+
+- Change one major control family at a time when possible.
+- Record who approved the change, when it was saved, and which ring it affects.
+- Keep a short before/after note for threshold, template, activation-mode, and rotation-interval changes.
+- Prefer temporary exceptions with owners and expiry dates over permanent weakenings.
+
+## Rollback and pause options
+
+Depending on the module, pause impact by:
+
+- Reverting the policy to the previous saved configuration
+- Moving VisionX to Standby or a narrower on-demand scope
+- Returning HostGuard to **Report only**
+- Softening GenGuard templates or domain/keyword rules
+- Pausing scheduled PAM rotation while leaving vault access least-privileged
+- Stopping further package assignment while leaving already-enrolled healthy agents in place
+
+Do not uninstall the agent fleet as the first response to a policy issue unless the incident requires it.
+
+## Security considerations
+
+- Limit who can change production policy and who can reveal vaulted credentials.
+- Treat license keys, unlock codes, uninstall codes, and vaulted passwords as secrets.
+- Ensure employee-monitoring notices and local legal requirements are addressed before enabling camera, browser, or endpoint enforcement.
+- Keep evidence, vault reveals, and unlock assistance inside approved channels only.
+
+## Related
+
+- [Verify your first healthy device](/kb/getting-started/first-healthy-device)
+- [Entitlements and module matrix](/kb/getting-started/entitlements-module-matrix)
+- [Deployment Center](/kb/portal/deployment-center)
+- [Security Policies hub](/kb/portal/security-policies-hub)
+- [Managed devices and software inventory](/kb/portal/managed-devices-and-inventory)
+- [Troubleshooting: agent offline or not updating](/kb/getting-started/troubleshooting-agent-offline)

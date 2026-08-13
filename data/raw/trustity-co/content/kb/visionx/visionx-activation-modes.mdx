@@ -1,0 +1,71 @@
+# VisionX activation modes
+
+Activation mode controls when VisionX is armed in an eligible user session. It is separate from **no-camera mode**, which controls behavior when an armed workflow cannot use a camera.
+
+## Always on
+
+Detection is armed whenever the endpoint has the required entitlement, healthy components, and an eligible user session. Choose this for users or devices where visual-channel protection is expected throughout the session.
+
+Always on has the broadest coverage and therefore the greatest need for a measured pilot. Validate camera availability, detection quality, and helpdesk readiness before enabling screen locks broadly.
+
+## Standby
+
+Standby means **no VisionX monitoring**. The module remains entitled and policy-managed, but detection never arms. It does not wait for a helpdesk action, event, application, or hidden trigger.
+
+Use Standby to pause monitoring deliberately, stage an installation before policy design is complete, or retain configuration while investigating an operational issue. Do not describe a Standby endpoint as protected by active VisionX detection.
+
+## On-demand
+
+On-demand determines Armed or Idle state from the foreground process or window title. It uses:
+
+- A **fallback** state used when no rule matches or the foreground context cannot be read.
+- An ordered list of **exception rules**.
+- A result on each rule: **Arm** or **Idle**.
+
+Rules are evaluated from top to bottom and the **first matching rule wins**. Later matches do not override it. If nothing matches, the fallback applies.
+
+Process rules match the foreground process name. Window-title rules match the window title pattern; they do not inspect browser URLs. Test title rules carefully because titles can change with application versions, documents, tabs, language, and user context.
+
+## Two common On-demand designs
+
+### Idle by default
+
+Set the fallback to **Idle** and create Arm rules for sensitive applications or recognizable workflows. This limits monitoring to known contexts. It also means an omitted or renamed application remains idle, so maintain the rule set as software changes.
+
+### Armed by default
+
+Set the fallback to **Armed** and create Idle rules for approved low-risk contexts. This provides wider coverage but requires careful exception design. Put narrow, specific exceptions before broad patterns because first match wins.
+
+## Rule-order example
+
+Suppose a broad window-title rule idles all training windows, while a more specific rule arms a sensitive training application. Put the specific Arm rule first. If the broad Idle rule appears first and also matches, evaluation stops there.
+
+## Selecting a mode
+
+- Choose **Always on** for continuous coverage.
+- Choose **Standby** when monitoring must be completely off.
+- Choose **On-demand** when foreground context can reliably define when monitoring should be armed.
+
+## Change and validation procedure
+
+1. Document the intended Armed and Idle outcomes before editing policy.
+2. For On-demand, set the fallback first, then add the most specific rules at the top.
+3. Save the policy and allow the endpoint to refresh.
+4. In **Managed devices**, confirm the reported activation mode and Armed or Idle state.
+5. Switch among representative applications and titles, including a context that matches no rule.
+6. Verify that the first matching rule produces the intended result.
+7. Test an unreadable or unexpected foreground context and confirm the fallback is safe.
+8. Record the validated rule order and owner for future application changes.
+
+## Troubleshooting
+
+- If On-demand never arms, check the fallback, exact process name, pattern, rule order, user-session status, and model readiness.
+- If it arms too broadly, look for an early broad rule or an Armed fallback.
+- If a browser workflow does not match, remember that rules use process names and window titles, not URLs.
+- If the mode appears unchanged, confirm the agent is online and has refreshed policy.
+
+## Related
+
+- [VisionX overview and policy](/kb/visionx/visionx-overview-and-policy)
+- [VisionX detection tuning](/kb/visionx/visionx-detection-tuning)
+- [Troubleshooting: agent offline or not updating](/kb/getting-started/troubleshooting-agent-offline)

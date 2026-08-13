@@ -1,0 +1,27 @@
+# 2026-07 — Late-month platform notes
+
+Integrator-facing summary of changes around the July launch window. Operator how-tos live on [trustity.co/kb](https://trustity.co/kb).
+
+## Cloud Portal
+
+- Invite emails route through first-party `/auth/confirm` → **set-password** → login (avoids Site URL falling straight to login).
+- Internal tenant ops: resend invite and break-glass delete for provisioned organizations.
+- Asset Inventory report path hardened (install-date normalization, chunked inserts, schema ensure).
+- Deployment page focuses on **license key + installer download**; portal pilot/prod ring UI is hidden until agent auto-update exists.
+- Marketing/legal contact for Trustity Cyber Security Ltd. public docs: `legal@trustity.co`.
+
+## TAO agent
+
+- **v1.0.31** — Strict VisionX no-camera locks report portal incidents (`no_camera`); GUI no longer falsely demands Activate after reboot when enrollment exists under ProgramData.
+- First install and updates remain **customer-distributed**; there is still no cloud push installer.
+
+## Docs
+
+- Marketing KB updated for Deployment, inventory troubleshooting, VisionX no-camera events, Windows reboot enrollment, invites, and organizational pilot rings.
+- Developer Central architecture / enterprise / TAO integration pages aligned with the above.
+
+## Still deferred
+
+- Agent auto-update with portal pilot/production targeting
+- Full SSO GA and SCIM Groups
+- Nested docs comments and deeper public partner API packs

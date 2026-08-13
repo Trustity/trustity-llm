@@ -1,0 +1,112 @@
+# Cloud Portal overview
+
+The Trustity Cloud Portal at `https://trustity.io` is the organization-scoped management surface for deployment, policy, endpoint visibility, and security operations. The pages you see depend on your portal role and enabled modules.
+
+## Scope
+
+Use this guide for an administrator's first portal walkthrough and as a map for common operational tasks. Product labels can evolve; if a page is not visible, check role and entitlement before treating it as a fault.
+
+## Prerequisites
+
+- An accepted portal invitation or organization-owner account
+- Multi-person ownership of the onboarding plan
+- Confirmed module entitlements
+- An approved method for handling the organization license key
+
+## Core areas
+
+### Home and module dashboards
+
+The dashboard summarizes the enabled product areas and recent organization activity. Module pages provide the authoritative operational views for their own events:
+
+- **GenGuard** for browser DLP events and policy
+- **VisionX** for camera DLP policy and detections
+- **Vault / PAM** for managed devices, local-account rotation, and vault workflows
+- **HostGuard IPS** for endpoint failed-logon protection events
+
+Do not use the general dashboard as the only health check. Validate endpoint state in Managed devices and detections in the relevant module page.
+
+### Deployment
+
+Deployment is the customer source for:
+
+- The organization license key used for endpoint or extension enrollment
+- Current Windows and Linux TAO downloads when an entitled module requires TAO
+- Published version, channel, availability, signature status where shown, and SHA-256 values where published
+- GenGuard installation and managed-browser materials when GenGuard is entitled
+
+Always obtain deployment assets and tenant-specific values from this page. Never substitute an organization ID or a key copied from another tenant.
+
+### Security policies
+
+Policy tabs appear only for entitled modules. Depending on subscription, the portal can expose:
+
+- TAO endpoint hardening
+- VisionX camera presence, lock, evidence, and activation behavior
+- GenGuard browser rules, categories, and destination controls
+- Vault/PAM rotation and Vault restrictions
+- HostGuard IPS thresholds and allowlisting
+- Additional entitled controls shown in the tenant
+
+Saving a portal policy makes it available to enrolled endpoints. Policy delivery is asynchronous, so verify the endpoint's recent health and applied state before concluding that a change failed.
+
+### Managed devices
+
+Managed devices is the main endpoint operations view. Use it to confirm:
+
+- Enrollment completed for the expected hostname
+- The device has a recent online status
+- Agent, OS, module, and inventory information is present
+- Vault/PAM state is available when entitled
+
+For a new rollout, reconcile this list against the deployment ring rather than assuming every installer execution produced a healthy device.
+
+### Event views
+
+Security events are separated by module. Use the page matching the control you tested. A VisionX detection, GenGuard block, and HostGuard action are different signals and are not expected to appear in one universal event list.
+
+### Audit Logs
+
+Audit Logs record supported administrative and system actions for the current organization. Search or export CSV when you need review evidence. Security detections remain in their module event views.
+
+### User Management
+
+Portal access is invitation-based. Owner/Admin users can manage access; Editor, Viewer, and Vault roles support narrower responsibilities. Sidebar visibility and allowed actions vary by both role and entitlement.
+
+## First administrator walkthrough
+
+1. Confirm the organization identity and your role.
+2. Open User Management and ensure there is a backup administrator.
+3. Review enabled modules and visible policy tabs.
+4. Review each policy without changing enforcement.
+5. Open Deployment and confirm the expected assets are available.
+6. Record the published installer version and checksum, if shown, in the change record.
+7. After enrolling a pilot device, verify it in Managed devices.
+8. Perform one approved module test and locate its event.
+9. Review Audit Logs for the administrative change.
+
+## Verification
+
+The portal is ready for pilot use when:
+
+- Required administrators can sign in
+- Expected policy and event pages are visible
+- Deployment presents the expected assets and a configured organization key
+- A pilot endpoint can appear in Managed devices
+- Administrators know which page owns each operational signal
+
+## Troubleshooting and security
+
+- **Page missing:** verify entitlement and role; signing out and back in can refresh a newly changed membership.
+- **No deployment assets:** confirm an endpoint or GenGuard module is enabled. Contact the organization administrator if the page reports that assets are unavailable.
+- **Policy appears unchanged:** save once, confirm the device is online, and allow an agent refresh before repeated edits.
+- **Unexpected device:** preserve relevant records, confirm who deployed it, and contact support if enrollment is not authorized.
+- Never paste license keys, vaulted credentials, or evidence images into general-purpose tickets or chat.
+
+## Related links
+
+- [Organization onboarding runbook](/kb/getting-started/organization-onboarding)
+- [Entitlements and module matrix](/kb/getting-started/entitlements-module-matrix)
+- [Verify your first healthy device](/kb/getting-started/first-healthy-device)
+- [Portal users and roles](/kb/portal/user-roles-and-invites)
+- [Audit Logs in the Cloud Portal](/kb/portal/audit-logs)

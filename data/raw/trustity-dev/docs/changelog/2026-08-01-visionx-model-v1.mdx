@@ -1,0 +1,23 @@
+# 2026-08-01 — Trustity VisionX Model V1
+
+Integrator note for the first Trustity-owned VisionX detector release.
+
+## TAO agent **v1.0.34**
+
+- **Trustity VisionX Model V1** (`models/trustity-visionx-v1.onnx` + `.labels.json`) is the preferred on-endpoint detector.
+- Stock **COCO `yolov8n.onnx`** remains packaged as **fallback** if Trustity weights are absent.
+- Runtime resolution: `TAO_VISIONX_MODEL` → Trustity V1 → COCO (`tao-core::resolve_model_path`).
+- Windows Setup CI **requires** Trustity V1 in the repo and still fetches COCO for the fallback path.
+- In-repo training workspace: `visionx-model/` (capture, label, train, export, holdout eval).
+- Agent auto-update consumes heartbeat `targetTaoVersion` (quiet in-place Setup); ring UI is available on Deployment for controlled rollout.
+
+## Cloud Portal
+
+- VisionX policy `detection.classes` emits `phone` and `camera` (agent still aliases legacy `cell phone`).
+- Deployment rings panel restored for pilot/production target versions.
+
+## Honesty / rollout
+
+V1 is strongest on phone-at-screen and related handheld imaging. Dedicated `camera` class and broader lens / imaging-device coverage improve with later dataset iterations shipped in subsequent TAO builds. Do not treat V1 as feature-complete for every dedicated imaging device.
+
+Public operator docs: [Trustity VisionX Model V1](https://trustity.co/kb/visionx/visionx-trustity-model-v1) (marketing KB).

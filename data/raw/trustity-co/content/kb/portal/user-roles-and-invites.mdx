@@ -1,0 +1,101 @@
+# Manage portal users, roles, and invitations
+
+Use **Administration → User Management** to grant and remove access to your organization’s Cloud Portal. This workflow manages local portal accounts. Directory sync via Active Directory is retired; for IdP staging and initial SCIM Users provisioning see [SSO and SCIM preview](/kb/portal/sso-and-scim-preview).
+
+## Before you begin
+
+- You must be the organization **Owner** or have the **Admin** role. Other users see **Admin access required**.
+- Confirm the invitee’s business email and intended responsibilities with the data or system owner.
+- Decide which licensed product modules the person needs. Role and module entitlement both affect what appears in the sidebar.
+- Ask the invitee to enable MFA after first sign-in; see [Manage your account and MFA](/kb/portal/manage-account-and-mfa).
+
+## Choose a role
+
+Portal roles are:
+
+- **Owner** - organization owner. Administers membership and remains able to sign in even when there are no invited members.
+- **Admin** - portal administrators who manage users, identity staging, retention, and operational settings.
+- **Analyst** - operators who investigate evidence, incidents, and policy outcomes (legacy **Editor** invites map to Analyst).
+- **Viewer** - read-mostly access across entitled modules (legacy **Vault** invites map to Viewer; module entitlement still controls which areas appear).
+
+Roles express intended responsibility, but licensed modules still control which product areas are available. Do not use a broad role as a substitute for change approval, separation of duties, or an internal access review.
+
+## Invite a portal user
+
+1. Sign in to the Cloud Portal as an Owner or Admin.
+2. Open **Administration → User Management**.
+3. In **Invite portal user**, enter the complete email address.
+4. Select **Admin**, **Analyst**, or **Viewer**.
+5. Select **Invite**. While the request is running, the button reads **Inviting…**.
+6. Confirm that **Invitation sent.** appears.
+7. Find the user under **Portal users** and verify the **User**, **Role**, and **Status** columns. A pending invitation is shown as **Invited**; completed access is shown as **Active**.
+8. Have the invitee open the invitation email.
+9. The link should open Trustity’s **set password** flow (not a blank login). After the password is saved, the invitee is signed out and should sign in with the new password.
+10. Confirm the expected organization name and navigation after sign-in.
+11. Ask the invitee to open **Manage Account** and enroll MFA.
+
+If the invite link lands on the login page without a password form, ask Support or an Owner to **resend the invitation** rather than guessing a password. Do not create a second organization for the same company to work around a broken invite.
+
+### Validate least-privilege access
+
+After activation, perform a short acceptance check with the user:
+
+1. Confirm the organization name and **Role** shown in **My Profile**.
+2. Confirm only entitled product areas appear.
+3. For a **Viewer**, confirm they understand they must not make administrative changes even if a control is visible.
+4. For an **Analyst**, confirm they can reach investigation surfaces they need and cannot invite users.
+5. Open **Audit Logs**, select **Refresh**, and verify the invitation action was recorded if that workflow emits an audit event.
+
+## Remove portal access
+
+1. Open **Administration → User Management**.
+2. Locate the person under **Portal users**.
+3. In **Actions**, select the trash icon. Its tooltip is **Remove access**.
+4. Review the confirmation: the user will no longer be able to sign in to this organization dashboard.
+5. Select **Remove access**.
+6. Confirm the success message and verify that the member no longer appears.
+7. Review **Audit Logs** for the removal action.
+
+You cannot remove your own access from this page. Use a second authorized administrator for access changes involving your account.
+
+## Troubleshooting
+
+### “Only organization owners and admins can manage portal users”
+
+Your membership is not an Owner or Admin, or the portal could not resolve your organization. Ask an existing Owner or Admin to perform the change. Do not create a duplicate organization to work around the message.
+
+### The invitation fails
+
+- Check for an accidental space or malformed address.
+- Confirm the user is not already listed under **Portal users**.
+- Retry once after refreshing the page.
+- If **Network error while inviting user** or **Failed to invite user** persists, capture the time, email domain, and visible error, then open a support ticket. Do not include passwords or MFA codes.
+
+### The invitee did not receive email
+
+Ask the invitee to check spam and quarantine, confirm the exact email shown in **Portal users**, and allowlist Trustity mail (including the portal From domain used for invites) if required by your mail gateway. Prefer **Resend invite** from an Owner/Admin when available. If the status remains **Invited**, contact Support rather than creating duplicate memberships.
+
+### Invite opens login instead of set-password
+
+Use a fresh invite or resend. Bookmarks to older accept URLs, expired tokens, or mail clients that rewrite links can break the one-time setup path. After a successful set-password, always sign in again - the session from the invite link is not kept on purpose.
+
+### The user sees the wrong product areas
+
+Confirm both the assigned role and the organization’s module entitlements. Missing areas commonly mean the corresponding module is not enabled for the tenant.
+
+## Security notes
+
+- Grant **Admin** only to people who administer the portal.
+- Use named accounts; never share a portal login.
+- Require MFA through your internal policy (and org MFA enforcement for Owners/Admins when enabled) and review **MFA: Enabled** during access reviews.
+- Remove access promptly when responsibilities change.
+- Review **Portal users** regularly and reconcile **Invited** accounts that were never activated.
+- Never send passwords, passkeys, authenticator codes, or recovery material through invitations or support tickets.
+
+## Related guides
+
+- [Audit Logs in the Cloud Portal](/kb/portal/audit-logs)
+- [Manage your account and MFA](/kb/portal/manage-account-and-mfa)
+- [SSO and SCIM preview](/kb/portal/sso-and-scim-preview)
+- [Support Center](/kb/portal/support-center)
+- [Cloud Portal overview](/kb/getting-started/cloud-portal-overview)

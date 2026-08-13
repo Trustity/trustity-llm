@@ -1,0 +1,62 @@
+# Enterprise admin API surfaces
+
+These surfaces are for **authenticated Cloud Portal operators** or **tenant SCIM connectors**. They are not public partner APIs and must not be scraped from Developer Central accounts.
+
+## Families (conceptual)
+
+| Family | Intended caller | Status |
+|--------|-----------------|--------|
+| Dashboard org context (`/api/dashboard/orgs`) | Portal session | Active org cookie validated against ownership/membership |
+| Enterprise settings / MFA policy | Owner/Admin session | Live |
+| Identity SSO metadata | Owner/Admin session | Preview: domain discovery + Supabase broker start when configured |
+| SCIM Users (`/api/scim/v2/Users`) | IdP with SCIM bearer token | Preview: list/pagination/create/read/patch/suspend |
+| SCIM discovery | IdP connector | ServiceProviderConfig, Schemas, ResourceTypes |
+| SCIM Groups | IdP connector | Discovery-safe empty list; writes not implemented |
+| Sessions revoke | Owner/Admin session | Live |
+| Rings / policy history / retention / assurance / audit export | Owner/Admin session | Live with honesty limits below |
+| Critical alerts outbox | Portal + internal workers | Atomic claim, retry/DLQ, dedupe key, offline cooldown |
+
+Exact paths and schemas for certified integrations are shared under NDA. Do not hardcode undocumented cron or service-role routes.
+
+## Honesty limits
+
+- **SSO login / discovery** — domain discovery and broker start exist, but every customer still requires IdP + Supabase Auth wiring and round-trip validation before production.
+- **SCIM** — Users lifecycle and discovery are available in preview; Groups mapping and a full Okta/Entra conformance matrix are not GA.
+- **Audit export SHA-256** — integrity metadata for the file bytes, not a signature.
+- **Multi-org UI** — authorized selector and membership-validated cookie are live; migration of remaining legacy page-local tenant lookups continues.
+
+## SCIM Users contract
+
+Base URL: `https://www.trustity.io/api/scim/v2`
+
+Authenticate tenant-scoped requests with the one-time bearer token generated under **Identity / SSO**.
+
+| Method | Path | Purpose |
+|--------|------|---------|
+| `GET` / `POST` | `/Users` | List (with `startIndex` / `count`) or create membership |
+| `GET` / `PATCH` / `DELETE` | `/Users/{id}` | Read, change active/role, or suspend + revoke sessions |
+| `GET` | `/ServiceProviderConfig` | Connector capabilities |
+| `GET` | `/Schemas` | Core User schema |
+| `GET` | `/ResourceTypes` | User resource type |
+| `GET` / `POST` | `/Groups` | Empty preview list / `501 notImplemented` for writes |
+
+The current filter grammar supports exact `userName eq "email@example.com"`. Errors use the SCIM Error schema.
+
+## SSO start flow
+
+1. Login submits the work email to `/api/auth/sso/discover`.
+2. The server matches a staged `sso_domain`.
+3. `/api/auth/sso/start` calls Supabase `signInWithSSO({ domain })` with `redirectTo=/auth/callback`.
+4. Supabase redirects to the configured SAML/OIDC enterprise connection and returns an auth code.
+5. `/auth/callback` exchanges the code, JIT-provisions membership by email when needed, sets the active-org cookie, and redirects to the dashboard.
+6. The normal MFA/session policy gates run after authentication.
+
+Metadata staging alone is not enough: the tenant IdP and Supabase enterprise connection must agree on identifiers, ACS/redirect URLs, certificates/secrets, claims, logout, and user assignment.
+
+Supabase does not link SSO identities to existing password identities. Trustity membership is matched by email so both methods can share the same tenant row.
+
+## Related
+
+- [Enterprise controls overview](/docs/platform/enterprise-controls)
+- [API surface map](/docs/api/surface-map)
+- [TAO integration model](/docs/api/tao-integration-model)

@@ -1,0 +1,73 @@
+# HostGuard: thresholds and report-only rollout
+
+HostGuard is most effective when thresholds reflect real endpoint administration. The current policy provides threshold controls and **Report only**; it does not provide a configurable source or process allowlist.
+
+## Understand threshold interaction
+
+- **Maximum login attempts** is the count that can qualify activity.
+- **Detection window** is the time period in which attempts accumulate.
+- **Ban duration** controls the temporary endpoint firewall block after an enforced detection.
+
+Lower attempt counts and longer windows increase sensitivity. Longer bans increase containment time and operational impact. Evaluate the combination rather than each value in isolation.
+
+## Build an observation baseline
+
+1. Select endpoints representing ordinary users, remote administrators, jump systems, helpdesk activity, and automation.
+2. Enable HostGuard with **Report only**.
+3. Keep initial thresholds stable through normal business and maintenance periods.
+4. Classify events by source and cause: expected user error, stale credential, service or task, scanner, approved support, or suspicious activity.
+5. Record event frequency and the impact that enforcement would have caused.
+
+Report only observes qualifying activity and reports it without adding HostGuard firewall blocks. It is the primary safe mechanism for learning normal behavior before enforcement.
+
+## Tune from evidence
+
+- If normal users frequently cross the threshold through occasional mistakes, consider a higher attempt count or shorter window.
+- If stale automation causes events, fix its stored credential before relaxing policy.
+- If broad scanning causes expected events, coordinate scan windows and test whether thresholds still meet the security objective.
+- If suspicious bursts stay below threshold, consider a lower attempt count or longer window in a controlled pilot.
+- Choose a ban duration that supports containment without exceeding recovery readiness.
+
+Change one variable at a time, document the hypothesis, and repeat the observation period.
+
+## Move to enforcement
+
+1. Confirm helpdesk can distinguish a HostGuard block from a general network outage.
+2. Confirm administrators have an alternate recovery path.
+3. Test an intentional threshold crossing on a lab or recovery-ready endpoint.
+4. Verify a HostGuard event and local temporary block occur.
+5. Confirm access recovers after the configured ban duration.
+6. Disable **Report only** for a small enforcement ring.
+7. Monitor events, endpoint reachability, and support volume.
+8. Expand only after the ring remains stable.
+
+## About allowlists
+
+Do not plan around a HostGuard source-IP, process, or management-tool allowlist: that control is not exposed by the current HostGuard policy. Do not claim that legitimate administration can be “allowlisted by process.”
+
+Instead:
+
+- Use Report only during discovery.
+- Correct stale credentials and noisy automation.
+- Set thresholds that tolerate expected mistakes without ignoring sustained attacks.
+- Separate especially noisy or high-risk endpoint groups into staged policy assignments where your tenant supports assignment scope.
+- Coordinate with central firewall and EDR teams, recognizing that HostGuard blocks are endpoint-local.
+
+## Respond to a block
+
+1. Verify endpoint, source, event time, and action in the portal.
+2. Determine whether the source is legitimate, misconfigured, or suspicious.
+3. If legitimate, correct the failed-logon cause and wait for the temporary ban to expire through the documented process.
+4. If suspicious, follow incident-response procedures and review related activity.
+5. Confirm the endpoint remains online so policy and telemetry continue.
+6. Change thresholds only after reviewing multiple events or a clear reproducible failure mode.
+
+## Rollback
+
+If enforcement causes unacceptable impact, return the affected assignment to **Report only** while investigating. This preserves visibility without creating new HostGuard firewall blocks. Record the rollback, cause, and criteria for re-enabling enforcement.
+
+## Related
+
+- [HostGuard IPS overview](/kb/hostguard/hostguard-ips-overview)
+- [Troubleshooting: agent offline](/kb/getting-started/troubleshooting-agent-offline)
+- [Product page: HostGuard IPS](/products/hostguard)

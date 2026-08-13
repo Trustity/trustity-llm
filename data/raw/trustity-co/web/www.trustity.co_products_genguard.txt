@@ -1,0 +1,98 @@
+SOURCE: https://www.trustity.co/products/genguard
+
+GenGuard | Browser DLP | Trustity | Trustity 
+
+Loading Trustity 
+
+Products Platform Solutions Contact Docs Partners 
+
+Cloud Portal Get Started 
+
+Back to Products 
+Browser DLP 
+
+GenGuard 
+
+Stop sensitive data from leaving through the browser. 
+
+GenAI copilots and unsanctioned SaaS create a new exfiltration path. GenGuard applies portal policy in Chrome and Edge - paste controls, domain blocking, and visibility into Shadow IT - without asking users to change how they work. 
+
+Request a Demo Request Access Read docs 
+
+Why GenGuard? 
+
+GenAI-aware controls. Reduce accidental pastes of source code, customer data, and secrets into LLM tools. 
+
+Enterprise deployment. Force-install via GPO or Intune using packaging and identifiers from Cloud Portal → Deployment. 
+
+One policy plane. Same Cloud Portal and TAO ecosystem as VisionX, Vault/PAM, and HostGuard IPS. 
+
+Documentation User Manual Developer Central ↗ 
+
+Ready to govern GenAI and browser risk? 
+
+Talk to us for a demo, or start in the Cloud Portal when you are ready. 
+
+Request a Demo Explore Platform 
+
+Unified endpoint, edge, and secure delivery - VisionX, GenGuard, Vault/PAM, HostGuard IPS, Trustity Axiom, and Trustity SecSend. 
+
+Products 
+
+VisionX 
+
+GenGuard 
+
+Vault & PAM 
+
+HostGuard IPS 
+
+Trustity Axiom 
+
+Trustity SecSend 
+
+All Products 
+
+Platform 
+
+Resources 
+
+Documentation 
+
+User Manual 
+
+Getting Started 
+
+Developer Central 
+
+Cloud Portal 
+
+Trustity Authenticator 
+
+Company 
+
+About Us 
+
+System Status 
+
+Release Notes 
+
+Trust Center 
+
+Contact Sales 
+
+Become a Partner 
+
+Partner login 
+
+Legal Center 
+
+Privacy Policy 
+
+Terms of Service 
+
+License Agreement 
+
+© 2026 Trustity 
+
+Privacy Terms Legal Security

@@ -1,0 +1,108 @@
+# VisionX detection tuning
+
+VisionX tuning balances detection sensitivity, persistence, alert volume, and user impact. Tune with representative endpoints and recorded test scenarios; do not optimize from a single alert.
+
+VisionX is aimed at **visual-channel data loss** - phones, cameras, lenses, and similar imaging devices used to capture or exfiltrate sensitive screen content - not phone photography alone.
+
+## Understand the controls
+
+From **TAO 1.0.35+**, endpoints run **dual detect** (COCO + Trustity VisionX Model). Tuning still uses the same portal controls; either model can confirm a configured class (`phone`, `camera`, and aliases). Re-baseline after upgrading the agent, and check logs for which model fired.
+
+### Lock response (Fast / Balanced / Accurate)
+
+In **Policies → VisionX**, the **Lock response** slider is the primary customer control for speed versus accuracy:
+
+| Mode | Intent | What it presets |
+|------|--------|-----------------|
+| **Faster lock** | Quicker interrupt when a risk appears | Higher poll rate, fewer confirmation frames, lower confidence bar |
+| **Balanced** | Recommended default | Mid poll rate, moderate frames and confidence |
+| **More accurate** | Fewer false locks | Lower poll rate, more frames, higher confidence |
+
+Typical desk targets after a clean confirmation are roughly **1-3 s** (Faster), **2-5 s** (Balanced), and **4-8 s** (More accurate). Hard angles and distance still add latency. Advanced controls remain available under **Advanced tuning** if you need to override the preset knobs.
+
+### Fine-grained knobs
+
+- **Confidence threshold** is the minimum confidence for a candidate detection. Raising it generally reduces lower-confidence detections; lowering it generally increases sensitivity.
+- **Consecutive frames** requires a candidate to persist before VisionX acts. A higher value can reduce brief transient detections but may delay action.
+- **Cooldown between alerts** suppresses repeated alerts for a period after a detection. It controls event frequency, not whether the original detection was valid.
+- **Lock on detection** determines whether a qualifying detection interrupts the user.
+- **Capture evidence images** determines whether VisionX attempts to attach reviewable evidence.
+
+These controls interact. For example, raising both confidence and consecutive frames can reduce noise substantially but can also miss short-lived risk. Cooldown cannot correct poor classification; it only reduces repeated events. Prefer changing **Lock response** first; use advanced knobs only when the slider is not enough.
+
+## Build a pilot
+
+Include a small set of endpoints representing:
+
+- Common laptop and external cameras
+- Docked and undocked work
+- Typical lighting and workspace backgrounds
+- Console and approved remote-session use
+- Sensitive and ordinary applications
+- Application and window-title changes used by On-demand policy
+- Representative visual risks (phone at screen, dedicated camera/lens angles, distance and motion)
+
+Obtain the required privacy and user approvals before evidence testing.
+
+## Establish a baseline
+
+1. Start with screen locking off.
+2. Select the intended activation mode and verify the endpoint reports Armed in test contexts.
+3. Start from **Balanced** lock response (or your tenant default) rather than copying values from another organization.
+4. Run repeatable positive scenarios that should detect and negative scenarios that should remain quiet.
+5. Record event time, endpoint, application context, confidence, labels, evidence availability, and operator disposition.
+6. Repeat across multiple sessions and devices before drawing conclusions.
+
+## Tune methodically
+
+Change one control at a time:
+
+- For desk latency that feels too slow after a clear detection, move toward **Faster lock**.
+- For repeated low-confidence benign detections, move toward **More accurate**, or raise confidence modestly under Advanced tuning.
+- For momentary detections caused by movement or transitions, consider increasing consecutive frames.
+- For multiple events from one sustained condition, increase cooldown after confirming the first event is useful.
+- For missed short-duration scenarios, review whether confidence or persistence is too restrictive.
+- For events outside intended applications, correct activation mode or On-demand rules before changing detection thresholds.
+
+After every change, save policy, wait for endpoint refresh, verify the reported state, and rerun the same test set.
+
+## Before enabling locking
+
+Confirm all of the following:
+
+- Positive tests detect reliably enough for the business objective.
+- Benign workflows do not produce unacceptable interruption.
+- Strict no-camera behavior has been tested with disconnected, disabled, and occupied cameras.
+- Helpdesk can verify users and provide authorized recovery without exposing unlock information.
+- Evidence reviewers and escalation owners are assigned.
+- A rollback owner and change window are documented.
+
+Enable locking in stages. Monitor event quality and support volume after each expansion.
+
+## Diagnose common symptoms
+
+### No events
+
+Confirm entitlement, endpoint communication, eligible user session, model and camera readiness, activation mode, Armed state, and policy refresh. In On-demand mode, test the fallback and first-match rule order.
+
+### Too many events
+
+Separate repeated events from distinct false positives. Review cooldown for repetition, then inspect confidence and consecutive frames for classification quality. Check whether Always on or an Armed fallback is broader than intended.
+
+### Events without images
+
+Confirm evidence capture is enabled and that policy permits it. Missing evidence does not invalidate the event; handle it as an event with limited review context.
+
+### Unexpected locks when no camera is available
+
+Review **no-camera mode**. Strict can lock when the camera is missing; Monitor allows work and detects only when a camera is available. This setting is independent of activation mode.
+
+## Maintain the tuning baseline
+
+Revalidate after major agent, camera, operating-system, docking, application, or workplace changes. Keep a dated record of test cases, outcomes, policy values, approver, and rollback decision.
+
+## Related
+
+- [VisionX overview and policy](/kb/visionx/visionx-overview-and-policy)
+- [VisionX activation modes](/kb/visionx/visionx-activation-modes)
+- [VisionX events, evidence, and helpdesk unlock workflow](/kb/visionx/visionx-events-evidence-helpdesk)

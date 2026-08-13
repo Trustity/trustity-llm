@@ -1,0 +1,31 @@
+# Critical alert routing
+
+Owners and Admins configure critical alert destinations under **Administration → Alerts** (or the enterprise alerts settings page in your tenant).
+
+## What gets routed
+
+Critical operational signals - for example agent-offline style events and high-severity VisionX / HostGuard outcomes your org enables - can be forwarded to:
+
+- Email recipients (requires Trustity outbound email configuration). Messages are HTML with a plain-text fallback and include structured details plus a Cloud Portal deep link when available.
+- Webhook URLs your SOC or ticketing system exposes
+
+## Configure routing
+
+1. Sign in as Owner or Admin.
+2. Open the critical alerts settings page.
+3. Enable email and/or webhook destinations.
+4. Enter verified recipient addresses or HTTPS webhook URLs.
+5. Save and send a controlled test if available.
+6. Confirm delivery in your mailbox or webhook consumer logs.
+
+## Operational expectations
+
+- Alert delivery is best-effort with retries; it is not a guaranteed pager platform.
+- Deduplication and atomic claim improvements are on the roadmap - expect possible duplicates during outages.
+- Pair portal alerts with SIEM / syslog forwarding when you need durable SOC ingestion; see [Log forwarding](/kb/portal/log-forwarding).
+
+## Related guides
+
+- [VisionX events, evidence, and helpdesk](/kb/visionx/visionx-events-evidence-helpdesk)
+- [Activity Log](/kb/portal/activity-log)
+- [Evidence retention and audit integrity](/kb/portal/evidence-retention)

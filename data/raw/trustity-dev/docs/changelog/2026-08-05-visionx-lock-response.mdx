@@ -1,0 +1,20 @@
+# 2026-08-05 — VisionX lock response + visual-channel framing
+
+Integrator note for Cloud Portal policy UX and operator messaging.
+
+## Cloud Portal
+
+- **Lock response** control on VisionX policy: **Faster lock** / **Balanced** / **More accurate**.
+- Each stop presets agent `performanceProfile`, `consecutiveFrames`, and `confidenceThreshold` (advanced overrides remain available).
+- Critical alert emails now send HTML + plain text with structured details (endpoint, labels, confidence, models, event id) and a portal deep link.
+- Product copy frames VisionX as **visual-channel DLP** (phones, cameras, lenses / imaging devices), not phone-only.
+
+## Agent
+
+No new TAO binary is required for the slider itself — current agents already honor performance profile, consecutive frames, and confidence from policy.
+
+## Honesty
+
+Model class labels remain `phone` and `camera` today. Broader form-factor coverage continues via training iterations shipped in TAO builds. Dual detect (COCO + Trustity) remains the production confirmation path.
+
+Public operator docs: [VisionX detection tuning](https://trustity.co/kb/visionx/visionx-detection-tuning).

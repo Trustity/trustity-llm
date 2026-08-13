@@ -1,0 +1,28 @@
+# Policy history and rollback
+
+Policy changes for entitled modules are recorded so Owners and Admins can review recent history and roll back when needed.
+
+## Review history
+
+1. Open **Policies → History** (or the policy history panel for the module you manage).
+2. Select a snapshot and review who changed what and when.
+3. Confirm the target module and scope before any restore.
+
+## Roll back
+
+1. Choose a prior known-good snapshot.
+2. Confirm the rollback prompt.
+3. Wait for agents to refresh policy on their next heartbeat cycle.
+4. Validate on a canary device before declaring the fleet restored.
+
+## Tips
+
+- Prefer deployment rings for risky changes instead of relying only on rollback; see [Pilot to production rollout](/kb/getting-started/pilot-to-production-rollout).
+- Record the reason for rollback in your internal change ticket.
+- Review **Audit Logs** after rollback.
+
+## Related guides
+
+- [Security policies hub](/kb/portal/security-policies-hub)
+- [Pilot to production rollout](/kb/getting-started/pilot-to-production-rollout)
+- [Audit Logs in the Cloud Portal](/kb/portal/audit-logs)

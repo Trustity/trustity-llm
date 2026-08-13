@@ -1,0 +1,86 @@
+# SSO and SCIM enterprise identity
+
+Owners and Admins configure enterprise identity under **Administration → Identity / SSO**.
+
+SSO and SCIM solve different problems:
+
+- **SSO authenticates people.** The customer’s identity provider (IdP) decides whether a person may sign in and applies its MFA / Conditional Access policy.
+- **SCIM provisions accounts.** The IdP creates, updates, suspends, and assigns roles to portal memberships as employee lifecycle events occur.
+
+Most enterprise customers use both: SCIM prepares the account and SSO authenticates the user.
+
+## Why customers use SCIM
+
+Without SCIM, an administrator manually invites and removes every portal user. That creates operational delay and access-review risk.
+
+With SCIM, an IdP such as Microsoft Entra ID or Okta can:
+
+1. Create a Trustity portal membership when an employee is assigned to the Trustity enterprise application.
+2. Update the portal role when responsibilities change.
+3. Suspend access when the employee is unassigned or leaves the company.
+4. Revoke active sessions during suspension.
+5. Produce a centralized identity-governance trail in the customer’s IdP.
+
+The customer gains faster onboarding, reliable offboarding, fewer orphaned accounts, consistent least privilege, and less repetitive administration. SCIM does **not** synchronize passwords or grant product licenses by itself; portal role and tenant module entitlements still apply.
+
+## What is live today
+
+- **Password + MFA** remains the supported Cloud Portal sign-in path and break-glass path during SSO pilots.
+- **SSO domain discovery and start** are present. The portal can detect staged SSO for an email domain and call the Supabase SSO broker. End-to-end sign-in works only after Trustity and the customer finish the IdP + Supabase Auth configuration.
+- **After a successful SSO login**, the portal can JIT-create a membership for the staged domain (default Viewer) and bind the active organization cookie.
+- **SSO / SAML metadata** can be saved for planning (domain, entity ID, ACS URL, metadata URL). Saving metadata alone does **not** make SSO production-ready.
+- **SCIM Users** supports bearer-token authenticated list, pagination, create, read, patch, suspend/delete, and session revocation.
+- **SCIM discovery** exposes ServiceProviderConfig, Schemas, and ResourceTypes for IdP connector setup.
+- **SCIM Groups** discovery currently returns an empty list; group-to-role mapping is not GA.
+
+## Stage SSO metadata
+
+1. Sign in as Owner or Admin.
+2. Open **Administration → Identity / SSO**.
+3. Enter IdP metadata fields provided by Okta, Entra ID, Google Workspace, or your IdP team.
+4. Optionally mark SSO as planned for the tenant.
+5. Select **Save SSO**.
+6. Confirm the page still describes the surface as preview/staging.
+7. Configure the matching SAML/OIDC enterprise connection in Trustity’s Supabase Auth project.
+8. Test IdP-initiated and service-provider-initiated sign-in with a non-production user before rollout.
+
+Treat saved metadata and domain discovery as configuration readiness - not as proof that the complete browser SSO round trip is active.
+
+## Configure SCIM Users
+
+1. On the same Identity page, select **Create SCIM bearer token**.
+2. Copy the token immediately; it is shown once.
+3. Store it in your IdP or secrets manager - never in tickets or chat.
+4. Point the IdP connector at `https://www.trustity.io/api/scim/v2`.
+5. Use the token as the HTTP Bearer token.
+6. Test connection/discovery.
+7. Assign one non-production user and confirm the expected **Viewer**, **Analyst**, or **Admin** membership.
+8. Change the role, then unassign the user and confirm that portal access is suspended and active sessions are revoked.
+
+## Current SCIM contract
+
+| Surface | Current behavior |
+|---------|------------------|
+| `/Users` | List with `startIndex` / `count`, filter by exact `userName`, create |
+| `/Users/{id}` | Read, patch active/role, suspend via delete |
+| `/ServiceProviderConfig` | Discovery metadata |
+| `/Schemas` | Core User schema |
+| `/ResourceTypes` | User resource type |
+| `/Groups` | Discovery-safe empty list; writes return not implemented |
+
+Use Users assignment for the current preview. Do not promise Group Push or full RFC conformance until Trustity publishes a GA conformance release.
+
+## Security notes
+
+- Rotate or revoke SCIM tokens after staff changes or suspected leakage.
+- Use a dedicated IdP connector secret and never reuse a human password.
+- Start with **Viewer** as the default role and elevate only through approved assignment.
+- Do not market end-user SSO as GA until the customer-specific IdP round-trip, logout, MFA/Conditional Access, and recovery tests pass.
+- Keep MFA enrolled for Owners and Admins even while SSO is staged.
+
+## Related guides
+
+- [Manage portal users, roles, and invitations](/kb/portal/user-roles-and-invites)
+- [Manage your account and MFA](/kb/portal/manage-account-and-mfa)
+- [Session control for operators](/kb/portal/session-control)
+- [Security Assurance readiness](/kb/portal/security-assurance)

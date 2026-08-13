@@ -1,0 +1,129 @@
+# Organization onboarding runbook
+
+Use this runbook to move a newly provisioned Trustity organization from initial access to an approved endpoint pilot.
+
+## Scope
+
+The runbook covers Cloud Portal access, role assignment, entitlement confirmation, policy review, deployment readiness, and handoff. It does not authorize production-wide deployment or define your organization's security policy.
+
+## Prerequisites
+
+- Trustity organization provisioned for the customer
+- Organization owner able to sign in at `https://trustity.io`
+- Commercial or project record listing purchased modules
+- Named security, endpoint engineering, networking, helpdesk, privacy, and change-approval contacts
+- At least one representative pilot endpoint
+- Approved credential-handling and software-distribution methods
+
+## Define ownership and success
+
+Before changing policy, record:
+
+- **Executive owner:** accepts business risk and rollout scope
+- **Portal owner:** maintains organization access and entitlements
+- **Policy owner:** approves module settings and exceptions
+- **Deployment owner:** packages and assigns endpoint software
+- **Network owner:** validates DNS, proxy, TLS, and egress
+- **Support owner:** handles endpoint impact and escalation
+- **Pilot success criteria:** objective health, policy, event, and user-experience checks
+
+Use hostnames or managed-device IDs in project records. Do not record license keys or vaulted credentials.
+
+## Step 1: establish administrator access
+
+1. The organization owner signs in to the Cloud Portal.
+2. Open **User Management**.
+3. Invite at least one backup Admin using an individually assigned account.
+4. Add **Analyst** or **Viewer** members only when their responsibilities require it (see [User roles and invites](/kb/portal/user-roles-and-invites)).
+5. Have each invitee complete **set password** from the invitation email, sign in, and verify the pages expected for the assigned role.
+6. Remove temporary onboarding access when it is no longer needed.
+
+Avoid shared administrator identities. Portal access is invitation-based, and visible pages depend on both role and module entitlement.
+
+## Step 2: confirm organization entitlements
+
+1. Review the portal navigation and **Security policies** tabs.
+2. Compare visible modules with the approved subscription.
+3. Open **Deployment** and confirm expected TAO or GenGuard assets are available.
+4. Record any discrepancy and resolve it before endpoint installation.
+
+Do not treat a hidden page as a software defect until role and entitlement have been checked. See the [entitlements and module matrix](/kb/getting-started/entitlements-module-matrix).
+
+## Step 3: review policy safely
+
+For each entitled module:
+
+1. Identify the enforcement surface and supported operating system.
+2. Review the current portal values.
+3. Define pilot behavior, exception handling, and rollback.
+4. Set or confirm only the minimum policy needed for the first test.
+5. Record the approver and change window.
+
+Start with observable, reversible pilot settings. Controls involving screen locks, browser blocking, local password rotation, firewall rules, or agent removal protection require a tested recovery process.
+
+## Step 4: prepare deployment
+
+1. Review the [network requirements](/kb/getting-started/network-requirements) with the network team.
+2. From **Deployment**, download the current package for the pilot OS.
+3. Record the displayed version, channel, signature status, and SHA-256 when available.
+4. Copy the organization license key into the approved deployment system.
+5. Use `<TRUSTITY_LICENSE_KEY>` in all written examples.
+6. Restrict access to deployment commands or managed-browser policies containing the real key.
+7. Package for a pilot group only.
+
+For Windows silent enrollment, use:
+
+```text
+Trustity-Agent-Setup.exe /quiet /license=<TRUSTITY_LICENSE_KEY>
+```
+
+For Linux, download the tarball from the Portal first and enroll with `sudo` after installation.
+
+## Step 5: deploy one representative device
+
+Choose a device that reflects the production OS, security stack, network path, and user session type. Follow the platform install guide, then complete [Verify your first healthy device](/kb/getting-started/first-healthy-device).
+
+Do not widen the assignment merely because the package manager reports success. Enrollment, heartbeat, policy, inventory, and a controlled module test must also pass.
+
+## Step 6: prepare operations
+
+Before expanding the pilot:
+
+- Give helpdesk the healthy-state checklist and escalation path
+- Document approved recovery and removal procedures
+- Define how exceptions are requested and reviewed
+- Identify the portal page for each module's events
+- Confirm who may access Vault/PAM or evidence-bearing events
+- Agree on audit review and deployment reconciliation cadence
+- Record privacy and workforce-notice requirements for applicable controls
+
+## Verification and sign-off
+
+Organization onboarding is complete when:
+
+- The owner and backup Admin can sign in
+- Least-privilege operational roles are assigned
+- Visible modules match the purchased subscription
+- Deployment presents the expected current assets
+- Network prerequisites are approved
+- One representative endpoint is healthy in Managed devices
+- A controlled test has produced the expected behavior and event
+- Helpdesk, recovery, privacy, and escalation procedures are documented
+- The pilot scope and success criteria have an explicit approver
+
+## Troubleshooting and security
+
+- **Invited user cannot see a page:** confirm membership role and module entitlement, then have the user start a new portal session.
+- **No deployment download:** confirm an entitled module requires the asset and check the availability message in Deployment.
+- **License key not configured:** stop deployment and contact the organization owner or Trustity Support.
+- **Unexpected policy values:** do not overwrite them without identifying the owner and impact.
+- **Unrecognized device appears:** preserve audit and device details and investigate the deployment source.
+- Keep the license key, local account passwords, evidence, and support bundles out of public or broadly shared systems.
+
+## Related links
+
+- [Welcome to Trustity](/kb/getting-started/welcome-to-trustity)
+- [Cloud Portal overview](/kb/getting-started/cloud-portal-overview)
+- [Entitlements and module matrix](/kb/getting-started/entitlements-module-matrix)
+- [Pilot-to-production rollout](/kb/getting-started/pilot-to-production-rollout)
+- [Portal users and roles](/kb/portal/user-roles-and-invites)

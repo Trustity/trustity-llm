@@ -1,0 +1,98 @@
+SOURCE: https://www.trustity.co/products/vault
+
+Vault & PAM | Trustity | Trustity 
+
+Loading Trustity 
+
+Products Platform Solutions Contact Docs Partners 
+
+Cloud Portal Get Started 
+
+Back to Products 
+Credentials 
+
+Vault & PAM 
+
+Rotate local privileged passwords. Vault what operators need. 
+
+Standing local admin passwords are a classic breach path. Trustity Vault/PAM rotates local accounts on managed endpoints through TAO, reports results to the Cloud Portal, and keeps vaulted material under zero-knowledge wrapping so Trustity cannot read customer secrets. 
+
+Request a Demo Request Access Read docs 
+
+Why Vault & PAM? 
+
+Local account focus. Rotate local privileged accounts on the device - domain AD passwords are out of scope by design. 
+
+Zero-knowledge vault. Split-key wrapping keeps vaulted credentials unreadable to Trustity operators. 
+
+Portal workflows. Schedule rotation, force-rotate after suspected compromise, and audit who accessed what. 
+
+Documentation User Manual Developer Central ↗ 
+
+Ready to retire standing local admin passwords? 
+
+Talk to us for a demo, or start in the Cloud Portal when you are ready. 
+
+Request a Demo Explore Platform 
+
+Unified endpoint, edge, and secure delivery - VisionX, GenGuard, Vault/PAM, HostGuard IPS, Trustity Axiom, and Trustity SecSend. 
+
+Products 
+
+VisionX 
+
+GenGuard 
+
+Vault & PAM 
+
+HostGuard IPS 
+
+Trustity Axiom 
+
+Trustity SecSend 
+
+All Products 
+
+Platform 
+
+Resources 
+
+Documentation 
+
+User Manual 
+
+Getting Started 
+
+Developer Central 
+
+Cloud Portal 
+
+Trustity Authenticator 
+
+Company 
+
+About Us 
+
+System Status 
+
+Release Notes 
+
+Trust Center 
+
+Contact Sales 
+
+Become a Partner 
+
+Partner login 
+
+Legal Center 
+
+Privacy Policy 
+
+Terms of Service 
+
+License Agreement 
+
+© 2026 Trustity 
+
+Privacy Terms Legal Security

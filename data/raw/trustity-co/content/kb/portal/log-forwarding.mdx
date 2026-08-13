@@ -1,0 +1,93 @@
+# Log Forwarding
+
+Use **Administration → Log Forwarding** to stream selected portal audit events to a syslog collector or HTTPS webhook.
+
+This path does not currently include GenGuard DLP browser events. Filters apply to portal audit events only. Treat destination configuration as an administrative security change and restrict it to authorized operators.
+
+## Before you begin
+
+- Confirm the collector is approved and reachable from Trustity Cloud.
+- Obtain destination host, port, protocol, and firewall requirements from the logging team.
+- For a webhook, obtain an HTTPS ingest URL and an approved token if required.
+- Decide which event types the destination should receive.
+- Plan a test event and confirm who will validate it at the destination.
+
+## Configure syslog
+
+1. Open **Log Forwarding**.
+2. In **Syslog (UDP / TCP / TLS)**, enter **Host** and **Port**.
+3. Select **UDP (default 514)**, **TCP**, or **TCP-TLS (e.g. 6514)** under **Protocol**.
+4. Select **Enable**.
+5. Configure **Events to forward**.
+6. Select **Save Configuration** and wait for **Log forwarding settings saved.**
+7. Select **Test Connection**.
+8. Review the **Last test** panel and confirm **SYSLOG: ok** with the expected destination.
+9. Confirm receipt and parsing at the collector.
+
+Prefer **TCP-TLS** when supported. UDP does not provide delivery acknowledgement, and plain TCP does not provide transport encryption.
+
+## Configure an HTTPS webhook
+
+1. In **HTTPS Webhook**, enter **Ingest URL**.
+2. If required, enter **Token / Secret (optional)**.
+3. Select **Enable**.
+4. Configure **Events to forward**.
+5. Select **Save Configuration**.
+6. Select **Test Connection**.
+7. Confirm **WEBHOOK: ok** and verify the event at the destination.
+
+The destination receives an HTTPS JSON request. The optional value is used as a bearer token. Native Splunk HEC formatting is not implemented; use a generic HTTPS collector or an approved downstream transform.
+
+## Select events
+
+Expand **Events to forward**:
+
+1. Configure the **syslog** and **webhook** columns independently.
+2. Select individual events or use **Select all**.
+3. Use **Deselect all** when you intend to return to an empty list.
+4. Select **Save Configuration** after changes.
+
+An empty selection means forward all audit actions; it does not mean forward none. Document this behavior in your change record.
+
+## Validate end to end
+
+1. Confirm the status strip shows **Syslog: On** or **Webhook: On**.
+2. Run **Test Connection** and review both destination results. A disabled destination may show **skipped**.
+3. Generate one approved administrative action included by the filter.
+4. Confirm it appears in **Audit Logs**.
+5. Confirm the same action arrives at the external destination with expected timestamp and fields.
+6. Verify alerts, parsing, and retention in the external platform.
+
+A successful test proves the test request reached the configured destination; it does not prove every future event will be ingested or parsed correctly.
+
+## Troubleshooting
+
+### Test Connection is disabled
+
+Enable syslog, or enable the webhook and provide an **Ingest URL**, then save.
+
+### Partial or failed result
+
+Read the per-destination result. Validate DNS, routing, firewall rules, port, TLS trust, webhook URL, and destination availability. Retry only after correcting the named issue.
+
+### Test succeeds but events do not arrive
+
+Confirm the action appears in **Audit Logs**, review **Events to forward**, and remember that GenGuard DLP browser events are excluded. Empty selection forwards all audit actions.
+
+### Webhook receives unauthorized responses
+
+Rotate the destination token through your approved process, update **Token / Secret (optional)**, save, and retest. Never place the token in a support ticket.
+
+## Security notes
+
+- Use TLS-protected destinations and least-privilege ingest credentials.
+- Never expose webhook tokens in screenshots, exports, tickets, or browser recordings.
+- Restrict external collector access because forwarded details may contain user, host, and administrative context.
+- Revalidate after collector, certificate, firewall, or token changes.
+- Disable unused destinations promptly.
+
+## Related guides
+
+- [Audit Logs in the Cloud Portal](/kb/portal/audit-logs)
+- [Activity Log](/kb/portal/activity-log)
+- [Support Center](/kb/portal/support-center)

@@ -1,0 +1,79 @@
+# Deploy the GenGuard browser extension
+
+GenGuard applies browser data-loss prevention and web controls through a managed extension. A successful deployment requires both installation and tenant configuration: seeing the extension icon alone does not prove that the browser is reporting or enforcing the current policy.
+
+## Plan the rollout
+
+Before deployment:
+
+- Confirm GenGuard entitlement and access to **Cloud Portal → Deployment**.
+- Choose supported managed browser channels for the pilot.
+- Identify the GPO, Intune, or other browser-management owner.
+- Create a pilot group containing normal users, administrators, and representative business applications.
+- Review the initial GenGuard policy and document legitimate domain exceptions.
+- Assign owners for Live Events triage and Browser Agents health.
+
+Use only extension identifiers, installation locations, and managed configuration values shown for your tenant. Values copied from another organization can install an extension that cannot associate with the correct tenant.
+
+## Deployment workflow
+
+1. Configure a limited pilot policy under **Policies → GenGuard**.
+2. Open **Deployment** and select the browser package or enterprise instructions for your tenant.
+3. Configure the extension as force-installed and non-removable for standard users.
+4. Deliver the organization configuration through the browser’s managed-policy channel.
+5. Assign the configuration to the pilot group.
+6. Ask pilot users to restart the browser if required by your management platform.
+7. Confirm each pilot appears in **GenGuard → Browser Agents**.
+8. Perform controlled tests for an allowed workflow and a blocked or alerted workflow.
+9. Confirm the expected records appear in **GenGuard → Live Events**.
+10. Expand through deployment rings only after policy behavior and support procedures are stable.
+
+## Validation checklist
+
+On each browser channel, verify:
+
+- The extension is installed by enterprise policy.
+- A standard user cannot remove or disable it.
+- Browser Agents shows the expected hostname, user, browser-agent version, status, and recent check-in.
+- Policy changes reach the pilot within the expected management and check-in interval.
+- Approved domains continue to work.
+- A controlled blocked condition produces the expected user experience and event status.
+- The browser remains usable after restart, sign-out, and network reconnection.
+
+Do not test with real credentials, personal data, source code, or customer records. Use synthetic data approved for security testing.
+
+## Rollout rings
+
+A practical sequence is security/IT, selected business teams, then organization-wide deployment. Hold each ring long enough to observe browser check-ins, event quality, business exceptions, and support volume.
+
+Keep the previous assignment scope available as a rollback path. If a policy causes disruption, narrow the policy or assignment through your approved change process; do not instruct users to remove a managed security control.
+
+## Common issues
+
+### Extension installed but no Browser Agent
+
+Confirm the tenant configuration is managed in the browser, the browser has restarted, the user has network access, and no competing policy is overriding the configuration.
+
+### Agent appears offline
+
+Compare **Last Seen** with the user’s browser activity. A device that is powered on can still appear offline if the managed browser is not running or reporting.
+
+### No Live Events
+
+Verify the agent is active, policy is saved, the test actually matches a configured control, and the event view is scoped to the expected organization.
+
+### Legitimate site is blocked
+
+Review domain and category policy. Add a narrowly scoped approved-domain exception when justified, save, and retest. Avoid broad exceptions that bypass unrelated controls.
+
+## Operational handoff
+
+Document the deployment owner, supported browser versions, pilot evidence, exception approver, event-triage owner, and rollback process. Review Browser Agents regularly for stale or missing installations.
+
+## Related
+
+- [GenGuard: GPO and Intune rollout](/kb/genguard/gpo-intune-rollout)
+- [GenGuard policy templates, keywords, domains, and categories](/kb/genguard/policy-templates-keywords-domains-categories)
+- [GenGuard Live Events and Browser Agents](/kb/genguard/live-events-and-browser-agents)
+- [Cloud Portal overview](/kb/getting-started/cloud-portal-overview)
+- [Product page: GenGuard](/products/genguard)

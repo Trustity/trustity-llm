@@ -1,0 +1,76 @@
+# Personal Vault and sharing limits
+
+Personal Vault provides encrypted, user-owned file storage and time- and download-limited sharing workflows. Files are scoped to the signed-in owner even when organization policy defines limits. Use it only for information approved by your organization’s classification, privacy, retention, and sharing policies.
+
+## Policy controls
+
+In the Vault policy, administrators can set:
+
+- **Maximum file size** for an individual upload
+- **Blocked file extensions**
+- **Organization storage quota**
+- **Maximum sharing duration**
+- **Maximum download count**
+- Additional access-posture or sharing requirements available in the tenant
+
+Policy limits are upper bounds, not recommended defaults for every share. Users should choose the shortest duration and fewest downloads needed.
+
+## Configure Personal Vault
+
+1. Identify allowed data classifications and prohibited content.
+2. Set a maximum file size appropriate for normal business use.
+3. Block executable or other disallowed extensions according to security policy.
+4. Set conservative share-duration and download limits.
+5. Confirm who may upload, decrypt, delete, and share files.
+6. Pilot uploads, downloads, quota handling, and expired links with non-sensitive files.
+7. Document incident and recovery contacts before production use.
+
+Extension blocking is a policy safeguard, not malware scanning or content inspection. Do not rely on a filename extension to establish that a file is safe.
+
+## Upload and download workflow
+
+1. Open **Personal Vault** and review current storage usage.
+2. Select an approved file.
+3. Confirm its size and extension comply with policy.
+4. Upload and wait for the success confirmation before closing the browser.
+5. Verify the file appears with the expected name and size.
+6. When needed, use **Decrypt** to download through the authorized portal session.
+7. Store the downloaded copy only in an approved location and remove temporary copies according to policy.
+
+If an upload fails, check individual file size, blocked extension, available storage quota, network connectivity, and session status. Do not rename a prohibited file merely to bypass an extension rule.
+
+## Create a sharing link
+
+1. Select **Share** for the correct file.
+2. Choose the shortest available expiry that meets the business need.
+3. Choose the lowest practical download count.
+4. Create the link and send it only through an approved channel to verified recipients.
+5. Record the business owner and expiry when required.
+6. Confirm the recipient can access the intended file and no other file.
+
+A link can be used by anyone who receives it unless additional controls explicitly shown in your tenant apply. Treat the link itself as sensitive. Download limits reduce repeated access but do not prevent a recipient from retaining a downloaded copy.
+
+## Sharing limits and expectations
+
+The organization policy defines maximum duration and download values. The share dialog may offer shorter presets. A link stops being usable when its expiry or permitted-download condition is reached.
+
+“Unlimited” or a high preset in the interface should still remain within organization policy and must not be used as a substitute for permanent managed collaboration storage.
+
+## Delete and revoke
+
+Delete a file only after confirming retention requirements and ownership. Deletion is not a substitute for revoking copies already downloaded by recipients. If a link is sent incorrectly, follow the incident process immediately and remove or disable access through the controls available in your tenant.
+
+## Operational review
+
+- Monitor storage consumption and investigate unexpected growth.
+- Review blocked extensions and business exceptions periodically.
+- Prefer short-lived, low-download links.
+- Remove obsolete files according to retention policy.
+- Revalidate controls after policy or browser changes.
+- Never upload credentials, unlock information, or unsupported secrets merely to transfer them.
+
+## Related
+
+- [Vault credential reveal and role hygiene](/kb/vault/credential-reveal-and-role-hygiene)
+- [PAM: local account password rotation](/kb/vault/pam-local-account-rotation)
+- [Audit Logs in the Cloud Portal](/kb/portal/audit-logs)

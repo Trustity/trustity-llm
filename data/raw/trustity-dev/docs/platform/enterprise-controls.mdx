@@ -1,0 +1,65 @@
+# Enterprise controls overview
+
+Enterprise controls live in the **Cloud Portal** control plane. They govern who can operate the tenant, how privileged sessions behave, and how evidence/audit is retained. Endpoint enforcement remains the TAO agent’s job.
+
+## RBAC
+
+Portal membership roles:
+
+| Role | Typical scope |
+|------|----------------|
+| **Owner** | Tenant owner; membership and enterprise settings |
+| **Admin** | Operational administration |
+| **Analyst** | Investigate evidence / incidents (legacy Editor) |
+| **Viewer** | Read-mostly (legacy Vault invites map here) |
+
+Module entitlements still gate which product areas appear. Day-to-day operator docs: [trustity.co/kb](https://trustity.co/kb).
+
+Invites use a first-party **set-password** confirm link, then force a fresh login. Treat broken invite→login redirects as a portal mail/URL issue (resend), not as “create another org.”
+
+## MFA and sessions
+
+- Password + MFA (TOTP / passkey) is the live portal auth path.
+- Orgs may enforce MFA for Owner/Admin (AAL2) after an operator has a verified factor.
+- Session Control supports idle guidance and session revocation.
+
+## SSO / SCIM (preview)
+
+- SSO metadata can be staged for IdP planning. Email-domain discovery and a Supabase SSO broker start path are implemented; each customer still needs an IdP enterprise connection and end-to-end validation.
+- **SCIM Users** supports list/pagination/create/read/patch/suspend with a tenant bearer token, plus standard discovery surfaces.
+- SCIM Groups writes and a complete Okta/Entra conformance matrix are not GA.
+
+Do not build production user journeys that depend on SSO login until a GA changelog says otherwise.
+
+SSO and SCIM are complementary:
+
+- SSO proves **who the user is** at sign-in.
+- SCIM controls **whether the account exists, which role it has, and when it is suspended**.
+
+For enterprise customers, the combination reduces orphaned access and makes onboarding/offboarding follow the source-of-truth identity platform.
+
+## Endpoint package targeting
+
+Portal **Deployment** publishes entitled Windows/Linux installers for **customer-driven** distribution. Staged pilot→production **rings in the portal UI are deferred** until agent auto-update exists. Integrators should model rings in MDM today; see the marketing [pilot-to-production](https://trustity.co/kb/getting-started/pilot-to-production-rollout) guide.
+
+Heartbeat may still expose optional `deploymentRing` / `targetTaoVersion` fields for forward compatibility — agents must not assume pull-update is implemented.
+
+## Retention and audit integrity
+
+- Retention preferences preview and purge eligible evidence/audit rows (audit archives via `archive_and_purge_audit_events`, then leaves rows in `audit_events_archive` indefinitely).
+- Live audit rows reject update/delete at the database layer; approved retention archives then deletes through a restricted break-glass function.
+- Per-row SHA-256 hash headers are best-effort chaining — **not** a GA tamper-evident guarantee under concurrent writes.
+- Audit JSONL export includes an `X-Trustity-Export-SHA256` integrity header — **not** a cryptographic signature.
+- Alert workers atomically claim queued deliveries and deduplicate repeated agent-offline notifications.
+- **Security Assurance** combines readiness configuration with alert delivery, restore-drill age, privileged-operator, and MFA status for the **current session only**. It is not an organization-wide privileged-user MFA census and is **not** a SOC 2 certification claim.
+
+## Multi-organization context
+
+Users with access to multiple tenants can select an active organization in the portal sidebar. The server validates ownership or non-suspended membership before setting the active-org cookie. Dashboard pages and enterprise APIs consume this centralized context.
+
+## Related
+
+- [Enterprise admin API surfaces](/docs/api/enterprise-admin-surfaces)
+- [API surface map](/docs/api/surface-map)
+- [Architecture overview](/docs/platform/architecture-overview)
+- [TAO agent integration model](/docs/api/tao-integration-model)

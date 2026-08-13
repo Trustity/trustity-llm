@@ -1,0 +1,27 @@
+# Evidence retention and audit integrity
+
+Owners and Admins manage retention under **Administration → Retention** (and related audit export actions).
+
+## Retention preferences
+
+1. Open retention settings.
+2. Set evidence and audit retention windows that match your legal and security policy.
+3. Use **preview** to see how many rows a purge would affect before enabling automated cleanup.
+4. Save only after change approval.
+
+Live audit rows may be archived into a dedicated archive table by retention jobs. The database enforces append-only behavior for the live audit stream. Formal WORM storage and a concurrency-safe tamper-evident chain are not GA claims.
+
+## Audit JSONL export
+
+1. Open Audit Logs or Security Assurance export actions available to your role.
+2. Export JSONL for the requested window.
+3. Capture the `X-Trustity-Export-SHA256` response header with the file.
+4. Store the file and hash together for evidence packages.
+
+The SHA-256 header is **integrity metadata** for the exported bytes. It is **not** a cryptographic digital signature or third-party attestation.
+
+## Related guides
+
+- [Audit Logs in the Cloud Portal](/kb/portal/audit-logs)
+- [Security Assurance readiness](/kb/portal/security-assurance)
+- [Critical alert routing](/kb/portal/critical-alert-routing)

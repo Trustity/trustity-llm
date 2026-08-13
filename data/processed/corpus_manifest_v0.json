@@ -1,0 +1,548 @@
+{
+  "version": "0.1.0",
+  "language": "en",
+  "sources": [
+    {
+      "id": "bf6b388e9863",
+      "path": "data/raw/trustity-dev/docs/changelog/2026-08-01-visionx-model-v1.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-dev-central/content/docs",
+      "title": "2026-08-01-visionx-model-v1",
+      "chars": 1416
+    },
+    {
+      "id": "f625a869b556",
+      "path": "data/raw/trustity-dev/docs/changelog/2026-07-enterprise-controls.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-dev-central/content/docs",
+      "title": "2026-07-enterprise-controls",
+      "chars": 1666
+    },
+    {
+      "id": "d5b3d72e68f0",
+      "path": "data/raw/trustity-dev/docs/changelog/2026-08-01-tao-1-0-35-dual-visionx.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-dev-central/content/docs",
+      "title": "2026-08-01-tao-1-0-35-dual-visionx",
+      "chars": 780
+    },
+    {
+      "id": "34c2fabafa77",
+      "path": "data/raw/trustity-dev/docs/changelog/2026-08-05-visionx-lock-response.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-dev-central/content/docs",
+      "title": "2026-08-05-visionx-lock-response",
+      "chars": 1141
+    },
+    {
+      "id": "66fb323be4c0",
+      "path": "data/raw/trustity-dev/docs/changelog/2026-08-03-tao-1-0-36-visionx-v1-1.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-dev-central/content/docs",
+      "title": "2026-08-03-tao-1-0-36-visionx-v1-1",
+      "chars": 488
+    },
+    {
+      "id": "74c6bba5188d",
+      "path": "data/raw/trustity-dev/docs/changelog/2026-07-31-platform-notes.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-dev-central/content/docs",
+      "title": "2026-07-31-platform-notes",
+      "chars": 1469
+    },
+    {
+      "id": "87d6c245ffbc",
+      "path": "data/raw/trustity-dev/docs/changelog/2026-07-launch.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-dev-central/content/docs",
+      "title": "2026-07-launch",
+      "chars": 522
+    },
+    {
+      "id": "666696b30b74",
+      "path": "data/raw/trustity-dev/docs/platform/enterprise-controls.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-dev-central/content/docs",
+      "title": "enterprise-controls",
+      "chars": 4064
+    },
+    {
+      "id": "f8ab0864911f",
+      "path": "data/raw/trustity-dev/docs/platform/architecture-overview.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-dev-central/content/docs",
+      "title": "architecture-overview",
+      "chars": 3833
+    },
+    {
+      "id": "fe310f7b5e23",
+      "path": "data/raw/trustity-dev/docs/getting-started/welcome.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-dev-central/content/docs",
+      "title": "welcome",
+      "chars": 1325
+    },
+    {
+      "id": "103f085c7aed",
+      "path": "data/raw/trustity-dev/docs/getting-started/accounts.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-dev-central/content/docs",
+      "title": "accounts",
+      "chars": 1474
+    },
+    {
+      "id": "0432aea5785f",
+      "path": "data/raw/trustity-dev/docs/api/enterprise-admin-surfaces.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-dev-central/content/docs",
+      "title": "enterprise-admin-surfaces",
+      "chars": 3751
+    },
+    {
+      "id": "9557256405c9",
+      "path": "data/raw/trustity-dev/docs/api/tao-integration-model.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-dev-central/content/docs",
+      "title": "tao-integration-model",
+      "chars": 2658
+    },
+    {
+      "id": "4ca530dd3473",
+      "path": "data/raw/trustity-dev/docs/api/surface-map.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-dev-central/content/docs",
+      "title": "surface-map",
+      "chars": 1343
+    },
+    {
+      "id": "6cb3db62a6c2",
+      "path": "data/raw/trustity-co/content/kb/hostguard/thresholds-and-allowlists.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "thresholds-and-allowlists",
+      "chars": 4302
+    },
+    {
+      "id": "56ddba138127",
+      "path": "data/raw/trustity-co/content/kb/hostguard/hostguard-ips-overview.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "hostguard-ips-overview",
+      "chars": 3892
+    },
+    {
+      "id": "858212a5de33",
+      "path": "data/raw/trustity-co/content/kb/portal/manage-account-and-mfa.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "manage-account-and-mfa",
+      "chars": 4453
+    },
+    {
+      "id": "d13806cacc07",
+      "path": "data/raw/trustity-co/content/kb/portal/security-policies-hub.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "security-policies-hub",
+      "chars": 4682
+    },
+    {
+      "id": "c03ce026165b",
+      "path": "data/raw/trustity-co/content/kb/portal/user-roles-and-invites.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "user-roles-and-invites",
+      "chars": 6405
+    },
+    {
+      "id": "2dbe29bf3567",
+      "path": "data/raw/trustity-co/content/kb/portal/audit-logs.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "audit-logs",
+      "chars": 5746
+    },
+    {
+      "id": "70a1d1a8bdaa",
+      "path": "data/raw/trustity-co/content/kb/portal/policy-history-and-rollback.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "policy-history-and-rollback",
+      "chars": 1100
+    },
+    {
+      "id": "91721ce523e4",
+      "path": "data/raw/trustity-co/content/kb/portal/deployment-center.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "deployment-center",
+      "chars": 8225
+    },
+    {
+      "id": "4d362ecd763d",
+      "path": "data/raw/trustity-co/content/kb/portal/session-control.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "session-control",
+      "chars": 1257
+    },
+    {
+      "id": "bc8bc9e46938",
+      "path": "data/raw/trustity-co/content/kb/portal/sso-and-scim-preview.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "sso-and-scim-preview",
+      "chars": 5039
+    },
+    {
+      "id": "b3bc0733a817",
+      "path": "data/raw/trustity-co/content/kb/portal/tao-endpoint-hardening.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "tao-endpoint-hardening",
+      "chars": 4912
+    },
+    {
+      "id": "91ac9a3ff771",
+      "path": "data/raw/trustity-co/content/kb/portal/support-center.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "support-center",
+      "chars": 4384
+    },
+    {
+      "id": "71f33aef1788",
+      "path": "data/raw/trustity-co/content/kb/portal/log-forwarding.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "log-forwarding",
+      "chars": 4329
+    },
+    {
+      "id": "dfa1b703ad59",
+      "path": "data/raw/trustity-co/content/kb/portal/security-assurance.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "security-assurance",
+      "chars": 2016
+    },
+    {
+      "id": "86543cda81c2",
+      "path": "data/raw/trustity-co/content/kb/portal/activity-log.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "activity-log",
+      "chars": 3687
+    },
+    {
+      "id": "812d560739c8",
+      "path": "data/raw/trustity-co/content/kb/portal/critical-alert-routing.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "critical-alert-routing",
+      "chars": 1495
+    },
+    {
+      "id": "86677ca5c17c",
+      "path": "data/raw/trustity-co/content/kb/portal/managed-devices-and-inventory.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "managed-devices-and-inventory",
+      "chars": 6422
+    },
+    {
+      "id": "1061ae7acd80",
+      "path": "data/raw/trustity-co/content/kb/portal/evidence-retention.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "evidence-retention",
+      "chars": 1287
+    },
+    {
+      "id": "0e85dd83592d",
+      "path": "data/raw/trustity-co/content/kb/getting-started/install-tao-linux.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "install-tao-linux",
+      "chars": 5042
+    },
+    {
+      "id": "170292a7e624",
+      "path": "data/raw/trustity-co/content/kb/getting-started/troubleshooting-agent-offline.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "troubleshooting-agent-offline",
+      "chars": 6075
+    },
+    {
+      "id": "2cf9c546075b",
+      "path": "data/raw/trustity-co/content/kb/getting-started/welcome-to-trustity.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "welcome-to-trustity",
+      "chars": 5007
+    },
+    {
+      "id": "7813fccbae66",
+      "path": "data/raw/trustity-co/content/kb/getting-started/entitlements-module-matrix.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "entitlements-module-matrix",
+      "chars": 6647
+    },
+    {
+      "id": "3be66de5120f",
+      "path": "data/raw/trustity-co/content/kb/getting-started/network-requirements.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "network-requirements",
+      "chars": 6105
+    },
+    {
+      "id": "db7e6967369f",
+      "path": "data/raw/trustity-co/content/kb/getting-started/organization-onboarding.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "organization-onboarding",
+      "chars": 6532
+    },
+    {
+      "id": "69301eef1d2c",
+      "path": "data/raw/trustity-co/content/kb/getting-started/cloud-portal-overview.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "cloud-portal-overview",
+      "chars": 5575
+    },
+    {
+      "id": "8d5c4e858cd8",
+      "path": "data/raw/trustity-co/content/kb/getting-started/pilot-to-production-rollout.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "pilot-to-production-rollout",
+      "chars": 5758
+    },
+    {
+      "id": "93d112e0b80e",
+      "path": "data/raw/trustity-co/content/kb/getting-started/first-healthy-device.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "first-healthy-device",
+      "chars": 6153
+    },
+    {
+      "id": "bd5548bcaa78",
+      "path": "data/raw/trustity-co/content/kb/getting-started/install-tao-windows.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "install-tao-windows",
+      "chars": 6985
+    },
+    {
+      "id": "c0bc022c5550",
+      "path": "data/raw/trustity-co/content/kb/deployment/tao-deployment-rings-auto-update.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "tao-deployment-rings-auto-update",
+      "chars": 1385
+    },
+    {
+      "id": "3a74c072ba66",
+      "path": "data/raw/trustity-co/content/kb/visionx/visionx-detection-tuning.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "visionx-detection-tuning",
+      "chars": 6494
+    },
+    {
+      "id": "6b35b3d67e6e",
+      "path": "data/raw/trustity-co/content/kb/visionx/visionx-events-evidence-helpdesk.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "visionx-events-evidence-helpdesk",
+      "chars": 5798
+    },
+    {
+      "id": "8ad5ad40b717",
+      "path": "data/raw/trustity-co/content/kb/visionx/visionx-trustity-model-v1.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "visionx-trustity-model-v1",
+      "chars": 2685
+    },
+    {
+      "id": "faad10df051c",
+      "path": "data/raw/trustity-co/content/kb/visionx/visionx-activation-modes.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "visionx-activation-modes",
+      "chars": 4214
+    },
+    {
+      "id": "f82703fccd58",
+      "path": "data/raw/trustity-co/content/kb/visionx/visionx-overview-and-policy.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "visionx-overview-and-policy",
+      "chars": 6259
+    },
+    {
+      "id": "572b8e84db31",
+      "path": "data/raw/trustity-co/content/kb/genguard/deploy-genguard-extension.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "deploy-genguard-extension",
+      "chars": 4441
+    },
+    {
+      "id": "39d1ac7a9d23",
+      "path": "data/raw/trustity-co/content/kb/genguard/policy-templates-keywords-domains-categories.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "policy-templates-keywords-domains-categories",
+      "chars": 4600
+    },
+    {
+      "id": "9b14c2a20e13",
+      "path": "data/raw/trustity-co/content/kb/genguard/live-events-and-browser-agents.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "live-events-and-browser-agents",
+      "chars": 4233
+    },
+    {
+      "id": "a3bf8f4ea215",
+      "path": "data/raw/trustity-co/content/kb/genguard/gpo-intune-rollout.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "gpo-intune-rollout",
+      "chars": 4608
+    },
+    {
+      "id": "dad16feecc6f",
+      "path": "data/raw/trustity-co/content/kb/vault/force-rotate-and-rid500.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "force-rotate-and-rid500",
+      "chars": 3867
+    },
+    {
+      "id": "7f94e82a34b2",
+      "path": "data/raw/trustity-co/content/kb/vault/credential-reveal-and-role-hygiene.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "credential-reveal-and-role-hygiene",
+      "chars": 3640
+    },
+    {
+      "id": "2b780badbedf",
+      "path": "data/raw/trustity-co/content/kb/vault/pam-local-account-rotation.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "pam-local-account-rotation",
+      "chars": 4160
+    },
+    {
+      "id": "4f20ed6e5f92",
+      "path": "data/raw/trustity-co/content/kb/vault/file-vault-and-sharing-limits.mdx",
+      "origin": "local:/Users/talyosef/Documents/GitHub/trustity-marketing-co-prod/content",
+      "title": "file-vault-and-sharing-limits",
+      "chars": 4223
+    },
+    {
+      "id": "b267943b1acc",
+      "path": "data/raw/trustity-co/web/www.trustity.co.txt",
+      "origin": "https://www.trustity.co/",
+      "title": "www.trustity.co",
+      "chars": 4089
+    },
+    {
+      "id": "a51be30b03a3",
+      "path": "data/raw/trustity-co/web/www.trustity.co_about.txt",
+      "origin": "https://www.trustity.co/about",
+      "title": "www.trustity.co_about",
+      "chars": 1097
+    },
+    {
+      "id": "da180e4f5f2c",
+      "path": "data/raw/trustity-co/web/www.trustity.co_platform.txt",
+      "origin": "https://www.trustity.co/platform",
+      "title": "www.trustity.co_platform",
+      "chars": 6088
+    },
+    {
+      "id": "a20730093515",
+      "path": "data/raw/trustity-co/web/www.trustity.co_products.txt",
+      "origin": "https://www.trustity.co/products",
+      "title": "www.trustity.co_products",
+      "chars": 2341
+    },
+    {
+      "id": "27dcf70cf355",
+      "path": "data/raw/trustity-co/web/www.trustity.co_products_visionx.txt",
+      "origin": "https://www.trustity.co/products/visionx",
+      "title": "www.trustity.co_products_visionx",
+      "chars": 1961
+    },
+    {
+      "id": "7dc0fc20f9b9",
+      "path": "data/raw/trustity-co/web/www.trustity.co_products_genguard.txt",
+      "origin": "https://www.trustity.co/products/genguard",
+      "title": "www.trustity.co_products_genguard",
+      "chars": 1672
+    },
+    {
+      "id": "2785527a4d63",
+      "path": "data/raw/trustity-co/web/www.trustity.co_products_vault.txt",
+      "origin": "https://www.trustity.co/products/vault",
+      "title": "www.trustity.co_products_vault",
+      "chars": 1726
+    },
+    {
+      "id": "20728c66279e",
+      "path": "data/raw/trustity-co/web/www.trustity.co_products_hostguard.txt",
+      "origin": "https://www.trustity.co/products/hostguard",
+      "title": "www.trustity.co_products_hostguard",
+      "chars": 1628
+    },
+    {
+      "id": "f9484f562c64",
+      "path": "data/raw/trustity-co/web/www.trustity.co_products_axiom.txt",
+      "origin": "https://www.trustity.co/products/axiom",
+      "title": "www.trustity.co_products_axiom",
+      "chars": 2029
+    },
+    {
+      "id": "590c14596c12",
+      "path": "data/raw/trustity-co/web/www.trustity.co_products_secsend.txt",
+      "origin": "https://www.trustity.co/products/secsend",
+      "title": "www.trustity.co_products_secsend",
+      "chars": 2138
+    },
+    {
+      "id": "14153463d1d9",
+      "path": "data/raw/trustity-co/web/www.trustity.co_solutions.txt",
+      "origin": "https://www.trustity.co/solutions",
+      "title": "www.trustity.co_solutions",
+      "chars": 2493
+    },
+    {
+      "id": "d7cca6d8f061",
+      "path": "data/raw/trustity-co/web/www.trustity.co_solutions_ciso.txt",
+      "origin": "https://www.trustity.co/solutions/ciso",
+      "title": "www.trustity.co_solutions_ciso",
+      "chars": 1944
+    },
+    {
+      "id": "0e99a2145ca9",
+      "path": "data/raw/trustity-co/web/www.trustity.co_solutions_finance.txt",
+      "origin": "https://www.trustity.co/solutions/finance",
+      "title": "www.trustity.co_solutions_finance",
+      "chars": 1749
+    },
+    {
+      "id": "674b7dc56e09",
+      "path": "data/raw/trustity-co/web/www.trustity.co_solutions_healthcare.txt",
+      "origin": "https://www.trustity.co/solutions/healthcare",
+      "title": "www.trustity.co_solutions_healthcare",
+      "chars": 1974
+    },
+    {
+      "id": "18cf0064f0c1",
+      "path": "data/raw/trustity-co/web/www.trustity.co_solutions_devops.txt",
+      "origin": "https://www.trustity.co/solutions/devops",
+      "title": "www.trustity.co_solutions_devops",
+      "chars": 2020
+    },
+    {
+      "id": "d5b59535ac37",
+      "path": "data/raw/trustity-co/web/www.trustity.co_kb.txt",
+      "origin": "https://www.trustity.co/kb",
+      "title": "www.trustity.co_kb",
+      "chars": 2085
+    },
+    {
+      "id": "91f417789377",
+      "path": "data/raw/trustity-co/web/www.trustity.co_kb_getting-started.txt",
+      "origin": "https://www.trustity.co/kb/getting-started",
+      "title": "www.trustity.co_kb_getting-started",
+      "chars": 2473
+    },
+    {
+      "id": "64d3d9b8a38f",
+      "path": "data/raw/trustity-co/web/www.trustity.co_kb_manual.txt",
+      "origin": "https://www.trustity.co/kb/manual",
+      "title": "www.trustity.co_kb_manual",
+      "chars": 9982
+    },
+    {
+      "id": "433ceee43e66",
+      "path": "data/raw/trustity-co/web/www.trustity.co_trust.txt",
+      "origin": "https://www.trustity.co/trust",
+      "title": "www.trustity.co_trust",
+      "chars": 4273
+    },
+    {
+      "id": "a6a432ce420a",
+      "path": "data/raw/trustity-co/web/www.trustity.co_releases.txt",
+      "origin": "https://www.trustity.co/releases",
+      "title": "www.trustity.co_releases",
+      "chars": 5399
+    },
+    {
+      "id": "37b85afa77d6",
+      "path": "data/raw/trustity-co/web/www.trustity.dev.txt",
+      "origin": "https://www.trustity.dev/",
+      "title": "www.trustity.dev",
+      "chars": 720
+    }
+  ],
+  "source_count": 77,
+  "chunk_count": 390,
+  "chunks_path": "data/processed/corpus_chunks_v0.jsonl"
+}

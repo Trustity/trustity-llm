@@ -1,0 +1,129 @@
+# Deployment Center
+
+Use **Deployment** in the Cloud Portal to obtain deployment assets for your organization. The page shows only assets enabled by your module entitlements.
+
+Trustity does **not** push the agent to endpoints from the cloud. Your IT team downloads the installer (or GenGuard policies) and distributes them with your approved process - Intune, SCCM, GPO, a software share, or a controlled interactive install.
+
+## Before you begin
+
+- Use an authorized deployment account and an approved endpoint change window.
+- Confirm the target operating system and required Trustity modules.
+- Keep the **Organization license key** confidential. It binds enrollment to your organization.
+- Ensure the endpoint can reach Trustity Cloud (see [network requirements](/kb/getting-started/network-requirements)).
+- For fleet rollout, test on a small pilot group before broad deployment. Pilot/production staging is an **organizational process**, not an automatic cloud push.
+
+The **Deployment** navigation appears when at least one eligible module is enabled. **No deployment assets available** means the organization does not currently have an eligible module; contact your Trustity administrator.
+
+## What you will see on the page
+
+1. **Organization license key** - copy it into your packaging system or enter it during interactive install. Never paste it into tickets or chat.
+2. **Windows Agent** - `Trustity-Agent-Setup.exe`, version/channel, availability, and SHA-256 when published.
+3. **Linux Agent** - x86_64 package plus install/update/verify command snippets that match the current published build.
+4. **GenGuard browser extension** (when entitled) - Chrome Web Store link and managed Windows policy downloads.
+
+Installer availability follows Trustity’s published release channel. A new TAO build becomes downloadable after Trustity publishes it; endpoints already enrolled keep running until you update them locally.
+
+## Deploy the Trustity TAO Agent on Windows
+
+1. Open **Deployment** and locate **Trustity TAO Agent**.
+2. Confirm the displayed version and channel.
+3. Under **Windows Agent**, wait for **Available**.
+4. Record the displayed SHA-256 value when present.
+5. Select **Download Windows Setup**.
+6. Transfer the installer through your approved software-distribution process.
+7. Verify the package hash and digital signature when shown before execution.
+8. Run the installer with administrative approval. For managed silent deployment, use the exact silent-install command displayed on the page (or `/quiet /license=<key>` as documented in [Install TAO on Windows](/kb/getting-started/install-tao-windows)).
+9. Supply the organization license key only through the approved installer or deployment workflow.
+10. Open **Managed devices** and verify the endpoint appears after its first heartbeat.
+
+Enrollment state lives under `%ProgramData%\Trustity\TAO`. After a successful enrollment, a reboot should **not** require entering the license again. If the tray UI asks to Activate while the service is already running and the device is online in the portal, treat that as a client bug worth reporting - do not re-enroll casually.
+
+## Deploy the Trustity TAO Agent on Linux
+
+1. Under **Linux Agent**, wait for **Available**.
+2. Select **Download Linux x86_64** and verify the displayed SHA-256 value when present.
+3. Expand **Install & update commands**.
+4. Use **Copy** for **Install + enroll**, then review the command set before execution.
+5. Run the installation and enrollment as an authorized administrator. Enrollment requires elevated privileges.
+6. Start and enable the service using the commands shown in the portal.
+7. Run the portal-provided **Verify** commands.
+8. In **Managed devices**, confirm the hostname, **Online** state, TAO health, version, modules, and recent heartbeat.
+
+Use the page’s current commands rather than copying commands from an old ticket or document. **Update (keeps enrollment)** updates an already enrolled Linux agent without intentionally replacing its enrollment.
+
+## Deploy the GenGuard browser extension
+
+The **GenGuard browser extension** section appears only when GenGuard is entitled.
+
+### Single-machine installation
+
+1. Select **Open in Chrome Web Store**.
+2. Install the extension through the browser’s normal approval flow.
+3. Use the organization license key to associate the extension with the organization.
+4. Confirm the endpoint reports in the relevant GenGuard view.
+
+### Managed Windows rollout
+
+1. Select **Download install policy** to obtain the force-install policy.
+2. Select **Download license policy** to obtain the organization-specific configuration. This action is disabled until the license key loads.
+3. Review both files in accordance with your endpoint-management change process.
+4. Pilot the policies on a limited device group.
+5. Confirm installation, organization association, and GenGuard event visibility before expanding scope.
+
+## Validate deployment
+
+1. Select **Managed devices** from the page (or **Secure Vault → Devices**).
+2. Search for the hostname.
+3. Confirm **Online**, a recent **Last heartbeat**, expected TAO version and modules, and the correct policy version.
+4. If inventory is entitled, select **Scan** and verify results after the next heartbeat.
+5. Open **Security policies** and confirm the expected policy area is available.
+6. Review **Audit Logs** for deployment-adjacent administrative changes when applicable.
+
+## Updating an already enrolled endpoint
+
+Until automatic agent update ships, treat updates like any other software package:
+
+1. Download the newer Setup/package from **Deployment**.
+2. Deploy it through the same approved channel as the original install.
+3. Prefer in-place update so `%ProgramData%\Trustity\TAO` enrollment is retained.
+4. Re-check **Managed devices** for the new version and a healthy heartbeat.
+
+Do not uninstall solely to “get a new version” unless your change process requires a clean reinstall - uninstall can interact with endpoint hardening and may change device identity behavior.
+
+## Troubleshooting
+
+### Installer shows Unavailable
+
+The package is not currently published. Refresh later or contact your Trustity administrator if immediate access is required. Do not download an installer from an unverified third party.
+
+### Organization license key shows Not configured
+
+Do not proceed with copied keys from another source. Ask the organization Owner or Trustity administrator to verify licensing.
+
+### Device does not appear
+
+Confirm installation completed, enrollment used the correct organization key, the service is running, and outbound connectivity is available. Wait for the first heartbeat, then refresh **Managed devices**.
+
+### Device appears Offline
+
+Check the endpoint service and network path, then use [Troubleshoot an offline TAO agent](/kb/getting-started/troubleshooting-agent-offline).
+
+### Inventory stays empty after Scan
+
+Confirm the Asset Inventory module is entitled and live on the agent, the device is Online, and you wait for the next heartbeat after requesting a scan. Open **Software Inventory** on the device card - “Last completed scan” with **Total items: 0** after a successful report usually means the scan ran but returned no parsable packages, or the report failed server-side. Retry once after confirming portal connectivity; if the agent UI shows a portal inventory error, capture the exact message and open a support ticket with hostname and time.
+
+## Security notes
+
+- Treat installers, policy files, and the organization license key as controlled deployment material.
+- Validate publisher signatures and hashes before broad rollout.
+- Never place the license key in tickets, screenshots, chat, source control, or public scripts.
+- Remove test deployments that are no longer authorized.
+
+## Related guides
+
+- [Managed devices and software inventory](/kb/portal/managed-devices-and-inventory)
+- [Security Policies hub](/kb/portal/security-policies-hub)
+- [TAO endpoint hardening](/kb/portal/tao-endpoint-hardening)
+- [Install TAO on Windows](/kb/getting-started/install-tao-windows)
+- [Install TAO on Linux](/kb/getting-started/install-tao-linux)
+- [Pilot to production rollout](/kb/getting-started/pilot-to-production-rollout)

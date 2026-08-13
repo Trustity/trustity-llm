@@ -1,0 +1,100 @@
+SOURCE: https://www.trustity.co/products/visionx
+
+VisionX | Visual DLP | Trustity | Trustity 
+
+Loading Trustity 
+
+Products Platform Solutions Contact Docs Partners 
+
+Cloud Portal Get Started 
+
+Back to Products 
+Visual DLP 
+
+VisionX 
+
+DLP that stops what others miss: visual-channel screen capture. 
+
+Traditional DLP blocks copy-paste and USB. When users can't copy, they photograph or record the screen. VisionX closes that attack surface - detecting phones, cameras, lenses, and similar imaging devices with Trustity VisionX Model running fully on the endpoint inside TAO, capturing evidence, and locking the workstation when policy requires it. 
+
+Request a Demo Request Access Read docs 
+
+Why VisionX? 
+
+Closes the visual gap. Standard DLP doesn't see screen photography or lens-based capture. VisionX does. 
+
+Trustity VisionX Model. Our own on-device detector ships with TAO 1.0.34+, dual with stock YOLO, tuned for visual-channel risk at the desk. 
+
+Speed you can tune. Portal Lock response - Faster, Balanced, or More accurate - lets operators trade lock latency for confirmation strictness. 
+
+Evidence & unlock control. Capture proof of violations and require an admin unlock code before work continues. 
+
+Documentation User Manual Developer Central ↗ 
+
+Ready to secure your screens? 
+
+Talk to us for a demo, or start in the Cloud Portal when you are ready. 
+
+Request a Demo Explore Platform 
+
+Unified endpoint, edge, and secure delivery - VisionX, GenGuard, Vault/PAM, HostGuard IPS, Trustity Axiom, and Trustity SecSend. 
+
+Products 
+
+VisionX 
+
+GenGuard 
+
+Vault & PAM 
+
+HostGuard IPS 
+
+Trustity Axiom 
+
+Trustity SecSend 
+
+All Products 
+
+Platform 
+
+Resources 
+
+Documentation 
+
+User Manual 
+
+Getting Started 
+
+Developer Central 
+
+Cloud Portal 
+
+Trustity Authenticator 
+
+Company 
+
+About Us 
+
+System Status 
+
+Release Notes 
+
+Trust Center 
+
+Contact Sales 
+
+Become a Partner 
+
+Partner login 
+
+Legal Center 
+
+Privacy Policy 
+
+Terms of Service 
+
+License Agreement 
+
+© 2026 Trustity 
+
+Privacy Terms Legal Security

@@ -1,0 +1,80 @@
+# Activity Log
+
+**Overview → Activity Log** provides cross-module search and CSV export for GenGuard DLP, portal audit actions, security incidents, and PAM password rotations.
+
+The navigation item requires an enabled GenGuard or Vault module. VisionX camera events and HostGuard IPS events remain in their module pages. Use **Audit Logs** when you need the focused administrative audit view.
+
+## Understand scope and limits
+
+The page reports:
+
+- **DLP**, **Audit**, **PAM**, and **Incidents** counts for the selected range.
+- **Stored (all time)** totals for historical context.
+- A loaded working set of up to 800 DLP rows, 800 combined audit/PAM rows, and 400 incident rows.
+- **Matching rows** and **Critical / blocked** for the active filters.
+
+The table is a loaded window, not an unlimited historical query. Search, source chips, pagination, and export operate on that loaded window.
+
+## Investigate activity
+
+1. Open **Activity Log**.
+2. Choose **Last 24 hours**, **Last 7 days**, **Last 30 days**, **Last 90 days**, or **All time**.
+3. Select **All sources**, **DLP**, **Audit**, **Incidents**, or **PAM**.
+4. Use **Search message, user, host, action, severity…**.
+5. Review **Matching rows** and **Critical / blocked**.
+6. In the table, correlate **Time**, **Source**, **Module**, **Severity**, and **Event**.
+7. Use **Prev** and **Next** to review all matching pages.
+8. Select **Refresh** before finalizing a finding.
+
+If **Stored (all time)** shows data but the selected range is empty, increase the range to **Last 90 days** or **All time**.
+
+## Monitor a live change window
+
+1. Set the narrowest useful time range and source.
+2. Select **Auto-refresh off** to enable **Auto-refresh every 15s**.
+3. Watch for the expected event and any related failure or critical event.
+4. Turn auto-refresh off when the change window closes.
+5. Validate the change in the responsible module page; the Activity Log is correlation evidence, not endpoint-state confirmation.
+
+## Export the filtered view
+
+1. Set the time range, source chip, and search.
+2. Confirm the matching count and loaded-window notice.
+3. Select **Export CSV**.
+4. Verify the file name begins with `trustity_nexus_logs_`.
+5. Confirm the export includes **Timestamp**, **Source**, **Module**, **Severity**, **Action**, and **Details**.
+6. Store the export in an approved evidence location.
+
+The export includes all filtered rows in the loaded window, not just the current 50-row page.
+
+## Troubleshooting
+
+### No rows match your filters
+
+Clear search, choose **All sources**, and expand the time range. Then select **Refresh**.
+
+### Could not load some data
+
+The banner can represent a partial-source failure. Record the named source and message, retry, and avoid treating the remaining rows as complete evidence.
+
+### No organization found for this account
+
+Confirm your organization membership or ownership with an administrator. Do not create a replacement organization.
+
+### Expected VisionX or HostGuard event is missing
+
+That is expected scope behavior. Open **VisionX Guard → Live Events** or **Trustity Vault → HostGuard IPS**.
+
+## Security notes
+
+- Limit investigation exports to authorized personnel.
+- Correlate timestamps carefully; the table displays local browser time while CSV timestamps are normalized.
+- A critical count is a triage signal, not proof of compromise.
+- Do not copy sensitive event content into tickets unless necessary and approved.
+
+## Related guides
+
+- [Audit Logs in the Cloud Portal](/kb/portal/audit-logs)
+- [Log Forwarding](/kb/portal/log-forwarding)
+- [Managed devices and software inventory](/kb/portal/managed-devices-and-inventory)
+- [Support Center](/kb/portal/support-center)

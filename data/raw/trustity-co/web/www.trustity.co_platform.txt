@@ -1,0 +1,259 @@
+SOURCE: https://www.trustity.co/platform
+
+Platform | Trustity Cloud Portal & TAO | Trustity 
+
+Loading Trustity 
+
+Products Platform Solutions Contact Docs Partners 
+
+Cloud Portal Get Started 
+
+Trustity Cloud Portal • TAO Agent 
+
+One portal. One agent. 
+Complete endpoint coverage. 
+
+Run VisionX, GenGuard, Vault/PAM, and HostGuard IPS from the Trustity Cloud Portal - with the TAO agent enforcing protection where work actually happens. 
+
+Get Started Free Talk to an Architect 
+
+TAO Agent coverage 
+
+One lightweight agent. Coverage across camera, browser, credentials, and host protection. 
+
+VisionX 
+
+Visual DLP on the interactive desktop - detection, evidence, and workstation lock when policy requires it. 
+
+GenGuard 
+
+Browser DLP for GenAI pastes, domain blocking, and Shadow IT discovery - managed from the portal. 
+
+HostGuard IPS 
+
+Failed-logon detection, host firewall blocks, and alerts back to the Cloud Portal. 
+
+VISUAL DLP 
+
+VisionX 
+
+Traditional DLP misses phones, cameras, and lenses aimed at screens. VisionX detects visual-channel risks on the endpoint, reports evidence to the portal, and can lock the workstation until an admin unlock code is entered. 
+
+On-device detection via the TAO session helper 
+
+Strict / Monitor no-camera modes from portal policy 
+
+Evidence events in the Trustity Cloud Portal 
+Explore VisionX 
+
+User pasting sensitive data into GenAI… 
+
+Blocked by GenGuard policy 
+
+BROWSER DLP 
+
+GenGuard 
+
+The perimeter moved to the browser. GenGuard blocks sensitive pastes into GenAI tools, enforces domain controls, and surfaces Shadow IT before it becomes an incident. 
+
+Blocks PII, secrets, and code leaks into unsanctioned tools 
+
+Domain / hosts enforcement on the endpoint 
+
+Shadow IT visibility for security and IT teams 
+Explore GenGuard 
+
+VAULT & PAM 
+
+Vault & PAM Rotation 
+
+Store secrets in a zero-knowledge vault and rotate local admin credentials on a schedule. TAO applies the password on the endpoint and reports it to the portal for vaulting. 
+
+Scheduled and force rotation from the portal 
+
+Built-in admin account resolution (RID 500) 
+
+Transactional pending state until the portal acknowledges 
+Explore Vault & PAM 
+
+endpoint-win10 
+
+TAO online 
+
+Local admin · last rotation just now 
+
+View in Vault 
+
+Force rotate 
+
+HostGuard IPS 
+
+2 active blocks 
+
+203.0.113.44 · failed logons BLOCKED 
+
+198.51.100.10 · threshold reached WATCHING 
+
+HOST IPS 
+
+HostGuard IPS 
+
+Catch brute-force attempts on the host. TAO watches failed logons, creates firewall rules for offending IPs, and reports incidents to the Cloud Portal. 
+
+Configurable attempt window and ban duration 
+
+Local firewall enforcement on Windows 
+
+Portal alerts for SecOps response 
+Explore HostGuard 
+
+EDGE SECURITY 
+
+Trustity Axiom 
+
+Protect SMB file traffic and DNS at the network edge - inline reverse proxy, policy-driven DNS nodes, and offline-ready operation. A Trustity portfolio product, sold and licensed separately from the Cloud Portal. 
+
+No endpoint agents required for this path 
+
+Air-gap capable management and licensing 
+
+Complements TAO endpoint controls 
+Explore Trustity Axiom 
+
+Portfolio layer 
+
+TAO secures the endpoint. Axiom secures the protocols clients already use for files and DNS - without requiring software on every workstation for that path. 
+axmapp.com ↗ 
+
+Customer delivery 
+
+Endpoint controls stop data from leaving the wrong way. SecSend helps you send the right documents the right way - sealed packages that only the intended recipient can unlock. 
+Talk to sales → 
+
+SECURE DELIVERY 
+
+Trustity SecSend 
+
+Give customers a secure way to receive contracts, statements, and personal files - without relying on open email attachments or shared passwords. 
+
+Sealed packages instead of cleartext attachments 
+
+One-time SMS code before unlock 
+
+Templates and controls built for operations teams 
+Explore Trustity SecSend 
+
+Built for real deployments 
+
+Practical controls for hybrid workstations and servers. 
+
+Agent 
+
+TAO unified agent - Windows service + session helper; Linux server modules. 
+
+Portal 
+
+Policy, vault, agents, critical alerts, retention, and Security Assurance readiness. 
+
+Modular Suite 
+
+Deploy the controls your environment needs - activate capabilities without fragmenting your stack. 
+
+Integrations 
+
+SIEM / syslog, alert routing, and operational workflows from the portal. 
+
+OS Support 
+
+Windows endpoints (full suite). Linux servers (PAM, IPS, inventory). 
+
+Inventory 
+
+Asset inventory reporting from TAO into the portal. 
+
+Privacy 
+
+See our Trust Center and Privacy Policy for data handling. 
+
+SSO & MFA 
+
+Password + MFA today; SSO domain discovery/start and SCIM Users lifecycle provisioning in preview. Session controls for operators. 
+
+Enterprise operations 
+
+Owners and Admins can enforce MFA for privileged portal roles, switch between authorized organizations, stage IdP metadata, provision and suspend users through SCIM, route deduplicated critical alerts, manage append-only audit retention (archive mode - not a tamper-evident GA claim), roll out TAO through deployment rings, and track measured Security Assurance readiness - without claiming a completed SOC 2 certification. 
+
+Deployment 
+
+Windows and Linux installers from one portal 
+
+Copy the organization key, download the current TAO build, and enroll endpoints. The same Cloud Portal then shows heartbeat, inventory, and PAM status. 
+Open Cloud Portal 
+
+Ready to deploy TAO? 
+
+Start in the Trustity Cloud Portal - then install the agent and enable your modules. 
+
+Request Access Contact Sales 
+
+Unified endpoint, edge, and secure delivery - VisionX, GenGuard, Vault/PAM, HostGuard IPS, Trustity Axiom, and Trustity SecSend. 
+
+Products 
+
+VisionX 
+
+GenGuard 
+
+Vault & PAM 
+
+HostGuard IPS 
+
+Trustity Axiom 
+
+Trustity SecSend 
+
+All Products 
+
+Platform 
+
+Resources 
+
+Documentation 
+
+User Manual 
+
+Getting Started 
+
+Developer Central 
+
+Cloud Portal 
+
+Trustity Authenticator 
+
+Company 
+
+About Us 
+
+System Status 
+
+Release Notes 
+
+Trust Center 
+
+Contact Sales 
+
+Become a Partner 
+
+Partner login 
+
+Legal Center 
+
+Privacy Policy 
+
+Terms of Service 
+
+License Agreement 
+
+© 2026 Trustity 
+
+Privacy Terms Legal Security

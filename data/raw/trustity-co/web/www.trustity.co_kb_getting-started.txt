@@ -1,0 +1,116 @@
+SOURCE: https://www.trustity.co/kb/getting-started
+
+Trustity | VisionX, GenGuard, Vault & HostGuard 
+
+Loading Trustity 
+
+Products Platform Solutions Contact Docs Partners 
+
+Cloud Portal Get Started 
+
+Back to Documentation 
+Getting Started 
+
+Onboarding, entitlements, network requirements, and TAO install. 
+
+Welcome to Trustity 
+
+Understand the Trustity platform, its management and enforcement components, and the recommended path to a verified first deployment. 
+
+Organization onboarding runbook 
+
+Prepare administrators, entitlements, policies, deployment controls, and acceptance criteria for a new Trustity organization. 
+
+Entitlements and module matrix 
+
+Map Trustity entitlements to portal areas, endpoint components, supported platforms, policies, and deployment checks. 
+
+Network requirements for Trustity deployment 
+
+Prepare DNS, HTTPS egress, proxy, TLS inspection, browser services, and validation for Trustity endpoints and administrators. 
+
+Cloud Portal overview 
+
+Navigate the Trustity Cloud Portal and use its deployment, policy, device, event, user, and audit areas safely. 
+
+Install the TAO agent on Windows 
+
+Deploy and enroll the Trustity Agent on Windows interactively or silently, then verify service, portal, and module health. 
+
+Install the TAO agent on Linux 
+
+Download TAO from the Cloud Portal, install and enroll it on supported Linux systems, and verify systemd and portal health. 
+
+Verify your first healthy device 
+
+Prove that the first TAO endpoint is installed, enrolled, online, current, receiving policy, and ready for a controlled module test. 
+
+Pilot to production rollout 
+
+Expand Trustity from a verified pilot into production with staged rings, change control, and measurable exit criteria. 
+
+Troubleshoot an offline or stale TAO agent 
+
+Diagnose enrollment, service, network, heartbeat, policy, and session issues without exposing credentials or destroying agent state. 
+
+Unified endpoint, edge, and secure delivery - VisionX, GenGuard, Vault/PAM, HostGuard IPS, Trustity Axiom, and Trustity SecSend. 
+
+Products 
+
+VisionX 
+
+GenGuard 
+
+Vault & PAM 
+
+HostGuard IPS 
+
+Trustity Axiom 
+
+Trustity SecSend 
+
+All Products 
+
+Platform 
+
+Resources 
+
+Documentation 
+
+User Manual 
+
+Getting Started 
+
+Developer Central 
+
+Cloud Portal 
+
+Trustity Authenticator 
+
+Company 
+
+About Us 
+
+System Status 
+
+Release Notes 
+
+Trust Center 
+
+Contact Sales 
+
+Become a Partner 
+
+Partner login 
+
+Legal Center 
+
+Privacy Policy 
+
+Terms of Service 
+
+License Agreement 
+
+© 2026 Trustity 
+
+Privacy Terms Legal Security

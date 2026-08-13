@@ -1,0 +1,13 @@
+# TAO 1.0.36 — Trustity VisionX Model V1.1
+
+## What changed
+
+- Installer embeds `trustity-visionx-v1.1.onnx` (+ labels) instead of V1 as the
+  Trustity dual partner.
+- Runtime still dual-detects: COCO first, then Trustity (V1.1 preferred, V1 legacy OK).
+- Agent / portal logs continue to report which model confirmed.
+
+## Why
+
+V1.1 adds motion / close / hard-negative capture on top of V1. Field validation
+stays under dual so COCO covers regressions while V1.1 is desk-tested on Windows.

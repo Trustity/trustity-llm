@@ -1,0 +1,87 @@
+# Security Policies hub
+
+**Overview → Security Policies** is the central policy workspace. Each visible tab identifies **What this policy enforces** and **Applied by** so operators can connect a setting to its enforcement component.
+
+## Access and entitlement
+
+The page appears when the organization has at least one enabled module. Tabs are entitlement-driven:
+
+- **TAO Agent** - Windows endpoint hardening.
+- **GenGuard** - keyword blocking, domain allow/block lists, and browsing categories.
+- **VisionX** - visual-channel risk (phones, cameras, lenses), lock-on-detection, evidence capture, unlock code, and activation.
+- **Vault / PAM** - password rotation and Vault limits (HostGuard IPS thresholds live under Devices → HostGuard and Vault policy where entitled).
+- **DeepShield** - browser deepfake and phishing sensitivity.
+
+The **TAO Agent** tab may appear with several endpoint-related entitlements, not only a separately named TAO entitlement. **Vault** users have a sidebar limited to **Secure Vault**. Other role labels indicate intended responsibility; follow your organization’s change-approval policy even when controls are visible.
+
+## Controlled policy workflow
+
+1. Obtain approval and record the current policy state.
+2. Open **Security Policies**.
+3. Select the entitled policy tab.
+4. Read **What this policy enforces** and **Applied by**.
+5. Change only the approved fields. Avoid combining unrelated policy changes.
+6. Use the panel’s exact save control and wait for its success message.
+7. Refresh the page and confirm the saved values remain selected.
+8. Allow the enforcing agent or extension to refresh.
+9. Validate on a pilot endpoint and in the related event or device view.
+10. Review **Audit Logs** for the policy update when the workflow emits an audit record.
+
+## Tab-specific validation
+
+### TAO Agent
+
+Use **Save endpoint hardening**. The success message states that agents refresh on the next heartbeat. Validate the device’s policy version and expected local behavior. See [TAO endpoint hardening](/kb/portal/tao-endpoint-hardening).
+
+### GenGuard
+
+After saving, validate an approved allowed case and an approved blocked case in a test browser. Use **Browser Protection → Live Events** to confirm reporting. Do not test with production-sensitive data.
+
+### VisionX
+
+Validate the selected activation and enforcement behavior on a controlled endpoint. In **Managed devices**, review VisionX health and **Details**, including camera, model, session, activation, and unlock-code readiness.
+
+### Vault / PAM
+
+Validate only on a designated test asset. Check the relevant Vault, PAM, or **HostGuard IPS** view, and confirm that rotation or enforcement does not interrupt an unapproved production account.
+
+### DeepShield
+
+Validate in a pilot browser with approved benign test content and confirm expected event visibility.
+
+### Device Control
+
+Do not treat **Coming soon** as active fleet enforcement. The category flag may be preserved in GenGuard policy, but the full USB/peripheral policy UI is still rolling out.
+
+## Troubleshooting
+
+### No policy modules enabled
+
+Confirm you are in the correct organization and that the expected subscription modules are enabled. Select **Open Deployment Center** only after entitlement is confirmed.
+
+### An expected tab is missing
+
+Check module entitlement and the user’s role. Missing tabs generally indicate the corresponding module is not enabled; **Vault** users intentionally do not receive the general sidebar.
+
+### The requested tab changes to another tab
+
+If a bookmarked tab is not entitled, the hub selects the first visible tab. Confirm the organization’s modules instead of repeatedly using the old link.
+
+### A change saves but the endpoint does not update
+
+Confirm the endpoint is **Online**, has a recent heartbeat, runs the expected enforcing component, and reports an updated policy version. Refresh **Managed devices** and inspect module health.
+
+## Security notes
+
+- Use peer review for high-impact enforcement, unlock, uninstall, and rotation changes.
+- Pilot before broad enablement and maintain a documented rollback state.
+- Never place unlock codes, uninstall codes, credentials, or sensitive evidence in change tickets.
+- Treat **Applied by** as a prerequisite: a saved cloud setting cannot enforce through a missing or unhealthy agent.
+
+## Related guides
+
+- [TAO endpoint hardening](/kb/portal/tao-endpoint-hardening)
+- [Deployment Center](/kb/portal/deployment-center)
+- [Managed devices and software inventory](/kb/portal/managed-devices-and-inventory)
+- [Audit Logs in the Cloud Portal](/kb/portal/audit-logs)
+- [VisionX overview and policy](/kb/visionx/visionx-overview-and-policy)

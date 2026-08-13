@@ -1,0 +1,71 @@
+# GenGuard: GPO and Intune rollout
+
+Use this checklist after GenGuard entitlement, policy ownership, and a pilot group are established. Exact administrative labels vary by browser and management-platform release. **Cloud Portal → Deployment** and your browser vendor’s current enterprise documentation are the sources of truth for tenant values and policy placement.
+
+## Before you start
+
+1. Confirm the supported Windows and browser versions in your environment.
+2. Confirm that Chrome or Edge administrative templates are current where GPO requires them.
+3. Open **Deployment** and obtain the extension and organization configuration for the correct tenant and browser.
+4. Create separate pilot and production assignments so deployment can advance or roll back by ring.
+5. Resolve policy conflicts from older extension deployments or overlapping MDM and GPO scope.
+6. Prepare synthetic allowed and blocked test cases.
+
+## Intune workflow
+
+1. Create a browser configuration profile using the policy type your organization supports.
+2. Add the GenGuard extension to the browser force-install policy using the value from **Deployment**.
+3. Add the managed organization configuration exactly as displayed for that tenant.
+4. Assign both settings to the same pilot users or devices unless your design intentionally separates them.
+5. Check for conflicting profiles and review the management service’s deployment status.
+6. Synchronize a pilot device, restart the browser when needed, and confirm the browser reports the policies as managed.
+7. Validate Browser Agents and Live Events before broad assignment.
+
+Use a consistent assignment model. Mixing a user-targeted installation policy with a device-targeted tenant configuration can produce partial deployment when only one side applies.
+
+## GPO workflow
+
+1. Use the approved Chrome or Edge administrative templates already maintained by your organization.
+2. Configure the browser’s extension force-install policy with the GenGuard value from **Deployment**.
+3. Configure the tenant-specific managed settings in the location documented by Deployment.
+4. Link the GPO to a pilot OU and verify security filtering and inheritance.
+5. Refresh policy through your normal administrative method, then restart the browser if required.
+6. Confirm the effective policy on the endpoint and verify that a standard user cannot remove the extension.
+7. Run controlled policy tests and confirm portal reporting.
+
+Avoid configuring the same browser through both GPO and Intune unless co-management ownership is explicit. When settings disagree, effective behavior may be difficult to diagnose.
+
+## Validation checklist
+
+- Device received the intended management profile or GPO.
+- Browser reports the force-install and organization settings as managed.
+- Extension is present and non-removable by a standard user.
+- Browser Agents identifies the correct endpoint and shows a recent check-in.
+- An allowed synthetic test completes normally.
+- A blocked synthetic test produces the expected user result and Live Event.
+- Browser restart and user sign-in do not remove management.
+- Policy and assignment changes are recorded in your change process.
+
+## Troubleshooting sequence
+
+1. Confirm the device or user is in the intended assignment or OU.
+2. Check management-platform status before troubleshooting GenGuard itself.
+3. Inspect effective browser policy and look for duplicate or conflicting entries.
+4. Verify the extension value and organization configuration came from the same tenant.
+5. Restart the browser and confirm it is the managed browser channel.
+6. Check Browser Agents **Last Seen**.
+7. Reproduce with synthetic data and review Live Events.
+
+If installation succeeds but tenant reporting does not, focus on managed organization configuration and conflicts. If neither installation nor configuration applies, focus on GPO/MDM assignment and browser policy ingestion.
+
+## Production expansion
+
+Expand in measured rings. Track installation coverage, recently active Browser Agents, block volume, business exceptions, and support cases. Keep pilot devices enrolled after production rollout so future policy changes can be validated first.
+
+## Related
+
+- [Deploy the GenGuard browser extension](/kb/genguard/deploy-genguard-extension)
+- [GenGuard policy templates, keywords, domains, and categories](/kb/genguard/policy-templates-keywords-domains-categories)
+- [GenGuard Live Events and Browser Agents](/kb/genguard/live-events-and-browser-agents)
+- [Cloud Portal overview](/kb/getting-started/cloud-portal-overview)
+- [Product page: GenGuard](/products/genguard)

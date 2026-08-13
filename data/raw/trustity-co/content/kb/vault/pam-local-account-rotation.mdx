@@ -1,0 +1,71 @@
+# PAM: local account password rotation
+
+When Vault/PAM is entitled, TAO can rotate passwords for selected **local Windows accounts** on enrolled endpoints and make the current vaulted credential available to authorized portal operators.
+
+## Scope
+
+- In scope: local accounts reported by the managed Windows device, including a selected local administrator account.
+- Out of scope: Active Directory, Entra ID, domain, cloud, service, application, and network-device accounts.
+
+This PAM workflow is local-only. A matching username does not make a domain identity a target, and the feature must not be documented or relied on as domain password rotation.
+
+## Prerequisites
+
+- Current TAO agent enrolled and communicating
+- Vault/PAM entitlement for the organization
+- Local-account inventory reported by the endpoint
+- An approved local account for management
+- Restricted operator roles for selection, rotation, and credential reveal
+- A tested recovery method for endpoints that cannot communicate
+
+## Enroll and select an account
+
+1. Open **Vault → Managed devices** and locate the endpoint.
+2. Confirm the endpoint is online, TAO health is acceptable, and local-account telemetry is recent.
+3. In the PAM section, review the reported local accounts.
+4. Select the approved local account.
+5. If no vaulted password exists for that account, selection can initiate its first rotation. If one already exists, selecting it restores the existing vaulted state and does not rotate unless **Rotate** is chosen.
+6. Wait for the endpoint to complete the request and report through a later heartbeat.
+7. Confirm **Vaulted password ready** and review the last-rotation time.
+
+Do not select an account solely because its name looks administrative. Confirm the account owner, purpose, recovery role, and whether services or scheduled tasks depend on it.
+
+## Scheduled rotation
+
+Set the rotation interval in the Vault policy according to organizational standards and endpoint availability. Rotation completes only when the managed endpoint can receive and process the request.
+
+Monitor for overdue rotations, pending requests, offline endpoints, and accounts that have not completed first rotation. A configured schedule is not proof that every endpoint rotated successfully.
+
+## Validation
+
+Use a pilot endpoint and approved test account:
+
+1. Confirm the old approved test credential no longer works after successful rotation.
+2. Reveal the new credential only with an authorized Vault role and use it for the minimum necessary validation.
+3. Hide or clear the credential immediately after use.
+4. Confirm the endpoint remains manageable after restart and network reconnection.
+5. Review the relevant audit or change record.
+
+## Operator good practice
+
+- Separate policy administration, credential use, and audit review where possible.
+- Reveal credentials only when needed; do not paste them into tickets, chat, scripts, or documentation.
+- Rotate after authorized emergency use or suspected exposure.
+- Keep a recovery process that does not depend on the same endpoint or a single operator.
+- Review account dependencies before changing the selected PAM account.
+
+## Troubleshooting
+
+- **No local accounts listed:** confirm the endpoint and agent version support local-account reporting, then wait for a current heartbeat.
+- **Rotation remains pending:** check endpoint connectivity, TAO health, and last communication. Do not repeatedly queue requests.
+- **No vaulted password:** the first rotation may not have completed; verify endpoint status and selected account.
+- **Account no longer usable by a service:** follow the service owner’s recovery procedure and reassess whether that account is appropriate for PAM rotation.
+
+## Related
+
+- [Vault: force-rotate and RID-500 admin notes](/kb/vault/force-rotate-and-rid500)
+- [Vault credential reveal and role hygiene](/kb/vault/credential-reveal-and-role-hygiene)
+- [File Vault and sharing limits](/kb/vault/file-vault-and-sharing-limits)
+- [Install the TAO agent on Windows](/kb/getting-started/install-tao-windows)
+- [Audit Logs in the Cloud Portal](/kb/portal/audit-logs)
+- [Product page: Vault & PAM](/products/vault)

@@ -1,0 +1,144 @@
+# Troubleshoot an offline or stale TAO agent
+
+Use this runbook when a TAO endpoint does not appear in Managed devices, reports offline, or does not reflect a saved policy. Work in order and preserve evidence before reinstalling.
+
+## Scope
+
+This procedure covers Windows and supported Linux TAO endpoints. GenGuard extension-only issues should also be checked against managed-browser deployment and the GenGuard event view.
+
+## Prerequisites
+
+- Portal access to the affected organization
+- Local administrative access to the endpoint
+- The approximate installation or failure time
+- The expected hostname, OS, deployment ring, and agent version
+- A safe location for diagnostic output with access controls
+
+Never collect or send the organization license key, vaulted passwords, local enrollment state, or evidence images unless Trustity Support explicitly provides an approved secure method.
+
+## Step 1: classify the symptom
+
+Determine which state applies:
+
+1. **Never enrolled:** the device has never appeared in Managed devices.
+2. **Offline:** the device exists but no longer has a recent heartbeat.
+3. **Online but stale:** heartbeat is current, but expected policy or inventory is missing.
+4. **Module unhealthy:** the agent is online, but one entitled module is unavailable.
+
+This distinction prevents unnecessary re-enrollment when only a policy or session condition is affected.
+
+## Step 2: verify organization and entitlement
+
+- Confirm you are viewing the correct Trustity organization.
+- Confirm the affected module appears in the organization's portal policy and navigation.
+- Confirm the key used for enrollment came from **Deployment** for this organization.
+- On a silent Windows deployment, confirm the package command used `/quiet /license=<TRUSTITY_LICENSE_KEY>`. `/quiet` alone does not provide enrollment.
+- On Linux, confirm enrollment was run with `sudo`.
+
+Do not include the actual license value in the change record.
+
+## Step 3: check local service health
+
+### Windows
+
+From an elevated Command Prompt:
+
+```text
+sc query TrustityAgent
+```
+
+Expect `RUNNING`. If the service is stopped or repeatedly restarting:
+
+- Review Trustity logs under `%ProgramData%\Trustity\TAO`
+- Check Windows Event Viewer around the failure time
+- Review application-control, antivirus, and EDR events for blocked TAO components
+- Confirm the executable path has not been moved or quarantined
+
+### Linux
+
+Run:
+
+```bash
+sudo tao-agent status
+sudo systemctl status trustity-tao
+sudo journalctl -u trustity-tao -n 100 --no-pager
+```
+
+If the CLI is enrolled but the service is not, verify system enrollment exists under `/var/lib/trustity/tao` and that the original enrollment used `sudo`.
+
+## Step 4: test network prerequisites
+
+Confirm from the endpoint:
+
+- DNS resolves `trustity.io`
+- The system clock and timezone are correct
+- Outbound TCP 443 is permitted
+- A required proxy is available to the system service, not only the signed-in browser
+- TLS inspection is not replacing or blocking Trustity connections in an unsupported way
+
+Follow [Network requirements](/kb/getting-started/network-requirements). Do not disable the corporate firewall or TLS controls as a troubleshooting shortcut; use an approved pilot exception if required.
+
+## Step 5: verify enrollment and heartbeat
+
+On Windows, open the Trustity Agent UI and confirm it identifies the expected organization rather than requesting a license. On Linux, use:
+
+```bash
+sudo tao-agent status
+```
+
+Then refresh Managed devices and compare the hostname, agent version, and last-seen state. Allow a normal heartbeat interval after restoring service or network access.
+
+Avoid repeatedly enrolling the same endpoint. Preserve current state and contact support if the portal shows a conflicting or unexpected device identity.
+
+## Step 6: diagnose policy or inventory lag
+
+If the endpoint is online but stale:
+
+1. Confirm the policy was saved in the correct module.
+2. Confirm the module is entitled.
+3. Allow the agent's asynchronous policy refresh.
+4. Check local status and logs for the time of the next heartbeat.
+5. Perform only one approved service restart if your change procedure permits it.
+6. Recheck Managed devices and the module page.
+
+Repeated policy edits make diagnosis harder because it becomes unclear which version the endpoint should apply.
+
+## Step 7: check module-specific conditions
+
+- **VisionX:** requires an active local or RDP interactive session. A healthy Windows service at the sign-in screen does not establish session-helper health.
+- **Vault/PAM:** applies to supported local accounts. Confirm a designated test account and break-glass path before retrying rotation.
+- **HostGuard IPS:** verify policy and endpoint firewall compatibility; review the HostGuard event view.
+- **GenGuard:** confirm the extension is force-installed, enabled, and bound to the correct organization through managed browser policy.
+- **Linux inventory:** confirm `dpkg-query` or `rpm` is available.
+
+## Verification
+
+The incident is resolved when:
+
+- The service remains running
+- The device has a recent online state in Managed devices
+- Agent version and inventory are current
+- Expected policy is active
+- A controlled module test behaves as intended
+- The resolution and time window are recorded without credentials
+
+## Escalation package
+
+If the issue persists, provide Trustity Support with:
+
+- Organization name, but not the license key
+- Hostname, OS version, and agent version
+- Deployment method and ring
+- Symptom classification and first observed time with timezone
+- Whether the endpoint ever appeared online
+- Relevant redacted service status and log excerpts
+- Proxy, TLS inspection, and endpoint-security products in the path
+- Troubleshooting steps already completed
+
+## Related links
+
+- [Network requirements](/kb/getting-started/network-requirements)
+- [Install TAO on Windows](/kb/getting-started/install-tao-windows)
+- [Install TAO on Linux](/kb/getting-started/install-tao-linux)
+- [Verify your first healthy device](/kb/getting-started/first-healthy-device)
+- [Contact Trustity](/contact)

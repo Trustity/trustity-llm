@@ -1,0 +1,80 @@
+# VisionX events, evidence, and helpdesk unlock workflow
+
+Use this guide to turn a VisionX alert into a consistent operational response. Access to events, evidence, policy, and unlock assistance should be limited to roles with a business need.
+
+## What an event can show
+
+Open **VisionX → Events**. Depending on the event and policy, operators may see:
+
+- Endpoint hostname and detection time
+- Detection confidence and labels (including `phone`, `camera`, legacy cell-phone style labels, or **`no_camera`** for Strict mode locks when no webcam is available)
+- Whether an evidence image is available
+- A watermarked indicator when applicable
+- An event identifier for internal case correlation
+
+The **With evidence** filter shows events that include an image. Search can help locate a hostname or label. Evidence availability depends on policy and successful capture; an event without an image can still be valid.
+
+### Detection vs no-camera locks
+
+| Situation | Typical portal signal | Evidence image |
+|---|---|---|
+| Confirmed visual-channel detection | Labels such as `phone` / `camera` (or legacy cell phone), confidence score | Optional, if capture is enabled and succeeds |
+| Strict mode, camera missing | Label **`no_camera`** (or equivalent), lock may also appear under **Incidents** | None - there is no frame to capture |
+
+Treat labels as machine signals for imaging-device / visual-channel risk - not as a claim that only consumer phones are in scope. If a workstation locks under Strict no-camera policy but **no** portal event appears, upgrade the endpoint to a current TAO build and retest. Older agents could lock locally without reporting.
+
+Critical email alerts from the Cloud Portal include endpoint, labels, confidence, models, event id, and a link back to VisionX Events when email notifications are enabled.
+
+## Triage procedure
+
+1. Confirm the event belongs to the expected organization and endpoint.
+2. Compare the timestamp with the user’s work schedule and any related support report.
+3. Review confidence and labels as context, not as a final incident verdict.
+4. If authorized, open the evidence image and determine whether it appears relevant to the detection. Skip this for `no_camera` events.
+5. Check **Managed devices** for current VisionX health, activation mode, Armed or Idle state, camera readiness, and recent communication.
+6. Classify the event according to your incident process: expected test, benign operational event, policy-tuning candidate, hardware/camera issue, or investigation required.
+7. Record only the minimum necessary event reference in your case system. Do not copy evidence into systems that are not approved for it.
+
+## Evidence handling
+
+Evidence may contain sensitive screen content, people, or surroundings. Follow your organization’s privacy, legal, retention, and access requirements.
+
+- Grant evidence access to designated reviewers only.
+- Do not download, screenshot, forward, or paste evidence into chat or tickets unless the destination is explicitly approved.
+- Use the portal event identifier and timestamp for case correlation when that is sufficient.
+- Treat labels and confidence as machine-generated signals requiring human review.
+- Escalate suspected misuse through the normal security and HR/legal channels; do not confront a user based only on an alert.
+
+Owners and Admins can also track VisionX-related cases under **Incidents** in the Cloud Portal when your tenant has incident tracking enabled. Use the portal event identifier to correlate Incidents with VisionX Events.
+
+## Helpdesk workflow for a locked user
+
+1. Verify the caller through your standard identity-check process.
+2. Capture the hostname, user, approximate lock time, and text visible on the lock screen. Never ask the user to photograph sensitive screen content.
+3. Check that the endpoint is enrolled and that VisionX recently communicated.
+4. Determine whether the lock followed a detection or a Strict no-camera condition. A disconnected or privacy-disabled camera may require physical remediation before work continues.
+5. If policy permits helpdesk unlock, retrieve the approved unlock information through your controlled administrative process.
+6. Provide assistance only through an approved channel. Do not place unlock information in tickets, email, chat history, or knowledge-base notes.
+7. Have the user restore the required camera or remove the triggering condition before resuming work.
+8. Confirm the workstation unlocks and VisionX returns to the expected Armed or Idle state.
+9. Record who authorized and performed the assistance without recording the unlock value.
+
+If identity, authorization, or endpoint ownership cannot be verified, stop and escalate to the designated security administrator.
+
+## When unlock does not resolve the issue
+
+- Confirm that the policy has an unlock code configured.
+- Check whether the camera is available and permitted by Windows privacy settings.
+- Confirm that an eligible user session and VisionX session component are healthy.
+- Look for model-missing, no-camera, waiting-session, or lock-readiness indicators in **Managed devices**.
+- If the screen repeatedly locks after recovery, move the user away from the triggering condition and escalate rather than repeatedly disclosing unlock information.
+
+## After-action review
+
+For unexpected locks, compare the event with current lock-response, confidence, consecutive-frame, cooldown, activation, and no-camera settings. Do not weaken all controls in response to one event. Reproduce safely in a pilot and change one setting at a time.
+
+## Related
+
+- [VisionX overview and policy](/kb/visionx/visionx-overview-and-policy)
+- [VisionX detection tuning](/kb/visionx/visionx-detection-tuning)
+- [Critical alert routing](/kb/portal/critical-alert-routing)

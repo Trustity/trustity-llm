@@ -1,0 +1,89 @@
+# Manage your account and MFA
+
+Select your profile area at the bottom of the sidebar, labeled **Manage Account**, to open **My Profile**. Every portal user manages MFA on their own account; an Admin cannot enroll a factor on another person’s behalf.
+
+## Review account context
+
+At the top of **My Profile**, confirm:
+
+- **Org:** is the expected organization.
+- **Role:** matches your assigned responsibility.
+- **MFA:** shows **Enabled** or **Not Enabled**.
+
+Under **Account Details**, review **Email**, **User ID**, and **Last Sign In**. Report an unexpected organization, role, or sign-in before making administrative changes.
+
+## Set up a passkey
+
+Passkeys depend on browser, operating-system, and device support.
+
+1. Open **Manage Account**.
+2. Under **Two-Factor Authentication**, select **Setup Passkey (TouchID / FaceID)**.
+3. Follow the browser or device prompt.
+4. Complete biometric, device PIN, or security-key verification.
+5. Wait for **Passkey (WebAuthn) enrolled successfully.**
+6. Confirm the factor appears as **Passkey / Biometric** and **MFA is Active**.
+7. Sign out and complete an approved test sign-in before relying on the new factor.
+
+Use a managed device or approved hardware security key. Do not enroll a shared personal device for an administrative account.
+
+## Set up an authenticator app
+
+Trustity recommends **[Trustity Authenticator](https://apps.apple.com/il/app/trustity-authenticator/id6760598675?l=he)** (iOS App Store). Android on Google Play is coming soon. Any standard TOTP app (Google Authenticator, Duo, etc.) also works.
+
+1. Under **Two-Factor Authentication**, download Trustity Authenticator if you do not already have an authenticator, then select **Setup Authenticator App (Trustity / TOTP)**.
+2. In Trustity Authenticator (or your approved TOTP app), scan the QR code.
+3. Enter the displayed six-digit code in the portal.
+4. Select **Verify**.
+5. Wait for **MFA enabled successfully.**
+6. Confirm the factor appears as **Authenticator App**, its status is active, and **MFA is Active**.
+7. Sign out and perform a test sign-in.
+
+Never photograph, share, or attach the QR code. It contains enrollment material that can be used to generate authentication codes.
+
+## Remove an MFA factor
+
+1. Confirm another approved sign-in factor is available, or arrange a controlled replacement.
+2. Locate the factor and select **Remove**.
+3. Review **Disable MFA? This reduces security.**
+4. Select **Disable MFA** only when removal is authorized.
+5. Refresh **My Profile** and verify the factor is gone.
+6. Enroll a replacement immediately if the account would otherwise show **MFA is Not Enabled.**
+
+Removing the only factor reduces account security and may violate your organization’s access policy.
+
+## Sign out
+
+Select **Sign Out** whenever you finish an administrative session, especially on a shared or temporary workstation. Closing a tab is not a substitute for signing out.
+
+## Troubleshooting
+
+### Passkey enrollment fails
+
+Confirm the browser and operating system support passkeys, that a screen lock is configured, and that private browsing or device policy is not blocking enrollment. Use an approved authenticator app if passkeys are unavailable.
+
+### Invalid Code. Try again.
+
+Enter the newest six-digit code, confirm the device clock is automatic, and retry before the code expires. If the issue persists, cancel and restart enrollment.
+
+### MFA is enabled but sign-in fails
+
+Verify you are using the factor registered to this account. Try another enrolled factor if available. Open a support ticket for recovery; never send a one-time code, QR image, biometric data, or passkey material.
+
+### Organization or role is wrong
+
+Stop and contact an Owner or Admin. They should review **User Management** rather than asking you to continue in the wrong organization.
+
+## Security notes
+
+- Prefer phishing-resistant passkeys for privileged administrators when supported.
+- Enroll only organization-approved authenticators and devices.
+- Keep at least one controlled recovery path consistent with your company policy.
+- Remove factors from lost, replaced, or unmanaged devices immediately.
+- Review **Last Sign In** and report unexpected activity.
+
+## Related guides
+
+- [Manage portal users, roles, and invitations](/kb/portal/user-roles-and-invites)
+- [Audit Logs in the Cloud Portal](/kb/portal/audit-logs)
+- [Support Center](/kb/portal/support-center)
+- [Trustity Authenticator (product)](/apps/trustity-auth)
