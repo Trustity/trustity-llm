@@ -65,10 +65,20 @@ scripts/            # ETL helpers
 
 ---
 
-## Quick links
+## Quick start (RAG preview)
 
-- Labs portal: https://labs.trustity.co  
-- Brand: https://trustity.co  
+```bash
+python3 scripts/rag_ask.py "What does VisionX detect on an endpoint?"
+```
+
+Local Mac generative (optional):
+
+```bash
+pip install mlx-lm
+python3 scripts/mlx_ask.py "What does VisionX detect on an endpoint?"
+```
+
+Public chat preview lives on Trustity Labs: `/llm` (Vercel).
 
 ## Disclaimer
 

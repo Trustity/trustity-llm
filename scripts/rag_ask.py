@@ -101,12 +101,16 @@ def main() -> None:
     if not contexts:
         contexts = [chunks[i] for _, i in ranked]
 
+    prompt = build_prompt(question, contexts)
+    if args.prompt_only:
+        print(prompt)
+        return
+
     print("=== Retrieved ===")
     for score, i in ranked:
         c = chunks[i]
         print(f"- {score:.3f} | {c['title']} | {c['origin']}")
 
-    prompt = build_prompt(question, contexts)
     print("\n=== Grounded prompt (paste into any LLM / later local MLX) ===\n")
     print(prompt)
 

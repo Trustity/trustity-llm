@@ -11,12 +11,15 @@
 
 **Exit:** ready for Phase 1 grounded demo wiring into Labs.
 
-## Phase 1 — RAG MVP (next)
+## Phase 1 — RAG MVP (in progress)
 
-- [ ] Package retrieval as tiny API
-- [ ] Optional: local MLX 3B/7B to *generate* from retrieved context on the Mac
-- [ ] Thin chat UI on Labs (“Trustity LLM — preview”)
-- [ ] Measure: faithfulness + on-topic rate on eval suite
+- [x] Package retrieval for Labs (`/api/llm/ask` + BM25)
+- [x] Chat UI on Labs (`/llm`)
+- [x] Optional Groq generative polish via env
+- [x] Local MLX script (`scripts/mlx_ask.py`)
+- [x] Infra decision doc (`docs/INFRA.md`)
+- [ ] Supabase logging (SQL ready; needs project credentials)
+- [ ] Measure faithfulness on eval suite
 
 **Exit:** public preview that already feels more niche-correct than raw ChatGPT for our eval prompts.
 
