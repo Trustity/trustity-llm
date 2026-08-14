@@ -1,6 +1,6 @@
 # Trustity LLM
 
-Public, security-specialized language model from **[Trustity Labs](https://labs.trustity.co)**.
+Public, security-specialized language model from **[Trustity Labs](https://trustitylabs.com)**.
 
 > Not a general chatbot. Built to answer **security** questions with higher niche accuracy than ChatGPT / Gemini-style general models.
 
