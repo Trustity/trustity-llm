@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import os
 import time
+from contextlib import asynccontextmanager
 from typing import Any
 
 from fastapi import FastAPI, Header, HTTPException
@@ -23,8 +24,41 @@ API_KEY = os.environ.get("LLM_API_KEY", "").strip()
 N_CTX = int(os.environ.get("N_CTX", "2048"))
 N_THREADS = int(os.environ.get("N_THREADS", str(os.cpu_count() or 4)))
 
-app = FastAPI(title="Trustity LLM", version="0.1.0")
 _llm = None
+_ready = False
+
+
+def get_llm():
+    global _llm
+    if _llm is not None:
+        return _llm
+    from huggingface_hub import hf_hub_download
+    from llama_cpp import Llama
+
+    print(f"Downloading {MODEL_REPO}/{MODEL_FILE} …", flush=True)
+    path = hf_hub_download(repo_id=MODEL_REPO, filename=MODEL_FILE)
+    print(f"Loading GGUF from {path}", flush=True)
+    _llm = Llama(
+        model_path=path,
+        n_ctx=N_CTX,
+        n_threads=N_THREADS,
+        n_gpu_layers=0,
+        chat_format="qwen",
+        verbose=True,
+    )
+    print("Model ready", flush=True)
+    return _llm
+
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    global _ready
+    get_llm()
+    _ready = True
+    yield
+
+
+app = FastAPI(title="Trustity LLM", version="0.1.0", lifespan=lifespan)
 
 
 class ChatMessage(BaseModel):
@@ -47,27 +81,10 @@ def require_key(authorization: str | None) -> None:
         raise HTTPException(status_code=401, detail="unauthorized")
 
 
-def get_llm():
-    global _llm
-    if _llm is not None:
-        return _llm
-    from huggingface_hub import hf_hub_download
-    from llama_cpp import Llama
-
-    path = hf_hub_download(repo_id=MODEL_REPO, filename=MODEL_FILE)
-    _llm = Llama(
-        model_path=path,
-        n_ctx=N_CTX,
-        n_threads=N_THREADS,
-        n_gpu_layers=0,
-        chat_format="qwen",
-        verbose=False,
-    )
-    return _llm
-
-
 @app.get("/health")
 def health() -> dict[str, str]:
+    if not _ready:
+        raise HTTPException(status_code=503, detail="model loading")
     return {"status": "ok", "model": MODEL_FILE}
 
 
