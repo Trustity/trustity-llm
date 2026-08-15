@@ -19,7 +19,8 @@
 - [x] Local MLX script (`scripts/mlx_ask.py`)
 - [x] Infra decision doc (`docs/INFRA.md`)
 - [ ] Supabase logging (SQL ready; needs project credentials)
-- [ ] Measure faithfulness on eval suite
+- [x] Curated specialist FAQ cards + query expansion + insufficient-context path
+- [x] Measure faithfulness on eval suite (`npm run eval:llm` in Labs)
 
 **Exit:** public preview that already feels more niche-correct than raw ChatGPT for our eval prompts.
 
