@@ -22,7 +22,7 @@ MODEL_FILE = os.environ.get(
 )
 API_KEY = os.environ.get("LLM_API_KEY", "").strip()
 N_CTX = int(os.environ.get("N_CTX", "2048"))
-N_THREADS = int(os.environ.get("N_THREADS", "4"))
+N_THREADS = int(os.environ.get("N_THREADS", "1"))
 
 _llm = None
 _ready = False
