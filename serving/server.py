@@ -22,7 +22,7 @@ MODEL_FILE = os.environ.get(
 )
 API_KEY = os.environ.get("LLM_API_KEY", "").strip()
 N_CTX = int(os.environ.get("N_CTX", "2048"))
-N_THREADS = int(os.environ.get("N_THREADS", str(os.cpu_count() or 4)))
+N_THREADS = int(os.environ.get("N_THREADS", "4"))
 
 _llm = None
 _ready = False
@@ -42,8 +42,8 @@ def get_llm():
         model_path=path,
         n_ctx=N_CTX,
         n_threads=N_THREADS,
+        n_batch=256,
         n_gpu_layers=0,
-        chat_format="chatml",
         verbose=False,
     )
     print("Model ready", flush=True)
@@ -95,15 +95,19 @@ def chat(
 ) -> dict[str, Any]:
     require_key(authorization)
     llm = get_llm()
-    messages = [{"role": m.role, "content": m.content} for m in body.messages]
-    out = llm.create_chat_completion(
-        messages=messages,
+    prompt_parts: list[str] = []
+    for m in body.messages:
+        prompt_parts.append(f"<|im_start|>{m.role}\n{m.content}<|im_end|>")
+    prompt_parts.append("<|im_start|>assistant\n")
+    prompt = "\n".join(prompt_parts)
+    out = llm.create_completion(
+        prompt=prompt,
         temperature=body.temperature,
-        max_tokens=min(body.max_tokens, 512),
-        stop=["<|im_end|>"],
+        max_tokens=min(body.max_tokens, 256),
+        stop=["<|im_end|>", "<|endoftext|>"],
     )
+    text = (out.get("choices") or [{}])[0].get("text", "")
     created = int(time.time())
-    choice = out["choices"][0]
     return {
         "id": out.get("id", "trustity-llm"),
         "object": "chat.completion",
@@ -112,8 +116,8 @@ def chat(
         "choices": [
             {
                 "index": 0,
-                "message": choice.get("message", {}),
-                "finish_reason": choice.get("finish_reason", "stop"),
+                "message": {"role": "assistant", "content": text},
+                "finish_reason": (out.get("choices") or [{}])[0].get("finish_reason", "stop"),
             }
         ],
         "usage": out.get("usage", {}),
