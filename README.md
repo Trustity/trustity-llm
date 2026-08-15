@@ -81,9 +81,10 @@ pip install -r requirements-mlx.txt
 python3 scripts/build_sft.py
 python3 scripts/train_lora_mlx.py
 python3 scripts/mlx_ask.py "What does VisionX detect on an endpoint?"
+python3 scripts/export_weights.py   # fuse; optional --upload-repo
 ```
 
-Public chat preview: [trustitylabs.com/llm](https://trustitylabs.com/llm).
+The Mac trains. Public chat is Vercel RAG (+ optional hosted API). See [`serving/README.md`](serving/README.md).
 
 ## Disclaimer
 

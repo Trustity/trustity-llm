@@ -17,6 +17,7 @@ dist/
 *.safetensors
 checkpoints/
 adapters/
+fused/
 wandb/
 .mypy_cache/
 .ruff_cache/

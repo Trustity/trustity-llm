@@ -48,6 +48,20 @@ Default base for LoRA is **Qwen2.5-3B-Instruct-4bit** so the first train finishe
 
 Adapters are gitignored. Do not commit raw weights.
 
+## Export (Mac trains, site does not depend on the Mac)
+
+The personal Mac is a trainer only. Fuse, then host the weights somewhere that stays online:
+
+```bash
+python3 scripts/export_weights.py
+# optional:
+python3 scripts/export_weights.py --upload-repo Trustity/trustity-llm-qwen3b
+```
+
+Point Labs (Vercel) at that host with `TRUSTITY_LLM_API_URL`. Details: [`serving/README.md`](../serving/README.md).
+
+Until that host exists, `/llm` on trustitylabs.com already ships the specialist FAQ + corpus on Vercel (no Mac required). Groq is optional polish.
+
 ## After this
 
 Larger LoRA (14B) waits for the Windows RTX 5080 unless a 7B run is already good enough on eval questions.
