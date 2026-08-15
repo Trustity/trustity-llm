@@ -4,7 +4,7 @@ Public, security-specialized language model from **[Trustity Labs](https://trust
 
 > Not a general chatbot. Built to answer **security** questions with higher niche accuracy than ChatGPT / Gemini-style general models.
 
-**Status:** foundation · Phase 0  
+**Status:** Phase 1 RAG on Labs · Phase 2 Mac LoRA in [`docs/MAC.md`](docs/MAC.md)  
 **Org:** [Trustity](https://trustity.co) · Labs research surface
 
 ---
@@ -65,20 +65,25 @@ scripts/            # ETL helpers
 
 ---
 
-## Quick start (RAG preview)
+## Quick start
+
+RAG preview (no GPU):
 
 ```bash
 python3 scripts/rag_ask.py "What does VisionX detect on an endpoint?"
 ```
 
-Local Mac generative (optional):
+Mac generative + LoRA: see [`docs/MAC.md`](docs/MAC.md).
 
 ```bash
-pip install mlx-lm
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements-mlx.txt
+python3 scripts/build_sft.py
+python3 scripts/train_lora_mlx.py
 python3 scripts/mlx_ask.py "What does VisionX detect on an endpoint?"
 ```
 
-Public chat preview lives on Trustity Labs: `/llm` (Vercel).
+Public chat preview: [trustitylabs.com/llm](https://trustitylabs.com/llm).
 
 ## Disclaimer
 

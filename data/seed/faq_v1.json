@@ -1,0 +1,109 @@
+[
+  {
+    "id": "visionx",
+    "title": "VisionX visual-channel DLP",
+    "origin": "https://trustity.co/products/visionx",
+    "questions": [
+      "What does VisionX detect on an endpoint?",
+      "What is Trustity VisionX?",
+      "How does VisionX stop a phone camera pointed at a screen?"
+    ],
+    "answer": "Trustity VisionX is camera-based / visual-channel DLP on the endpoint, enforced by the TAO agent. It detects phones, cameras, and lenses aimed at a screen, can capture evidence, and can lock the workstation when policy requires it. USB and email DLP do not see this path: a photo of the screen leaves the corporate digital perimeter. Compensating controls are detection plus a lock response (Faster / Balanced / More accurate in Cloud Portal policy) and operator review of VisionX live events. Model class labels today include phone and camera; dual detect (COCO plus Trustity VisionX weights) is the production confirmation path. Do not treat VisionX as a complete replacement for network DLP."
+  },
+  {
+    "id": "genguard",
+    "title": "GenGuard browser DLP and GenAI data loss",
+    "origin": "https://trustity.co/products/genguard",
+    "questions": [
+      "How does GenGuard reduce GenAI data loss?",
+      "What is Trustity GenGuard?",
+      "Why is pasting source code into ChatGPT a DLP problem?"
+    ],
+    "answer": "Trustity GenGuard is browser DLP: an extension plus Cloud Portal policy. It is designed to stop sensitive pastes into public GenAI chatbots, block risky domains, and surface Shadow IT / unsanctioned SaaS from the browser. Pasting source code into a public GenAI tool creates data-loss risk because sensitive code may leave the corporate boundary, vendor retention and training policies may be unclear, and this channel bypasses DLP that only watches email or USB. GenGuard keyword blocking, domain allow/block lists, and browsing categories are the product controls for that gap. Do not test with production-sensitive data."
+  },
+  {
+    "id": "pam-vault",
+    "title": "Vault PAM local administrator password rotation",
+    "origin": "https://trustity.co/products/vault",
+    "questions": [
+      "Why rotate local admin passwords with PAM?",
+      "What is Trustity Vault used for?",
+      "What is the security benefit of rotating local administrator passwords across a workstation fleet?"
+    ],
+    "answer": "Trustity Vault / PAM combines a zero-knowledge vault with scheduled local administrator password rotation via the TAO agent. Unique, rotated local admin passwords limit lateral movement when a shared local admin secret is dumped, reduce the useful lifetime of stolen credentials, and pair with vaulting so operators retrieve a current secret instead of a static fleet password. Validate rotation only on a designated test asset so production accounts are not interrupted without approval."
+  },
+  {
+    "id": "hostguard",
+    "title": "HostGuard IPS brute-force detection",
+    "origin": "https://trustity.co/products/hostguard",
+    "questions": [
+      "How does HostGuard IPS work?",
+      "Describe a host-based approach to detecting and slowing remote desktop brute-force attempts.",
+      "What does Trustity HostGuard do on a Windows endpoint?"
+    ],
+    "answer": "Trustity HostGuard IPS is host-based brute-force detection and blocking. It watches failed logons, can block offending source IPs at the endpoint firewall, and reports incidents to the Cloud Portal. Policy knobs include maximum login attempts, detection window, and ban duration. Start in Report only to learn normal helpdesk, jump-host, and automation noise before enforcement. A host-based approach to slowing RDP brute force is: detect failed-logon bursts, temporarily firewall the source, and alert SecOps in the portal. Helpdesk must be able to distinguish a HostGuard block from a generic outage."
+  },
+  {
+    "id": "axiom",
+    "title": "Trustity Axiom edge SMB and DNS",
+    "origin": "https://trustity.co/products/axiom",
+    "questions": [
+      "What is Trustity Axiom used for?",
+      "How can policy-driven DNS at the edge reduce malware callback risk without an agent on every device?",
+      "Does Axiom need a TAO agent on every device?"
+    ],
+    "answer": "Trustity Axiom is edge SMB and DNS security: an inline SMB reverse proxy and policy-driven DNS nodes. It can run air-gap capable and does not require an endpoint agent on every device for this path, so it can cover IoT and BYOD that lack TAO. Policy-driven DNS at the edge reduces malware callback risk by blocking known-bad or DGA-like domains centrally. Axiom complements TAO endpoint controls; it is a portfolio product licensed separately from the Cloud Portal."
+  },
+  {
+    "id": "secsend",
+    "title": "Trustity SecSend secure document delivery",
+    "origin": "https://trustity.co/products/secsend",
+    "questions": [
+      "What is Trustity SecSend?",
+      "Why is SMS one-time passcode unlock often safer than emailing a shared document password?",
+      "How does SecSend deliver sensitive files?"
+    ],
+    "answer": "Trustity SecSend delivers sensitive files as sealed packages. Recipients unlock with a one-time SMS code rather than another shared password emailed in the same channel as the file. Putting the password in the same mailbox as the attachment is weak: a mailbox compromise yields both. An OTP on a second channel binds access to a factor the attacker may not have and reduces replay if only email is stolen."
+  },
+  {
+    "id": "tao",
+    "title": "TAO agent and Cloud Portal",
+    "origin": "https://trustity.co/platform",
+    "questions": [
+      "What is the TAO agent?",
+      "How do Trustity Cloud Portal and TAO fit together?",
+      "Does Trustity push the agent to endpoints from the cloud?"
+    ],
+    "answer": "Policy lives in the Trustity Cloud Portal. Enforcement happens on the endpoint and in the browser. The TAO agent is the Windows/Linux runtime for VisionX detection, PAM rotation, HostGuard IPS, browser DLP hooks, and asset inventory. Trustity does not push the installer from the cloud; IT downloads Setup from Deployment and distributes it (Intune, SCCM, GPO, or controlled install) using the organization license key. Agents activate only licensed modules. Each organization is a hard tenant boundary."
+  },
+  {
+    "id": "visual-bypass",
+    "title": "Phone camera vs USB and email DLP",
+    "origin": "https://trustity.co/products/visionx",
+    "questions": [
+      "How can a phone camera pointed at a screen cause data leakage even when USB and email DLP are enabled?",
+      "Why doesn't USB DLP stop someone photographing a screen?"
+    ],
+    "answer": "A phone camera pointed at a screen is a visual exfil channel. USB device control and email DLP never see the pixels. Photos can capture rendered secrets, PII, source, or customer data. Compensating controls: visual-channel detection (VisionX), workstation lock on policy, physical-area rules, and awareness. Digital egress tools remain necessary for files and paste; they do not close the camera path."
+  },
+  {
+    "id": "genai-paste",
+    "title": "Pasting source code into public GenAI",
+    "origin": "https://trustity.co/products/genguard",
+    "questions": [
+      "Why can pasting source code into a public GenAI chatbot create a data-loss risk for an enterprise?",
+      "Threat-model a SaaS startup where engineers use ChatGPT daily. List top 3 realistic data-leak paths."
+    ],
+    "answer": "Pasting source or secrets into a public GenAI chatbot is a data-loss path: content leaves the enterprise boundary, the vendor may retain or train on prompts depending on contract, and Shadow IT bypasses DLP that only inspects email, USB, or web-upload MIME types. Realistic leak paths for a SaaS team using ChatGPT daily include (1) paste of secrets and code into GenAI, (2) unsanctioned SaaS file uploads, (3) endpoint malware or a camera / shoulder-surf of the screen. Controls: browser DLP (GenGuard), approved enterprise GenAI with logging, secret scanning, and visual DLP (VisionX)."
+  },
+  {
+    "id": "hardening-exec",
+    "title": "Traveling executive Windows laptop hardening",
+    "origin": "https://trustity.co/kb",
+    "questions": [
+      "Give a minimal hardening checklist for a Windows laptop used by an executive who travels frequently.",
+      "How should we harden a CEO Windows laptop for travel?"
+    ],
+    "answer": "A minimal hardening checklist for a traveling executive Windows laptop: full-disk encryption; strong identity (SSO plus MFA, no standing local admin for daily work); patch cadence with auto-update; unique rotated local admin via PAM rather than a shared helpdesk password; disk/USB and browser DLP policies; screen lock and visual-channel controls for public spaces; VPN or Zero Trust access; inventory and HostGuard so stolen-device brute force is noisy. This is educational guidance, not a compliance certification."
+  }
+]

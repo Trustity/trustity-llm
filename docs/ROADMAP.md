@@ -24,13 +24,14 @@
 
 **Exit:** public preview that already feels more niche-correct than raw ChatGPT for our eval prompts.
 
-## Phase 2 — Specialist weights
+## Phase 2 — Specialist weights (Mac first)
 
-- Choose base (default proposal: **Qwen2.5-14B-Instruct** or **Llama-3.1-8B-Instruct** if GPU-tight)
-- Build SFT mix: seed Q&A + synthetic (teacher-filtered) + refused/unsafe pairs
-- LoRA fine-tune + merge optional
-- Publish eval scores vs base
-- Push to Hugging Face (public or gated)
+- [x] SFT mix v0 from FAQ + refuse/off-topic pairs (`scripts/build_sft.py`)
+- [x] MLX LoRA recipe on Apple Silicon (`docs/MAC.md`, `scripts/train_lora_mlx.py`)
+- [x] Run LoRA on the M5 (3B 4-bit default; 7B optional)
+- [ ] Score eval suite vs base + adapter
+- [ ] LoRA 14B on Windows RTX 5080 when that box is the trainer
+- [ ] Push to Hugging Face (gated default)
 
 **Exit:** downloadable / hostable specialist model with documented eval.
 

@@ -25,6 +25,7 @@
 Why: niche security model + brand control while still being “open enough”. Can flip to fully public later.
 
 ## Base model (Mac-first revision)
-1. **Serving on Mac now:** Qwen2.5-7B-Instruct or Llama-3.2-3B via **MLX** (quantized).
-2. **LoRA target when Windows GPU online:** Qwen2.5-14B-Instruct.
-3. Until fine-tune: **RAG over Trustity corpus** answers product questions accurately.
+1. **Serving on Mac now:** `mlx-community/Qwen2.5-3B-Instruct-4bit` (default), optional 7B 4-bit on 48GB.
+2. **LoRA on Mac:** `scripts/train_lora_mlx.py` → `adapters/trustity-mlx`.
+3. **LoRA target when Windows GPU online:** Qwen2.5-14B-Instruct.
+4. Public Labs demo remains RAG (+ optional Groq) until a hostable specialist endpoint exists.

@@ -13,7 +13,7 @@
 
 ## Public URL
 
-- Chat: `/llm` on Labs (production: `https://trustity-labs.vercel.app/llm`)
+- Chat: `/llm` on Labs (`https://trustitylabs.com/llm`)
 - API: `POST /api/llm/ask` `{ "question": "..." }`
 
 ## Later (Windows 5080)

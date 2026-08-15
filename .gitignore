@@ -16,6 +16,7 @@ dist/
 *.gguf
 *.safetensors
 checkpoints/
+adapters/
 wandb/
 .mypy_cache/
 .ruff_cache/
