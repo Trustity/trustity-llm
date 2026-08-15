@@ -7,6 +7,9 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY serving/requirements.txt .
+# Prebuilt wheels enable OpenMP and deadlock on Railway's CPU; compile without it.
+ENV CMAKE_ARGS="-DGGML_OPENMP=OFF -DGGML_BLAS=OFF" \
+    FORCE_CMAKE=1
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY serving/server.py .

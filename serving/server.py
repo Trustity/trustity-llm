@@ -7,6 +7,7 @@ the Mac is not in the path.
 from __future__ import annotations
 
 import os
+import threading
 import time
 from contextlib import asynccontextmanager
 from typing import Any
@@ -26,6 +27,7 @@ N_THREADS = int(os.environ.get("N_THREADS", "1"))
 
 _llm = None
 _ready = False
+_infer_lock = threading.Lock()
 
 
 def get_llm():
@@ -42,7 +44,8 @@ def get_llm():
         model_path=path,
         n_ctx=N_CTX,
         n_threads=N_THREADS,
-        n_batch=256,
+        n_threads_batch=N_THREADS,
+        n_batch=int(os.environ.get("N_BATCH", "256")),
         n_gpu_layers=0,
         verbose=False,
     )
@@ -100,12 +103,16 @@ def chat(
         prompt_parts.append(f"<|im_start|>{m.role}\n{m.content}<|im_end|>")
     prompt_parts.append("<|im_start|>assistant\n")
     prompt = "\n".join(prompt_parts)
-    out = llm.create_completion(
-        prompt=prompt,
-        temperature=body.temperature,
-        max_tokens=min(body.max_tokens, 256),
-        stop=["<|im_end|>", "<|endoftext|>"],
-    )
+    print(f"infer start tokens={min(body.max_tokens, 256)} prompt_chars={len(prompt)}", flush=True)
+    with _infer_lock:
+        t0 = time.time()
+        out = llm.create_completion(
+            prompt=prompt,
+            temperature=body.temperature,
+            max_tokens=min(body.max_tokens, 256),
+            stop=["<|im_end|>", "<|endoftext|>"],
+        )
+        print(f"infer done in {time.time() - t0:.2f}s", flush=True)
     text = (out.get("choices") or [{}])[0].get("text", "")
     created = int(time.time())
     return {
