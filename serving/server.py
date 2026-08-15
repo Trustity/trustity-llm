@@ -43,8 +43,8 @@ def get_llm():
         n_ctx=N_CTX,
         n_threads=N_THREADS,
         n_gpu_layers=0,
-        chat_format="qwen",
-        verbose=True,
+        chat_format="chatml",
+        verbose=False,
     )
     print("Model ready", flush=True)
     return _llm
@@ -70,7 +70,7 @@ class ChatRequest(BaseModel):
     model: str | None = None
     messages: list[ChatMessage]
     temperature: float = 0.15
-    max_tokens: int = Field(default=500, le=1024)
+    max_tokens: int = Field(default=256, le=512)
 
 
 def require_key(authorization: str | None) -> None:
@@ -99,7 +99,8 @@ def chat(
     out = llm.create_chat_completion(
         messages=messages,
         temperature=body.temperature,
-        max_tokens=body.max_tokens,
+        max_tokens=min(body.max_tokens, 512),
+        stop=["<|im_end|>"],
     )
     created = int(time.time())
     choice = out["choices"][0]
