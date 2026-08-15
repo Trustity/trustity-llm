@@ -28,6 +28,11 @@ def main() -> None:
         default="",
         help="Hugging Face repo, e.g. Trustity/trustity-llm-qwen3b-lora",
     )
+    parser.add_argument(
+        "--export-gguf",
+        action="store_true",
+        help="Also write a GGUF next to the fused MLX checkpoint (for Railway/llama.cpp)",
+    )
     args = parser.parse_args()
 
     adapter = Path(args.adapter_path)
@@ -48,6 +53,14 @@ def main() -> None:
     ]
     if args.upload_repo:
         cmd.extend(["--upload-repo", args.upload_repo])
+    if args.export_gguf:
+        cmd.extend(
+            [
+                "--export-gguf",
+                "--gguf-path",
+                str(Path(args.save_path) / "trustity-qwen3b.gguf"),
+            ]
+        )
     print(" ".join(cmd))
     subprocess.check_call(cmd)
     print(

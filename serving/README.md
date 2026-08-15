@@ -1,43 +1,65 @@
-# Serving Trustity LLM (not on the Mac, not on Vercel)
+# Railway inference (always-on)
 
-Train and fuse on the Mac. Host inference on a machine that can stay online.
-Labs (`trustitylabs.com/llm`) only does RAG + an HTTP call.
-
-```
-Mac (train) → fused weights / Hugging Face
-                    ↓
-         always-on inference API
-                    ↓
-         Vercel TRUSTITY_LLM_API_URL
-                    ↓
-         https://trustitylabs.com/llm
-```
-
-Vercel cannot load Qwen. The personal Mac should not be the public GPU.
-
-## Option A — Hugging Face Inference (simplest upload)
-
-1. `huggingface-cli login`
-2. `python3 scripts/export_weights.py --upload-repo Trustity/trustity-llm-qwen3b`
-3. Create an Inference Endpoint (or compatible OpenAI-style provider) for that repo.
-4. On the Labs Vercel project:
+The Mac trains. **Railway serves.** Vercel (Labs) only does RAG and then POSTs here.
 
 ```
-TRUSTITY_LLM_API_URL=https://router.huggingface.co/v1/chat/completions
-TRUSTITY_LLM_API_KEY=hf_...
-TRUSTITY_LLM_MODEL=Trustity/trustity-llm-qwen3b
+Mac LoRA  →  optional GGUF upload
+Railway   →  llama.cpp CPU, OpenAI-compatible /v1/chat/completions
+Vercel    →  TRUSTITY_LLM_API_URL=https://<railway>/v1/chat/completions
 ```
 
-Exact URL depends on the HF product you enable. The Labs route expects an OpenAI chat-completions JSON body.
+Qwen2.5-3B Q4 fits a Railway instance with **~8GB RAM**. No GPU required. Use a plan that does not sleep if you want the site to answer 24/7.
 
-## Option B — Small always-on VPS (3B 4-bit fits CPU)
+## Deploy
 
-Rent a cheap Linux box (Railway / Fly / Hetzner). Run any OpenAI-compatible server in front of the fused weights (vLLM, llama.cpp, TGI). Point `TRUSTITY_LLM_API_URL` at `https://your-host/v1/chat/completions`.
+From the `trustity-llm` repo (this `railway.toml` points the Dockerfile at `serving/`):
 
-## Option C — Keep Groq for generation
+1. Create a Railway project, connect GitHub `Trustity/trustity-llm`.
+2. Set RAM to 8GB+.
+3. Variables:
 
-If you do not want to host weights yet: leave `GROQ_API_KEY` on Vercel. The **specialist knowledge is already in the Labs repo** (FAQ cards + corpus). Training on the Mac improves a future hosted model; it is not required for the public `/llm` page to stay useful.
+```
+MODEL_REPO=bartowski/Qwen2.5-3B-Instruct-GGUF
+MODEL_FILE=Qwen2.5-3B-Instruct-Q4_K_M.gguf
+LLM_API_KEY=<long random secret>
+N_CTX=2048
+```
 
-## Env on Labs
+4. First boot downloads the GGUF (a few minutes). `/health` should return `ok`.
+5. Public URL looks like `https://trustity-llm-production.up.railway.app`.
 
-See `trustitylabs/.env.example`.
+On the **Labs** Vercel project:
+
+```
+TRUSTITY_LLM_API_URL=https://<your-railway-host>/v1/chat/completions
+TRUSTITY_LLM_API_KEY=<same secret>
+TRUSTITY_LLM_MODEL=trustity-llm
+```
+
+Leave Groq unset if Railway should be the only generator. If Railway is down, Labs falls back to Groq (if set) or extractive RAG.
+
+## Use the Mac-trained LoRA later
+
+Fuse on the Mac, export GGUF, put it on Hugging Face, then change Railway:
+
+```bash
+python3 scripts/export_weights.py --export-gguf
+# upload the .gguf to a HF repo you control
+```
+
+```
+MODEL_REPO=Trustity/trustity-llm-gguf
+MODEL_FILE=trustity-qwen3b.Q4_K_M.gguf
+```
+
+Until that file exists, Railway serves the public Qwen Instruct GGUF plus Labs RAG — already better than a cold Mac.
+
+## Local smoke test
+
+```bash
+cd serving
+pip install -r requirements.txt
+export LLM_API_KEY=dev
+python -m uvicorn server:app --port 8080
+curl -s localhost:8080/health
+```

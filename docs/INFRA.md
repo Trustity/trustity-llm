@@ -7,7 +7,7 @@
 | Chat UI + RAG + specialist FAQ | **Vercel** (`trustitylabs`) | Public site; no GPU; Mac is not in the request path |
 | Generative polish | `GROQ_API_KEY` and/or `TRUSTITY_LLM_API_URL` | OpenAI-compatible HTTP; optional |
 | Train LoRA | **Mac (MLX)** | Personal machine; train then shut the lid |
-| Host fused weights | HF endpoint / VPS / Together — **not the Mac** | Must stay online independently |
+| Host fused weights | **Railway** (CPU GGUF) or HF | Always-on; Mac is trainer only |
 | Logging | **Supabase** (optional) | Wire when credentials exist |
 
 ## Public URL
@@ -19,7 +19,7 @@
 
 1. Browser hits Labs on Vercel.
 2. Vercel retrieves FAQ + corpus (already in the git repo).
-3. If `TRUSTITY_LLM_API_URL` is set, Vercel asks that host to write the answer (your uploaded specialist model).
+3. If `TRUSTITY_LLM_API_URL` is set (Railway), Vercel asks that host to write the answer.
 4. Else if `GROQ_API_KEY` is set, Groq writes the answer from the same RAG context.
 5. Else Vercel returns the extractive grounded answer.
 
